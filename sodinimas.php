@@ -26,20 +26,19 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 
 //sodinimo scenarijus
 
+$photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg");
+
+
 if(isset($_POST['sodinti'])) {
-    $_SESSION['a'] []= [
+    $_SESSION['a'][]= [
         'id' => ++$_SESSION['agurku ID'],
         'agurkai' => 0
     ];
-
-   foreach (glob("photo/*") as $photo) {
-         echo '<li><a href="'.$photo.'" title=""><img src="'.$photo.'" alt="" /></a> </li>';      
-       }
-       
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
     die;
     //po post einam antra karta, kad eitume per get
 }
+
 //Jeigu norim atvaizduoti, tai darom su get
 //jei norim kazka nusiusti, tai einam su post
 
@@ -134,6 +133,7 @@ if(isset($_POST['rauti'])) {
         display:inline-block;
         float: left;
         width: 33%;
+        margin-top: 50px;
     }
     .btn-sodinti {
         display: block;
@@ -146,11 +146,18 @@ if(isset($_POST['rauti'])) {
         display:inline-block;
         float: left;
         width: 33%;
+        margin-top: 50px;
     }
     .form-top {
         padding-bottom: 40px;
+        width: 100%;
+        display: inline-block;
     }
-    
+    .agurkas-img {
+        display: inline-block;
+        height: 50px;
+        width: 100px;
+    }
 </style>
 <body>
     <nav>
@@ -167,7 +174,7 @@ if(isset($_POST['rauti'])) {
         <?php foreach($_SESSION['a'] as $agurkas): ?>
         <div class="form-top">
             <div class="agurkas-nr">
-                <img src="<?= $agurkas['photo'] ?>" alt="photo">
+                <img class="agurkas-img" src="<?= $photos[array_rand($photos)] ?>" alt="photo">
                 <div>Agurkas nr. <?= $agurkas['id'] ?></div>
             </div>
             <div class="agurkas-vnt">Agurkų: <?= $agurkas['agurkai'] ?></div>

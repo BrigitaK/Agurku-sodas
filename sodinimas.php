@@ -27,12 +27,32 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 //sodinimo scenarijus
 
 if(isset($_POST['sodinti'])) {
-    $_SESSION['a'] [] = [
+    $_SESSION['a'] []= [
         'id' => ++$_SESSION['agurku ID'],
         'agurkai' => 0
     ];
+
+   foreach (glob("photo/*") as $photo) {
+         echo '<li><a href="'.$photo.'" title=""><img src="'.$photo.'" alt="" /></a> </li>';      
+       }
+       
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
     die;
+    //po post einam antra karta, kad eitume per get
+}
+//Jeigu norim atvaizduoti, tai darom su get
+//jei norim kazka nusiusti, tai einam su post
+
+//isrovimo scenarijus
+
+if(isset($_POST['rauti'])) {
+    foreach($_SESSION['a'] as $index => $agurkas) {
+        if ($_POST['rauti'] == $agurkas['id']) {
+            unset($_SESSION['a'][$index]);
+            header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
+            die;
+        }
+    }
 }
 
 ?>
@@ -46,37 +66,95 @@ if(isset($_POST['sodinti'])) {
 </head>
 <style>
     body {
-        margin: 50px 100px;
+
     }
     nav {
         display: inline-block;
         float: right;
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 60px;
+        background: #e7e9ec;
+        padding: 15px 50px;
+        margin-top: -30px;
     }
     nav a {
         display: inline-block;
         float: right;
         text-decoration: none;
         color: black;
-        margin-left: 10px;
+        margin-left: 15px;
+        padding-top:-10px;
+        margin-top: 15px;
     }
     nav a:hover {
-        color: red;
+        color: #1877f2;
     }
     form {
         display: inline-block;
+        width: 1200px;
+        margin-left: calc(50% - 600px);
         margin-top: 40px;
+
     }
-    h1 {
+    @media (max-width: 990px) {
+        form {
+            width: 700px;
+            margin-left: calc(50% - 350px);
+        }
+    }
+    @media (max-width: 1280px) {
+        form {
+            width: 900px;
+            margin-left: calc(50% - 450px);
+        }
+    }
+    h1, h3 {
+        color: #5c565c;
+        text-transform: uppercase;
         text-align: center;
-        margin-top: 30px;
         padding-bottom: 20px;
         
     }
+    .loggout {
+        margin-top:8px;
+        border: 2px solid #5c565c;
+        padding: 5px 15px;
+        border-radius: 5px;
+    }
+    .loggout:hover {
+        color: black;
+        border: 2px solid #1877f2;
+    }
+    .agurkas-nr {
+        display:inline-block;
+        float: left;
+        width: 33%;
+    }
+    .agurkas-vnt {
+        display:inline-block;
+        float: left;
+        width: 33%;
+    }
+    .btn-sodinti {
+        display: block;
+        max-width: 300px;
+        text-align: center;
+        margin: auto;
+        padding: 10px 50px;
+    }
+    .btn-israuti {
+        display:inline-block;
+        float: left;
+        width: 33%;
+    }
+    .form-top {
+        padding-bottom: 40px;
+    }
+    
 </style>
 <body>
     <nav>
+    <a class="loggout" href="login.php?logout">Atsijungti</a>
     <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php">Skynimas</a>
     <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php">Auginimas</a>
     <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php">Sodinimas</a>
@@ -87,10 +165,18 @@ if(isset($_POST['sodinti'])) {
         <h3>Sodinimas</h3>
         <form action="" method="POST">
         <?php foreach($_SESSION['a'] as $agurkas): ?>
-        Agurkas nr. <?= $agurkas['id'] ?>
+        <div class="form-top">
+            <div class="agurkas-nr">
+                <img src="<?= $agurkas['photo'] ?>" alt="photo">
+                <div>Agurkas nr. <?= $agurkas['id'] ?></div>
+            </div>
+            <div class="agurkas-vnt">Agurkų: <?= $agurkas['agurkai'] ?></div>
+            <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas['id'] ?>">Išrauti</button>
+        </div>
+
     
         <?php endforeach ?>
-        <button type="submit" name="sodinti">SODINTI</button>
+        <button class="btn-sodinti" type="submit" name="sodinti">SODINTI</button>
         </form>
     </main>
 

@@ -1,17 +1,4 @@
 <?php
-//agurku sodas
-//sone pasidaryti meniu, kad butu galima vaikscioti per visus tris puslapius
-//turime agurku sarasa, turime mygtuka, paspaudus mygtuka prisideda naujas agurkas
-//naujas agurkas turi savo unikalu id, reikia paveiksliuku ir prisideda random paveiksliukas prie to agurko
-//spaudziam kryziuka israuti ir agurko nebelieka
-//antras psl agurku auginimas
-//visi agurkai eina vienas paskui kita, didelis sk rodo kiek siuo metu turi agurku.
-//kiekviena karta refresinus puslapi parodo random  nuo 2 iki 7 agurku prisides paspaudus auginti
-//3 psl agurku skynimas
-//as galiu i input ivesti pvz 4 agaurkus ir paspausti skinti, tuomet bendras sk turi sumazeti
-//jeigu agurkas turi 0 vaisiu, tuomet parasyta skinti negalima ir nera atvaizduojami mygtukai
-
-//viska saugome sesijoje arba json file
 
 session_start();
 
@@ -25,9 +12,13 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 }
 
 //auginimo scenarijus
-
-
-
+if (isset($_POST['auginti'])) {
+    foreach ($_SESSION['a'] as $index => &$agurkas ) {
+        $agurkas['agurkai'] += $_POST['kiekis'][$agurkas['id']];
+    }
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
+    die;
+}
 
 ?>
 
@@ -143,9 +134,12 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
             <div class="agurkas-nr">
                 <img src="<?= $agurkas['photo'] ?>" alt="photo">
                 <?php $kiekis = rand(2,9) ?>
-                <div><?= $agurkas['id'] ?></div>
+                <div>Agurkas nr. <?= $agurkas['id'] ?></div>
             </div>
             <div class="agurkas-vnt">Agurkų: <?= $agurkas['agurkai'] ?></div>
+
+            <h3 style="color:red">+<?= $kiekis ?></h3>
+            <input type="hidden" name="kiekis[<?=$agurkas['id'] ?>]" value="<?= $kiekis ?>">
         </div>
 
     

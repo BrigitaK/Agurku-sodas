@@ -22,18 +22,19 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
 if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
     $_SESSION['a'] = [];
     $_SESSION['agurku ID'] = 0;
+    $_SESSION['photo'] = '';
 }
 
 //sodinimo scenarijus
-
-$photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg");
-
 
 if(isset($_POST['sodinti'])) {
     $_SESSION['a'][]= [
         'id' => ++$_SESSION['agurku ID'],
         'agurkai' => 0
     ];
+    foreach ($_SESSION['a'] as $index => $agurkas ) {
+        'photo' == $_POST['photo'][$agurkas['id']];
+    }
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
     die;
     //po post einam antra karta, kad eitume per get
@@ -174,7 +175,9 @@ if(isset($_POST['rauti'])) {
         <?php foreach($_SESSION['a'] as $agurkas): ?>
         <div class="form-top">
             <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $photos[array_rand($photos)] ?>" alt="photo">
+                <?php $photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg"); ?>
+                <?php $photo = $photos[array_rand($photos)]?>
+                <img class="agurkas-img" src="<?=$photo?>" alt="photo">
                 <div>Agurkas nr. <?= $agurkas['id'] ?></div>
             </div>
             <div class="agurkas-vnt">Agurkų: <?= $agurkas['agurkai'] ?></div>

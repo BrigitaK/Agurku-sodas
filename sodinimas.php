@@ -94,23 +94,15 @@ if(isset($_POST['rauti'])) {
     }
     form {
         display: inline-block;
-        width: 1200px;
-        margin-left: calc(50% - 600px);
+        width: 700px;
+        margin-left: calc(50% - 400px);
         margin-top: 40px;
+        border: 2px solid #DCDCDC;
+        padding: 40px;
+        border-radius: 10px;
+        margin-bottom: 70px;
+    }
 
-    }
-    @media (max-width: 990px) {
-        form {
-            width: 700px;
-            margin-left: calc(50% - 350px);
-        }
-    }
-    @media (max-width: 1280px) {
-        form {
-            width: 900px;
-            margin-left: calc(50% - 450px);
-        }
-    }
     h1, h3 {
         color: #5c565c;
         text-transform: uppercase;
@@ -131,12 +123,18 @@ if(isset($_POST['rauti'])) {
     .agurkas-nr {
         display:inline-block;
         float: left;
-        width: 33%;
+        width: 25%;
+        text-align: center;
+        border: 2px solid #DCDCDC;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 10px 0;
     }
     .agurkas-vnt {
         display:inline-block;
         float: left;
-        width: 33%;
+        width: 45%;
+        text-align: center;
         margin-top: 55px;
     }
     .btn-sodinti {
@@ -145,16 +143,32 @@ if(isset($_POST['rauti'])) {
         text-align: center;
         margin: auto;
         padding: 10px 50px;
+        margin-top: 45px;
+        border: 2px solid #DCDCDC;
+        background-color: transparent;
+        border-radius: 10px;
+        text-transform: uppercase;
+    }
+    .btn-sodinti:hover {
+        color: black;
+        border: 2px solid #1877f2;
     }
     .btn-israuti {
+        border: 2px solid #DCDCDC;
         display:inline-block;
-        float: left;
-        width: 33%;
+        float: right;
+        width: 25%;
         margin-top: 45px;
         padding: 10px;
+        background-color: transparent;
+        border-radius: 10px;
+        text-transform: uppercase;
+    }
+    .btn-israuti:hover {
+        color: black;
+        border: 2px solid #1877f2;
     }
     .form-top {
-        padding-bottom: 40px;
         width: 100%;
         display: inline-block;
     }

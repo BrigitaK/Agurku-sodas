@@ -56,22 +56,13 @@ if (isset($_POST['auginti'])) {
     }
     form {
         display: inline-block;
-        width: 1200px;
-        margin-left: calc(50% - 600px);
+        width: 700px;
+        margin-left: calc(50% - 400px);
         margin-top: 40px;
-
-    }
-    @media (max-width: 990px) {
-        form {
-            width: 700px;
-            margin-left: calc(50% - 350px);
-        }
-    }
-    @media (max-width: 1280px) {
-        form {
-            width: 900px;
-            margin-left: calc(50% - 450px);
-        }
+        border: 2px solid #DCDCDC;
+        padding: 40px;
+        border-radius: 10px;
+        margin-bottom: 70px;
     }
     h1, h3 {
         color: #5c565c;
@@ -93,28 +84,37 @@ if (isset($_POST['auginti'])) {
     .agurkas-nr {
         display:inline-block;
         float: left;
-        width: 33%;
+        width: 25%;
+        text-align: center;
+        border: 2px solid #DCDCDC;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 10px 0;
     }
     .agurkas-vnt {
         display:inline-block;
         float: left;
-        width: 33%;
+        width: 45%;
+        text-align: center;
         margin-top: 55px;
     }
-    .btn-sodinti {
+    .btn-auginti {
         display: block;
         max-width: 300px;
         text-align: center;
         margin: auto;
         padding: 10px 50px;
+        margin-top: 45px;
+        border: 2px solid #DCDCDC;
+        background-color: transparent;
+        border-radius: 10px;
+        text-transform: uppercase;
     }
-    .btn-israuti {
-        display:inline-block;
-        float: left;
-        width: 33%;
+    .btn-auginti:hover {
+        color: black;
+        border: 2px solid #1877f2;
     }
     .form-top {
-        padding-bottom: 40px;
         width: 100%;
         display: inline-block;
     }
@@ -131,6 +131,7 @@ if (isset($_POST['auginti'])) {
     
 </style>
 <body>
+
     <nav>
     <a class="loggout" href="login.php?logout">Atsijungti</a>
     <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php">Skynimas</a>
@@ -141,6 +142,7 @@ if (isset($_POST['auginti'])) {
     <main>
         <h1>Agurkų sodas</h1>
         <h3>Auginimas</h3>
+
         <form action="" method="POST">
         <?php foreach($_SESSION['a'] as $agurkas): ?>
         <div class="form-top">
@@ -150,14 +152,12 @@ if (isset($_POST['auginti'])) {
                 <div>Agurkas nr. <?= $agurkas['id'] ?></div>
             </div>
             <div class="agurkas-vnt">Agurkų: <?= $agurkas['agurkai'] ?></div>
-
             <h3 class="kiekis" >+<?= $kiekis ?></h3>
             <input type="hidden" name="kiekis[<?=$agurkas['id'] ?>]" value="<?= $kiekis ?>">
         </div>
 
-    
         <?php endforeach ?>
-        <button class="btn-sodinti" type="submit" name="auginti">AUGINTI</button>
+        <button class="btn-auginti" type="submit" name="auginti">AUGINTI</button>
         </form>
     </main>
 

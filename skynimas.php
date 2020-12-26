@@ -19,12 +19,21 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
     if (isset($_POST['skinti'])) {
         foreach ($_SESSION['a'] as $index => &$agurkas ) {
             if ($_POST['skinti'] == $agurkas['id']) {
-                $agurkas['agurkai'] -= $_POST['kiek'];
+                if($_POST['kiekis'][$agurkas['id']] < 0) {
+                    $_SESSION['msg'] = 'Įveskite teigiamą skaičių.';
+                } 
+                else if ( $agurkas['agurkai'] >= $_POST['kiekis'][$agurkas['id']]){
+                    $agurkas['agurkai'] -= $_POST['kiekis'][$agurkas['id']];
+                }
+                else if ($agurkas['agurkai'] < $_POST['kiekis'][$agurkas['id']]){
+                    $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek agurkų nėra.';
+                } 
             }
         }
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
     die;
     }
+
 
 //skynimo scenarijus 
 if (isset($_POST['skinti-visus'])) {
@@ -34,8 +43,7 @@ if (isset($_POST['skinti-visus'])) {
         }
     }
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die;
-    
+    die;   
 }
 //visu agurku nuskynimas
 if (isset($_POST['skynimas'])) {
@@ -45,6 +53,7 @@ if (isset($_POST['skynimas'])) {
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
     die; 
 }
+
 
 
 
@@ -59,7 +68,11 @@ if (isset($_POST['skynimas'])) {
 </head>
 <style>
     body {
-
+        position: relative;
+    }
+    .session {
+        position: absolute;
+        color: red;
     }
     nav {
         display: inline-block;
@@ -84,22 +97,13 @@ if (isset($_POST['skynimas'])) {
     }
     form {
         display: inline-block;
-        width: 1200px;
-        margin-left: calc(50% - 600px);
+        width: 900px;
+        margin-left: calc(50% - 500px);
         margin-top: 40px;
-
-    }
-    @media (max-width: 990px) {
-        form {
-            width: 700px;
-            margin-left: calc(50% - 350px);
-        }
-    }
-    @media (max-width: 1280px) {
-        form {
-            width: 900px;
-            margin-left: calc(50% - 450px);
-        }
+        border: 2px solid #DCDCDC;
+        padding: 40px;
+        border-radius: 10px;
+        margin-bottom: 70px;
     }
     h1, h3 {
         color: #5c565c;
@@ -122,12 +126,17 @@ if (isset($_POST['skynimas'])) {
         display:inline-block;
         float: left;
         width: 20%;
+        text-align: center;
+        border: 2px solid #DCDCDC;
+        border-radius: 10px;
+        padding: 10px 0;
     }
     .agurkas-vnt {
         display:inline-block;
         float: left;
         width: 20%;
-        margin-top: 50px;
+        text-align: center;
+        margin-top: 55px;
     }
     .btn-skinti-visus {
         display: block;
@@ -135,12 +144,31 @@ if (isset($_POST['skynimas'])) {
         text-align: center;
         margin: auto;
         padding: 10px 50px;
+        margin-top: 45px;
+        border: 2px solid #DCDCDC;
+        background-color: transparent;
+        border-radius: 10px;
+        text-transform: uppercase;
+    }
+    .btn-skinti-visus:hover {
+        color: black;
+        border: 2px solid #1877f2;
     }
     .btn-skinti {
+        border: 2px solid #DCDCDC;
         display:inline-block;
-        float: left;
-        width: 19%;
-        margin-top: 50px;
+        float: right;
+        width: 22%;
+        margin-top: -38px;
+        padding: 10px;
+        background-color: transparent;
+        border-radius: 10px;
+        text-transform: uppercase;
+        margin-left: 12px;
+    }
+    .btn-skinti:hover {
+        color: black;
+        border: 2px solid #1877f2;
     }
     .form-top {
         padding-bottom: 40px;
@@ -151,6 +179,21 @@ if (isset($_POST['skynimas'])) {
         display: inline-block;
         height: 50px;
         width: 100px;
+    }
+    .input {
+        border: 2px solid #DCDCDC;
+        width: 10%;
+        margin-top: 45px;
+        padding: 10px;
+        background-color: transparent;
+        border-radius: 10px;
+        text-transform: uppercase;
+        margin-left: 2px;
+    }
+    .input:hover {
+        color: black;
+        border: 2px solid #1877f2;
+        border-radius: 10px;
     }
 </style>
 <body>
@@ -163,8 +206,7 @@ if (isset($_POST['skynimas'])) {
     
     <main>
         <h1>Agurkų sodas</h1>
-        <h3>Sodinimas</h3>
-
+        <h3>Skynimas</h3>
         <form action="" method="POST">
         <?php foreach($_SESSION['a'] as $agurkas): ?>
         <div class="form-top">
@@ -173,9 +215,13 @@ if (isset($_POST['skynimas'])) {
                 <div>Agurkas nr. <?= $agurkas['id'] ?></div>
             </div>
             <div class="agurkas-vnt">Galima skinti: <?= $agurkas['agurkai'] ?></div>
-            <input class="btn-skinti" type="text" name="kiek" value="<?= $_POST['kiek']?>"><br>
-            <button class="btn-skinti" type="submit" name="skinti" value="<?= $agurkas['id'] ?>">Skinti</button>
-            <button class="btn-skinti" type="submit" name="skinti-visus" value="<?= $agurkas['id'] ?>">Skinti visus</button>
+            <?php if ($agurkas['agurkai'] != 0) { ?>
+                <?php if(isset($_SESSION['ERROR'])) { echo "<span class='session'>" .$_SESSION['ERROR']. "</span>"; unset($_SESSION['ERROR']); }?>
+                <?php if(isset($_SESSION['msg'])) { echo "<span class='session'>" .$_SESSION['msg']. "</span>"; unset($_SESSION['msg']); }?>
+                <input class="input" name="kiekis[<?= $agurkas['id'] ?>]" value="<?= $kiekis ?>"><br>
+                <button class="btn-skinti" type="submit" name="skinti-visus" value="<?= $agurkas['id'] ?>">Skinti visus</button>
+                <button class="btn-skinti" type="submit" name="skinti" value="<?= $agurkas['id'] ?>">Skinti</button>
+            <?php } ?>
         </div>
     
         <?php endforeach ?>

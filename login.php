@@ -16,9 +16,9 @@ if(isset($_SESSION['logged']) && 1 == $_SESSION['logged']) {
 if($_SERVER['REQUEST_METHOD'] === 'POST') { //JEIGU PASPAUDE MYGTUKA SUMBIT
     $data = json_decode(file_get_contents('data.json'),1);
     foreach($data as $user) {
-        if(($_POST['email'] ?? '') === $user['email'] &&
+        if(($_POST['vardas'] ?? '') === $user['name'] &&
             md5($_POST['pass'] ?? '') === $user['pass']){
-               $_SESSION['name'] = $user['name'];
+               $_SESSION['vardas'] = $user['name'];
                $_SESSION['logged'] = 1;
                header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
                die;
@@ -54,6 +54,15 @@ if(isset($_SESSION['msg'])) {
         color: #a49fa5;
         text-transform: uppercase;
 
+    }
+    p {
+        display: block;
+        margin: auto;
+        width: 375px;
+        text-align: center;
+        margin-top: 80px;
+        color: #a49fa5;
+        font-size: 25px;
     }
     form {
         display: block;
@@ -92,9 +101,10 @@ if(isset($_SESSION['msg'])) {
 </style>
 <body>
     <h1>Agurkų sodas</h1>
+    <p>Norėdami prisijungti įveskite: vardas: Jonukas, password: 123</p>
     <div><?= $msg ?? '' ?></div>
     <form action="" method="POST">
-        <input type="text" name="email" placeholder="Email">
+        <input type="text" name="vardas" placeholder="Vardas">
         <br><br>
         <input type="password" name="pass" value="" placeholder="Password">
         <br><br>

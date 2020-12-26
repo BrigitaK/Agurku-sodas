@@ -99,6 +99,7 @@ if (isset($_POST['auginti'])) {
         display:inline-block;
         float: left;
         width: 33%;
+        margin-top: 55px;
     }
     .btn-sodinti {
         display: block;
@@ -114,6 +115,18 @@ if (isset($_POST['auginti'])) {
     }
     .form-top {
         padding-bottom: 40px;
+        width: 100%;
+        display: inline-block;
+    }
+    .agurkas-img {
+        display: inline-block;
+        height: 50px;
+        width: 100px;
+    }
+    .kiekis {
+        color:red; 
+        margin-top: 50px; 
+        text-align: left;
     }
     
 </style>
@@ -132,13 +145,13 @@ if (isset($_POST['auginti'])) {
         <?php foreach($_SESSION['a'] as $agurkas): ?>
         <div class="form-top">
             <div class="agurkas-nr">
-                <img src="<?= $agurkas['photo'] ?>" alt="photo">
+                <img class="agurkas-img" src="<?= $agurkas['photo'] ?>" alt="photo">
                 <?php $kiekis = rand(2,9) ?>
                 <div>Agurkas nr. <?= $agurkas['id'] ?></div>
             </div>
             <div class="agurkas-vnt">Agurkų: <?= $agurkas['agurkai'] ?></div>
 
-            <h3 style="color:red">+<?= $kiekis ?></h3>
+            <h3 class="kiekis" >+<?= $kiekis ?></h3>
             <input type="hidden" name="kiekis[<?=$agurkas['id'] ?>]" value="<?= $kiekis ?>">
         </div>
 

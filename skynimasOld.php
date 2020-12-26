@@ -1,17 +1,4 @@
 <?php
-//agurku sodas
-//sone pasidaryti meniu, kad butu galima vaikscioti per visus tris puslapius
-//turime agurku sarasa, turime mygtuka, paspaudus mygtuka prisideda naujas agurkas
-//naujas agurkas turi savo unikalu id, reikia paveiksliuku ir prisideda random paveiksliukas prie to agurko
-//spaudziam kryziuka israuti ir agurko nebelieka
-//antras psl agurku auginimas
-//visi agurkai eina vienas paskui kita, didelis sk rodo kiek siuo metu turi agurku.
-//kiekviena karta refresinus puslapi parodo random  nuo 2 iki 7 agurku prisides paspaudus auginti
-//3 psl agurku skynimas
-//as galiu i input ivesti pvz 4 agaurkus ir paspausti skinti, tuomet bendras sk turi sumazeti
-//jeigu agurkas turi 0 vaisiu, tuomet parasyta skinti negalima ir nera atvaizduojami mygtukai
-
-//viska saugome sesijoje arba json file
 
 session_start();
 
@@ -21,38 +8,31 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
 }
 if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
     $_SESSION['a'] = [];
-    $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
+    $_SESSION['agurku ID'] = 0;
     $_SESSION['photo'] = '';
 }
 
-//sodinimo scenarijus
-//reikia detektint sodinimo mygtuka, posto masyve turi atsirasti indeksas 'sodinti'
-//automatiskai generuojam indeksa $_SESSION['a'][] ir priskiriam jam nauja agurka
-//tuomet agurku id dides vienetu
-
-
-if(isset($_POST['sodinti'])) {
-    $_SESSION['a'][]= [
-        'id' => ++$_SESSION['agurku ID'],
-        $photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg"),
-        'photo' =>  $photos[array_rand($photos)],
-        'agurkai' => 0
-    ];
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
+//skynimo scenarijus
+if (isset($_POST['skinti'])) {
+    foreach ($_SESSION['a'] as $index => &$agurkas ) {
+        $agurkas['agurkai'] -= $_POST['kiek-skinti'][$agurkas['id']];
+    }
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
     die;
-    //po post einam antra karta, kad eitume per get
 }
+
+
 
 //Jeigu norim atvaizduoti, tai darom su get
 //jei norim kazka nusiusti, tai einam su post
 
 //isrovimo scenarijus
 
-if(isset($_POST['rauti'])) {
-    foreach($_SESSION['a'] as $index => $agurkas) {
-        if ($_POST['rauti'] == $agurkas['id']) {
-            unset($_SESSION['a'][$index]);
-            header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
+if(isset($_POST['skynimas'])) {
+    foreach($_SESSION['a'] as $index => &$agurkas) {
+        if ($_POST['skynimas'] == $agurkas['id']) {
+            $agurkas['agurkai'] == 0;
+            header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
             die;
         }
     }
@@ -65,7 +45,7 @@ if(isset($_POST['rauti'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sodinimas</title>
+    <title>Skynimas</title>
 </head>
 <style>
     body {
@@ -131,27 +111,26 @@ if(isset($_POST['rauti'])) {
     .agurkas-nr {
         display:inline-block;
         float: left;
-        width: 33%;
+        width: 20%;
     }
     .agurkas-vnt {
         display:inline-block;
         float: left;
-        width: 33%;
-        margin-top: 55px;
+        width: 20%;
+        margin-top: 50px;
     }
-    .btn-sodinti {
+    .btn-skinti-visus {
         display: block;
         max-width: 300px;
         text-align: center;
         margin: auto;
         padding: 10px 50px;
     }
-    .btn-israuti {
+    .btn-skinti {
         display:inline-block;
         float: left;
-        width: 33%;
-        margin-top: 45px;
-        padding: 10px;
+        width: 19%;
+        margin-top: 50px;
     }
     .form-top {
         padding-bottom: 40px;
@@ -179,16 +158,27 @@ if(isset($_POST['rauti'])) {
         <?php foreach($_SESSION['a'] as $agurkas): ?>
         <div class="form-top">
             <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $agurkas['photo'] ?>" alt="photo">
+                <?php $photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg"); ?>
+                <?php $photo = $photos[array_rand($photos)]?>
+                <img class="agurkas-img" src="<?=$photo?>" alt="photo">
                 <div>Agurkas nr. <?= $agurkas['id'] ?></div>
             </div>
-            <div class="agurkas-vnt">Agurkų: <?= $agurkas['agurkai'] ?></div>
-            <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas['id'] ?>">Išrauti</button>
+
+            <div class="agurkas-vnt">Galima skinti: <?= $agurkas['agurkai'] ?></div>
+
+            <input class="btn-skinti" type="text" name="kiek-skinti" value="<?= $_POST['kiek-skinti'] ?? '' ?>"><br>
+            <input type="hidden" name="kiek-skinti[<?=$agurkas['id'] ?>]" value="<?= $_POST['kiek-skinti'] ?? '' ?>">
+            
+            <button class="btn-skinti" type="submit" name="skinti" value="<?= $agurkas['id'] ?>">Skinti</button>
+            <button class="btn-skinti" type="submit" name="skinti-visus" value="<?= $agurkas['id'] ?>">Skinti visus</button>
         </div>
+
+    
         <?php endforeach ?>
-        <button class="btn-sodinti" type="submit" name="sodinti">SODINTI</button>
+        <button class="btn-skinti-visus" type="submit" name="skynimas">Skinti visus agurkus</button>
         </form>
     </main>
 
 </body>
+
 </html>

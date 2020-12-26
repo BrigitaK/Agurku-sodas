@@ -19,11 +19,11 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
     if (isset($_POST['skinti'])) {
         foreach ($_SESSION['a'] as $index => &$agurkas ) {
             if ($_POST['skinti'] == $agurkas['id']) {
-                $agurkas['agurkai'] -= 1;
+                $agurkas['agurkai'] -= $_POST['kiek'];
             }
         }
-        header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-        die;
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
+    die;
     }
 
 //skynimo scenarijus 
@@ -32,22 +32,19 @@ if (isset($_POST['skinti-visus'])) {
         if ($_POST['skinti-visus'] == $agurkas['id']) {
             $agurkas['agurkai'] -=  $agurkas['agurkai'];
         }
-        header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die;
     }
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
+    die;
     
 }
 //visu agurku nuskynimas
 if (isset($_POST['skynimas'])) {
-    foreach ($_SESSION['a'] as $index => $agurkas ) {
-            $agurkas['agurkai'] == 0;
-        // $agurkas['agurkai'] -= 5;//$_POST['kiek-skinti'][$_POST['agurko-id']];
-        header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-        die;
+    foreach ($_SESSION['a'] as $index => &$agurkas ) {
+        $agurkas['agurkai']  -=  $agurkas['agurkai'];
     }
-    
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
+    die; 
 }
-
 
 
 
@@ -167,6 +164,7 @@ if (isset($_POST['skynimas'])) {
     <main>
         <h1>Agurkų sodas</h1>
         <h3>Sodinimas</h3>
+
         <form action="" method="POST">
         <?php foreach($_SESSION['a'] as $agurkas): ?>
         <div class="form-top">
@@ -174,20 +172,14 @@ if (isset($_POST['skynimas'])) {
                 <img class="agurkas-img" src="<?= $agurkas['photo'] ?>" alt="photo">
                 <div>Agurkas nr. <?= $agurkas['id'] ?></div>
             </div>
-            
-
             <div class="agurkas-vnt">Galima skinti: <?= $agurkas['agurkai'] ?></div>
-
-                <input class="btn-skinti" type="text" name="kiek" value="<?= $_POST['kiek']?>"><br>
-
-                <button class="btn-skinti" type="submit" name="skinti" value="<?= $agurkas['id'] ?>">Skinti</button>
-    
+            <input class="btn-skinti" type="text" name="kiek" value="<?= $_POST['kiek']?>"><br>
+            <button class="btn-skinti" type="submit" name="skinti" value="<?= $agurkas['id'] ?>">Skinti</button>
             <button class="btn-skinti" type="submit" name="skinti-visus" value="<?= $agurkas['id'] ?>">Skinti visus</button>
         </div>
-
     
         <?php endforeach ?>
-        <button class="btn-skinti-visus" type="submit" name="skynimas">Skinti visus agurkus</button>
+        <button class="btn-skinti-visus" type="submit" name="skynimas">Skinti visą derlių</button>
         </form>
           
     </main>

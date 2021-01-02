@@ -22,6 +22,12 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
                 if($_POST['kiekis'][$agurkas['id']] < 0) {
                     $_SESSION['msg'] = 'Įveskite teigiamą skaičių.';
                 } 
+                else if ( floor($_POST['kiekis'][$agurkas['id']]) != $_POST['kiekis'][$agurkas['id']]){
+                    $_SESSION['msg'] = 'Įveskite sveiką skaičių.';
+                }
+                else if ( !is_numeric($_POST['kiekis'][$agurkas['id']])){
+                    $_SESSION['msg'] = 'Įveskite skaičių.';
+                }
                 else if ( $agurkas['agurkai'] >= $_POST['kiekis'][$agurkas['id']]){
                     $agurkas['agurkai'] -= $_POST['kiekis'][$agurkas['id']];
                 }

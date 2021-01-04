@@ -1,4 +1,5 @@
 <?php
+
 //agurku sodas
 //sone pasidaryti meniu, kad butu galima vaikscioti per visus tris puslapius
 //turime agurku sarasa, turime mygtuka, paspaudus mygtuka prisideda naujas agurkas
@@ -14,6 +15,8 @@
 //viska saugome sesijoje arba json file
 
 session_start();
+
+include __DIR__.'/Agurkas.php';
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');

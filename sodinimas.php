@@ -35,11 +35,20 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 
 
 if(isset($_POST['sodinti'])) {
+
+    $agurkoObj = new Agurkas; //irasomas objektas, pasidarom nauja agurka
+
     $_SESSION['a'][]= [
-        'id' => ++$_SESSION['agurku ID'],
+
+        $agurkoObj->id = $_SESSION['agurku ID'] +1,
         $photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg"),
-        'photo' =>  $photos[array_rand($photos)],
-        'agurkai' => 0
+        $agurkuObj->count = 0,
+        $agurkoObj->photo = $photos[array_rand($photos)]
+
+        //'id' => ++$_SESSION['agurku ID'],
+        //$photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg"),
+        //'photo' =>  $photos[array_rand($photos)],
+        //'agurkai' => 0
     ];
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
     die;

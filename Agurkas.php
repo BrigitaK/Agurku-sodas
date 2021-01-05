@@ -45,9 +45,27 @@ class Agurkas {
 
     public function skinti($agurkai)
     {
-        $this->count = $this->count - $_POST['kiekis'][$agurkas->id];
+        
+        if ( is_numeric($agurkai)){
+        
+            if($agurkai < 0) {
+                $_SESSION['msg'] = 'Įveskite teigiamą skaičių.';
+            } 
+            else if ( floor($agurkai) != $agurkai){
+                $_SESSION['msg'] = 'Įveskite sveiką skaičių.';
+            }
+
+
+            else if ($this->count < $agurkai){
+                $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek agurkų nėra.';
+            }
+            else if ( $this->count >= $agurkai){
+                $this->count -= $agurkai;
+            }
+        }
+
     }
-    
+
     public function skintiVisus($agurkai)
     {
 

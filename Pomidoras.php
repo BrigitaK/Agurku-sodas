@@ -47,7 +47,25 @@ class Pomidoras {
 
     public function skintiPomidorus($pomidorai)
     {
-        $this->count = $this->count - $_POST['kiekis'][$pomidoras->id];
+        
+        if ( is_numeric($pomidorai)){
+        
+            if($pomidorai < 0) {
+                $_SESSION['msg'] = 'Įveskite teigiamą skaičių.';
+            } 
+            else if ( floor($pomidorai) != $pomidorai){
+                $_SESSION['msg'] = 'Įveskite sveiką skaičių.';
+            }
+
+
+            else if ($this->count < $pomidorai){
+                $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek agurkų nėra.';
+            }
+            else if ( $this->count >= $pomidorai){
+                $this->count -= $pomidorai;
+            }
+        }
+
     }
 
     public function skintiVisusPomidorus($pomidorai)

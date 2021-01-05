@@ -22,24 +22,10 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 //skynimo Agurku scenarijus
     if (isset($_POST['skinti'])) {
         foreach ($_SESSION['obj'] as $index => $agurkas ) {
-            $agurkas = unserialize($agurkas);
-            if ($_POST['skinti'] == $agurkas->id) {
-                if($_POST['kiekis'][$agurkas->id] < 0) {
-                    $_SESSION['msg'] = 'Įveskite teigiamą skaičių.';
-                } 
-                else if ( floor($_POST['kiekis'][$agurkas->id]) != $_POST['kiekis'][$agurkas->id]){
-                    $_SESSION['msg'] = 'Įveskite sveiką skaičių.';
-                }
-                else if ( !is_numeric($_POST['kiekis'][$agurkas->id])){
-                    $_SESSION['msg'] = 'Įveskite skaičių.';
-                }
-                else if ($agurkas->count < $_POST['kiekis'][$agurkas->id]){
-                    $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek agurkų nėra.';
-                } 
-                else if ( $agurkas->count >= $_POST['kiekis'][$agurkas->id]){
-                    $agurkas->skinti($_POST['skinti'][$agurkas->id]);//atimam agurka
-                }
-            }
+            $agurkas = unserialize($agurkas); // <----- agurko objektas
+            $agurkas->skinti($_POST['kiekis'][$agurkas->id]); // <------- atimam agurka
+            $agurkas = serialize($agurkas); // <------ vel stringas
+            $_SESSION['obj'][$index] = $agurkas; // <----- uzsaugom agurkus
         }
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
     die;
@@ -48,24 +34,10 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 //skynimo Pomidoru scenarijus
 if (isset($_POST['skintiP'])) {
     foreach ($_SESSION['objP'] as $index => $pomidoras ) {
-        $pomidoras = unserialize($pomidoras);
-        if ($_POST['skintiP'] == $pomidoras->id) {
-            if($_POST['kiekis'][$pomidoras->id] < 0) {
-                $_SESSION['msg'] = 'Įveskite teigiamą skaičių.';
-            } 
-            else if ( floor($_POST['kiekis'][$pomidoras->id]) != $_POST['kiekis'][$pomidoras->id]){
-                $_SESSION['msg'] = 'Įveskite sveiką skaičių.';
-            }
-            else if ( !is_numeric($_POST['kiekis'][$pomidoras->id])){
-                $_SESSION['msg'] = 'Įveskite skaičių.';
-            }
-            else if ($pomidoras->count < $_POST['kiekis'][$pomidoras->id]){
-                $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek agurkų nėra.';
-            } 
-            else if ( $pomidoras->count >= $_POST['kiekis'][$pomidoras->id]){
-                $pomidoras->skintiPomidorus($_POST['skinti'][$pomidoras->id]);//atimam agurka
-            }
-        }
+        $pomidoras = unserialize($pomidoras); // <----- agurko objektas
+        $pomidoras->skintiPomidorus($_POST['kiekis'][$pomidoras->id]); // <------- atimam agurka
+        $pomidoras = serialize($pomidoras); // <------ vel stringas
+        $_SESSION['objP'][$index] = $pomidoras; // <----- uzsaugom agurkus
     }
 header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
 die;

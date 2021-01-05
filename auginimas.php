@@ -10,6 +10,7 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
     $_SESSION['a'] = [];
     $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
     $_SESSION['pomidoru ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
+    $_SESSION['moliugu ID'] = 0; //kad moliugai nesikartotu yra naujas kintamasis
 }
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
@@ -46,6 +47,22 @@ if (isset($_POST['augintiP'])) {
         $pomidoras->addPomidoras($_POST['kiekis'][$pomidoras->id]);// pridedam agurka
         $pomidoras = serialize($pomidoras); // vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
+    }
+
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
+    die;
+}
+
+//auginimam moliugus
+if (isset($_POST['augintiM'])) {
+
+    //objektai yra perduodami pagal referenca
+    //auginimas su objektu
+    foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
+        $moliugas = unserialize($moliugas); //agurko objektas
+        $moliugas->addMoliugas($_POST['kiekis'][$moliugas->id]);// pridedam agurka
+        $moliugas = serialize($moliugas); // vel stringas
+        $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
     }
 
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
@@ -211,6 +228,26 @@ if (isset($_POST['augintiP'])) {
 
         <?php endforeach ?>
         <button class="btn-auginti" type="submit" name="augintiP">AUGINTI</button>
+        </form>
+
+        <h3 id="moliugai">Moliūgai</h3>
+
+        <form action="#moliugai" method="POST">
+        <?php foreach($_SESSION['objM'] as $moliugas): ?>
+        <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
+        <div class="form-top">
+            <div class="agurkas-nr">
+                <img class="agurkas-img" src="<?= $moliugas->photoM ?>" alt="photo">
+                <?php $kiekis = rand(1,3) ?>
+                <div>Moliūgo nr. <?= $moliugas->id ?></div>
+            </div>
+            <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>
+            <h3 class="kiekis" >+<?= $kiekis ?></h3>
+            <input type="hidden" name="kiekis[<?=$moliugas->id ?>]" value="<?= $kiekis ?>">
+        </div>
+
+        <?php endforeach ?>
+        <button class="btn-auginti" type="submit" name="augintiM">AUGINTI</button>
         </form>
     </main>
 

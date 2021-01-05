@@ -4,6 +4,7 @@ session_start();
 
 include __DIR__.'/Agurkas.php';
 include __DIR__.'/Pomidoras.php';
+include __DIR__.'/Moliugas.php';
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');

@@ -4,6 +4,7 @@ session_start();
 
 include __DIR__.'/Agurkas.php';
 include __DIR__.'/Pomidoras.php';
+include __DIR__.'/Moliugas.php';
 
 if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
     $_SESSION['a'] = [];

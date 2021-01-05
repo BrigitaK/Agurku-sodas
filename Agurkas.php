@@ -9,7 +9,7 @@ class Agurkas {
     {
         $this->id = $lastId + 1;
         $this->count = 0;
-        $photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg");
+        $photos = array("./photo/agurkas.jpg", "./photo/agurkas3.jpg", "./photo/agurkas2.jpg");
         $this->photo = $photos[array_rand($photos)];
 
 

@@ -11,7 +11,7 @@ class Pomidoras {
     {
         $this->id = $lastId + 1;
         $this->count = 0;
-        $photosP = array("./photo/pomidoras.jpg", "./photo/pomidoras1.jpg", "./photo/pomidoras2.jpg");
+        $photosP = array("./photo/pomidoras1.jpg", "./photo/pomidoras2.jpg", "./photo/pomidoras3.jpg");
         $this->photoP = $photosP[array_rand($photosP)];
 
 

@@ -25,7 +25,7 @@ if(isset($_POST['sodinti'])) {
 
     //sukuriam konstruktoriu
     $agurkoObj = new Agurkas($_SESSION['agurku ID']);//irasomas objektas, pasidarom nauja agurka
-
+    ++$_SESSION['agurku ID'];
 
     // norint ideti objekta i sesija reikia paversti i stringa ir atgal atversti i objekta
     $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa
@@ -36,10 +36,10 @@ if(isset($_POST['sodinti'])) {
     //ivyksta nera prasmes. Kadangi zinok kad objektas greit numirs, tai mes iskar ji serializuojam ir kai reikia vel i ji kreipiames
     
 
-    $_SESSION['a'][]= [ 
-        'id' => ++$_SESSION['agurku ID'],
-        'agurkai' => 0,
-    ];
+    //$_SESSION['a'][]= [ 
+    //    'id' => ++$_SESSION['agurku ID'],
+    //    'agurkai' => 0,
+    //];
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
     die;
     //po post einam antra karta, kad eitume per get
@@ -51,11 +51,18 @@ if(isset($_POST['sodinti'])) {
 //isrovimo scenarijus
 
 if(isset($_POST['rauti'])) {
-    foreach($_SESSION['a'] as $index => $agurkas) {
-        if ($_POST['rauti'] == $agurkas['id']) {
-            // unset($_SESSION['a'][$index]);
-            //papildomai reikia israuti ir objekta
-            unset($_SESSION['a'][$index],$_SESSION['obj'][$index]);
+    //foreach($_SESSION['a'] as $index => $agurkas) {
+    //    if ($_POST['rauti'] == $agurkas[id]) {
+    //        unset($_SESSION['a'][$index];
+    //        header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
+    //        die;
+    //    }
+    //}
+
+    foreach($_SESSION['obj'] as $index => $agurkas) {
+        $agurkas = unserialize($agurkas);
+        if ($_POST['rauti'] == $agurkas->id) {
+            unset($_SESSION['obj'][$index]);
             header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
             die;
         }

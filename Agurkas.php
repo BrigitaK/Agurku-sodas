@@ -40,6 +40,23 @@ class Agurkas {
     public function addAgurkas($agurkai)
     {
         $this->count = $this->count + $agurkai;
+        
+    }
+
+    public function skinti($agurkai)
+    {
+        $this->count = $this->count - $_POST['kiekis'][$agurkas->id];
+    }
+    public function skintiVisus($agurkai)
+    {
+
+        $this->count = 0;
+    }
+
+    public function nuimtiDerliu($agurkai) // 
+    {
+
+        $this->count = 0;
     }
 
     //visai nebutina

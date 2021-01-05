@@ -3,6 +3,7 @@
 session_start();
 
 include __DIR__.'/Agurkas.php';
+include __DIR__.'/Pomidoras.php';
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
@@ -13,6 +14,10 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
     $_SESSION['obj'] = []; // sukuriam objektu masyva, laikysim agurku objektus
     $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
     $_SESSION['photo'] = '';
+
+    $_SESSION['objP'] = []; // sukuriam objektu masyva, laikysim pomidoru objektus
+    $_SESSION['pomidoru ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
+    $_SESSION['photoP'] = '';
 }
 
 //sodinimo scenarijus
@@ -45,6 +50,16 @@ if(isset($_POST['sodinti'])) {
     //po post einam antra karta, kad eitume per get
 }
 
+
+if(isset($_POST['sodintiP'])) {
+
+    $pomidoroObj = new Pomidoras($_SESSION['pomidoru ID']);//irasomas objektas, pasidarom nauja agurka
+    ++$_SESSION['pomidoru ID'];
+    $_SESSION['objP'][]= serialize($pomidoroObj); //irasom serializuota objekta paversta i stringa
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
+    die;
+}
+
 //Jeigu norim atvaizduoti, tai darom su get
 //jei norim kazka nusiusti, tai einam su post
 
@@ -63,6 +78,18 @@ if(isset($_POST['rauti'])) {
         $agurkas = unserialize($agurkas);
         if ($_POST['rauti'] == $agurkas->id) {
             unset($_SESSION['obj'][$index]);
+            header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
+            die;
+        }
+    }
+}
+
+//raunam Pomidora
+if(isset($_POST['rautiP'])) {
+    foreach($_SESSION['objP'] as $index => $pomidoras) {
+        $pomidoras = unserialize($pomidoras);
+        if ($_POST['rautiP'] == $pomidoras->id) {
+            unset($_SESSION['objP'][$index]);
             header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
             die;
         }
@@ -198,9 +225,9 @@ if(isset($_POST['rauti'])) {
     </nav>
     
     <main>
-        <h1>Agurkų sodas</h1>
-        <h3>Sodinimas</h3>
-        <form action="" method="POST">
+        <h1>Daržovių sodinimas</h1>
+        <h3 id="agurkai">Agurkai</h3>
+        <form action="#agurkai" method="POST">
         
         <?php foreach($_SESSION['obj'] as $agurkas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
         <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
@@ -216,6 +243,25 @@ if(isset($_POST['rauti'])) {
         </div>
         <?php endforeach ?>
         <button class="btn-sodinti" type="submit" name="sodinti">SODINTI</button>
+        </form>
+
+        <h3 id="pomidorai">Pomidorai</h3>
+        <form action="#pomidorai" method="POST">
+        
+        <?php foreach($_SESSION['objP'] as $pomidoras): //paverciam i obj, norint panaudoti reikia isserializuoti?>
+        <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
+
+        
+        <div class="form-top">
+            <div class="agurkas-nr">
+                <img class="agurkas-img" src="<?= $pomidoras->photoP ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
+                <div>Pomidoras nr. <?= $pomidoras->id ?></div>
+            </div>
+            <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
+            <button class="btn-israuti" type="submit" name="rautiP" value="<?= $pomidoras->id ?>">Išrauti</button>
+        </div>
+        <?php endforeach ?>
+        <button class="btn-sodinti" type="submit" name="sodintiP">SODINTI</button>
         </form>
     </main>
 

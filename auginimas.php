@@ -3,10 +3,12 @@
 session_start();
 
 include __DIR__.'/Agurkas.php';
+include __DIR__.'/Pomidoras.php';
 
 if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
     $_SESSION['a'] = [];
     $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
+    $_SESSION['pomidoru ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
 }
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
@@ -27,6 +29,22 @@ if (isset($_POST['auginti'])) {
         $agurkas->addAgurkas($_POST['kiekis'][$agurkas->id]);// pridedam agurka
         $agurkas = serialize($agurkas); // vel stringas
         $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
+    }
+
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
+    die;
+}
+
+//auginimam pomidorus
+if (isset($_POST['augintiP'])) {
+
+    //objektai yra perduodami pagal referenca
+    //auginimas su objektu
+    foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
+        $pomidoras = unserialize($pomidoras); //agurko objektas
+        $pomidoras->addPomidoras($_POST['kiekis'][$pomidoras->id]);// pridedam agurka
+        $pomidoras = serialize($pomidoras); // vel stringas
+        $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
     }
 
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
@@ -153,10 +171,10 @@ if (isset($_POST['auginti'])) {
     </nav>
     
     <main>
-        <h1>Agurkų sodas</h1>
-        <h3>Auginimas</h3>
+        <h1>Daržovių auginimas</h1>
+        <h3 id="agurkai">Agurkai</h3>
 
-        <form action="" method="POST">
+        <form action="#agurkai" method="POST">
         <?php foreach($_SESSION['obj'] as $agurkas): ?>
         <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
         <div class="form-top">
@@ -172,6 +190,26 @@ if (isset($_POST['auginti'])) {
 
         <?php endforeach ?>
         <button class="btn-auginti" type="submit" name="auginti">AUGINTI</button>
+        </form>
+
+        <h3 id="pomidorai">Pomidorai</h3>
+
+        <form action="#pomidorai" method="POST">
+        <?php foreach($_SESSION['objP'] as $pomidoras): ?>
+        <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
+        <div class="form-top">
+            <div class="agurkas-nr">
+                <img class="agurkas-img" src="<?= $pomidoras->photoP ?>" alt="photo">
+                <?php $kiekis = rand(1,3) ?>
+                <div>Pomidoro nr. <?= $pomidoras->id ?></div>
+            </div>
+            <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
+            <h3 class="kiekis" >+<?= $kiekis ?></h3>
+            <input type="hidden" name="kiekis[<?=$pomidoras->id ?>]" value="<?= $kiekis ?>">
+        </div>
+
+        <?php endforeach ?>
+        <button class="btn-auginti" type="submit" name="augintiP">AUGINTI</button>
         </form>
     </main>
 

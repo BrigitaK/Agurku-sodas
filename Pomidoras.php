@@ -1,16 +1,18 @@
 <?php 
 
-class Agurkas {
+class Pomidoras {
 
-    private $id, $count, $photo; //jei du kintamieji turi ta pati matomuma, galima rasyti per kableli
+
+    private $id, $count, $photoP; //jei du kintamieji turi ta pati matomuma, galima rasyti per kableli
+
 
 
     public function __construct($lastId)
     {
         $this->id = $lastId + 1;
         $this->count = 0;
-        $photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg");
-        $this->photo = $photos[array_rand($photos)];
+        $photosP = array("./photo/pomidoras.jpg", "./photo/pomidoras1.jpg", "./photo/pomidoras2.jpg");
+        $this->photoP = $photosP[array_rand($photosP)];
 
 
 
@@ -37,22 +39,23 @@ class Agurkas {
                                         //propertyName tai savybe ir butu visiskai pazodziui isversta ir butu kaip public propertyName
     }
 
-    public function addAgurkas($agurkai)
+    public function addPomidoras($pomidorai)
     {
-        $this->count = $this->count + $agurkai;
+        $this->count = $this->count + $pomidorai;
         
     }
 
-    public function skinti($agurkai)
+    public function skintiPomidorus($pomidorai)
     {
-        $this->count = $this->count - $_POST['kiekis'][$agurkas->id];
+        $this->count = $this->count - $_POST['kiekis'][$pomidoras->id];
     }
-    
-    public function skintiVisus($agurkai)
+
+    public function skintiVisusPomidorus($pomidorai)
     {
 
         $this->count = 0;
     }
+
 
     //visai nebutina
    // public function __serialize() //iskvieciamas kai objektas yra serializuojamas

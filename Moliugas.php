@@ -43,7 +43,7 @@ class Moliugas {
 
 
             else if ($this->count < $moliugai){
-                $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek agurkų nėra.';
+                $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek moliūgų nėra.';
             }
             else if ( $this->count >= $moliugai){
                 $this->count -= $moliugai;
@@ -52,7 +52,7 @@ class Moliugas {
 
     }
 
-    public function skintiVisus($moliugai)
+    public function skintiVisusMoliugus($moliugai)
     {
 
         $this->count = 0;

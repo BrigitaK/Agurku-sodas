@@ -59,7 +59,7 @@ class Pomidoras {
 
 
             else if ($this->count < $pomidorai){
-                $_SESSION['ERROR1'] = 'Įvestas skaičius per didelis, tiek agurkų nėra.';
+                $_SESSION['ERROR1'] = 'Įvestas skaičius per didelis, tiek pomidorų nėra.';
             }
             else if ( $this->count >= $pomidorai){
                 $this->count -= $pomidorai;

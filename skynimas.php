@@ -13,7 +13,8 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
 if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
     $_SESSION['a'] = [];
     $_SESSION['agurku ID'] = 0;
-    $_SESSION['pomidoru ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
+    $_SESSION['pomidoru ID'] = 0; 
+    $_SESSION['moliugu ID'] = 0; 
 }
 
 //Jeigu norim atvaizduoti, tai darom su get
@@ -39,6 +40,18 @@ if (isset($_POST['skintiP'])) {
         $pomidoras->skintiPomidorus($_POST['kiekis'][$pomidoras->id]); // <------- atimam agurka
         $pomidoras = serialize($pomidoras); // <------ vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // <----- uzsaugom agurkus
+    }
+header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
+die;
+}
+
+//skynimo moliugu scenarijus
+if (isset($_POST['skintiM'])) {
+    foreach ($_SESSION['objM'] as $index => $moliugas ) {
+        $moliugas = unserialize($moliugas); // <----- agurko objektas
+        $moliugas->skintiMoliugus($_POST['kiekis'][$moliugas->id]); // <------- atimam agurka
+        $moliugas = serialize($moliugas); // <------ vel stringas
+        $_SESSION['objM'][$index] = $moliugas; // <----- uzsaugom agurkus
     }
 header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
 die;
@@ -75,6 +88,22 @@ if (isset($_POST['skinti-visusP'])) {
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
     die;   
 }
+
+//skynimo moliugu scenarijus 
+if (isset($_POST['skinti-visusM'])) {
+
+    foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
+        $moliugas = unserialize($moliugas); //agurko objektas
+        if ($_POST['skinti-visusM'] == $moliugas->id) {
+            $moliugas->skintiVisusMoliugus($_POST['skinti-visusP'][$moliugas->id]);// atimam agurka
+            $moliugas = serialize($moliugas); // vel stringas
+            $_SESSION['objP'][$index] = $moliugas; // uzsaugom agurkus
+        }
+    }
+
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
+    die;   
+}
 //visu agurku nuskynimas
 if (isset($_POST['skynimas'])) {
 
@@ -96,6 +125,19 @@ if (isset($_POST['skynimasP'])) {
         $pomidoras->skintiVisusPomidorus($_POST['skynimas'][$pomidoras->id]);// atimam agurka
         $pomidoras = serialize($pomidoras); // vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
+    }
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
+    die; 
+}
+
+//visu moliugu nuskynimas
+if (isset($_POST['skynimasM'])) {
+
+    foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
+        $moliugas = unserialize($moliugas); //agurko objektas
+        $moliugas->skintiVisusMoliugus($_POST['skynimas'][$moliugas->id]);// atimam agurka
+        $moliugas = serialize($moliugas); // vel stringas
+        $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
     }
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
     die; 
@@ -297,6 +339,29 @@ if (isset($_POST['skynimasP'])) {
     
         <?php endforeach ?>
         <button class="btn-skinti-visus" type="submit" name="skynimasP">Skinti visą derlių</button>
+        </form>
+
+        <h3 id="moliugai">Moliūgai</h3>
+        <form action="#moliugai" method="POST">
+        <?php foreach($_SESSION['objM'] as $moliugas): ?>
+        <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
+        <div class="form-top">
+            <div class="agurkas-nr">
+                <img class="agurkas-img" src="<?= $moliugas->photoM ?>" alt="photo">
+                <div>Moliūgo nr. <?= $moliugas->id ?></div>
+            </div>
+            <div class="agurkas-vnt">Galima skinti: <?= $moliugas->count ?></div>
+            <?php if ($moliugas->count != 0) { ?>
+                <?php if(isset($_SESSION['ERROR1'])) { echo "<span class='session'>" .$_SESSION['ERROR1']. "</span>"; unset($_SESSION['ERROR1']); }?>
+                <?php if(isset($_SESSION['msg1'])) { echo "<span class='session'>" .$_SESSION['msg1']. "</span>"; unset($_SESSION['msg1']); }?>
+                <input class="input" name="kiekis[<?= $moliugas->id ?>]" value="<?= $kiekis ?>"><br>
+                <button class="btn-skinti" type="submit" name="skinti-visusM" value="<?= $moliugas->id ?>">Skinti visus</button>
+                <button class="btn-skinti" type="submit" name="skintiM" value="<?= $moliugas->id ?>">Skinti</button>
+            <?php } ?>
+        </div>
+    
+        <?php endforeach ?>
+        <button class="btn-skinti-visus" type="submit" name="skynimasM">Skinti visą derlių</button>
         </form>
           
     </main>

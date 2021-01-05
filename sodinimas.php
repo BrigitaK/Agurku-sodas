@@ -1,19 +1,5 @@
 <?php
 
-//agurku sodas
-//sone pasidaryti meniu, kad butu galima vaikscioti per visus tris puslapius
-//turime agurku sarasa, turime mygtuka, paspaudus mygtuka prisideda naujas agurkas
-//naujas agurkas turi savo unikalu id, reikia paveiksliuku ir prisideda random paveiksliukas prie to agurko
-//spaudziam kryziuka israuti ir agurko nebelieka
-//antras psl agurku auginimas
-//visi agurkai eina vienas paskui kita, didelis sk rodo kiek siuo metu turi agurku.
-//kiekviena karta refresinus puslapi parodo random  nuo 2 iki 7 agurku prisides paspaudus auginti
-//3 psl agurku skynimas
-//as galiu i input ivesti pvz 4 agaurkus ir paspausti skinti, tuomet bendras sk turi sumazeti
-//jeigu agurkas turi 0 vaisiu, tuomet parasyta skinti negalima ir nera atvaizduojami mygtukai
-
-//viska saugome sesijoje arba json file
-
 session_start();
 
 include __DIR__.'/Agurkas.php';
@@ -36,19 +22,17 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 
 if(isset($_POST['sodinti'])) {
 
-    $agurkoObj = new Agurkas; //irasomas objektas, pasidarom nauja agurka
+    $agurkoObj = new Agurkas;//irasomas objektas, pasidarom nauja agurka
 
-    $_SESSION['a'][]= [
+    $agurkoObj->id = $_SESSION['agurku ID'] +1; //paimam objekto id
+    $agurkoObj->count = 0; // objekto count
 
-        $agurkoObj->id = $_SESSION['agurku ID'] +1,
-        $photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg"),
-        $agurkuObj->count = 0,
-        $agurkoObj->photo = $photos[array_rand($photos)]
+    $photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg");
+    $agurkoObj->photo = $photos[array_rand($photos)]; //objekto foto
 
-        //'id' => ++$_SESSION['agurku ID'],
-        //$photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg"),
-        //'photo' =>  $photos[array_rand($photos)],
-        //'agurkai' => 0
+    $_SESSION['a'][]= [ //norint ideti objekta i sesija reikia 
+        'id' => ++$_SESSION['agurku ID'],
+        'agurkai' => 0,
     ];
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
     die;

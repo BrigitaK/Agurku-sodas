@@ -2,13 +2,11 @@
 
 session_start();
 
+include __DIR__.'/Agurkas.php';
+
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
     die;
-}
-if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
-    $_SESSION['a'] = [];
-    $_SESSION['agurku ID'] = 0;
 }
 
 //auginimo scenarijus

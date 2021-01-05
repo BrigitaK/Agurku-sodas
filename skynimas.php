@@ -214,19 +214,20 @@ if (isset($_POST['skynimas'])) {
         <h1>Agurkų sodas</h1>
         <h3>Skynimas</h3>
         <form action="" method="POST">
-        <?php foreach($_SESSION['a'] as $agurkas): ?>
+        <?php foreach($_SESSION['obj'] as $agurkas): ?>
+        <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
         <div class="form-top">
             <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $agurkas['photo'] ?>" alt="photo">
-                <div>Agurkas nr. <?= $agurkas['id'] ?></div>
+                <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
+                <div>Agurkas nr. <?= $agurkas->id ?></div>
             </div>
-            <div class="agurkas-vnt">Galima skinti: <?= $agurkas['agurkai'] ?></div>
-            <?php if ($agurkas['agurkai'] != 0) { ?>
+            <div class="agurkas-vnt">Galima skinti: <?= $agurkas->count ?></div>
+            <?php if ($agurkas->count != 0) { ?>
                 <?php if(isset($_SESSION['ERROR'])) { echo "<span class='session'>" .$_SESSION['ERROR']. "</span>"; unset($_SESSION['ERROR']); }?>
                 <?php if(isset($_SESSION['msg'])) { echo "<span class='session'>" .$_SESSION['msg']. "</span>"; unset($_SESSION['msg']); }?>
-                <input class="input" name="kiekis[<?= $agurkas['id'] ?>]" value="<?= $kiekis ?>"><br>
-                <button class="btn-skinti" type="submit" name="skinti-visus" value="<?= $agurkas['id'] ?>">Skinti visus</button>
-                <button class="btn-skinti" type="submit" name="skinti" value="<?= $agurkas['id'] ?>">Skinti</button>
+                <input class="input" name="kiekis[<?= $agurkas->id ?>]" value="<?= $kiekis ?>"><br>
+                <button class="btn-skinti" type="submit" name="skinti-visus" value="<?= $agurkas->id ?>">Skinti visus</button>
+                <button class="btn-skinti" type="submit" name="skinti" value="<?= $agurkas->id ?>">Skinti</button>
             <?php } ?>
         </div>
     

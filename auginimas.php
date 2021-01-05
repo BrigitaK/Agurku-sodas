@@ -4,6 +4,11 @@ session_start();
 
 include __DIR__.'/Agurkas.php';
 
+if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
+    $_SESSION['a'] = [];
+    $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
+}
+
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
     die;
@@ -11,9 +16,19 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
 
 //auginimo scenarijus
 if (isset($_POST['auginti'])) {
-    foreach ($_SESSION['a'] as $index => &$agurkas ) {
-        $agurkas['agurkai'] += $_POST['kiekis'][$agurkas['id']];
+    //foreach ($_SESSION['a'] as $index => &$agurkas ) {
+    //    $agurkas['agurkai'] += $_POST['kiekis'][$agurkas['id']];
+    //}
+
+    //objektai yra perduodami pagal referenca
+    //auginimas su objektu
+    foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
+        $agurkas = unserialize($agurkas); //agurko objektas
+        $agurkas->addAgurkas($_POST['kiekis'][$agurkas->id]);// pridedam agurka
+        $agurkas = serialize($agurkas); // vel stringas
+        $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
     }
+
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
     die;
 }
@@ -142,16 +157,17 @@ if (isset($_POST['auginti'])) {
         <h3>Auginimas</h3>
 
         <form action="" method="POST">
-        <?php foreach($_SESSION['a'] as $agurkas): ?>
+        <?php foreach($_SESSION['obj'] as $agurkas): ?>
+        <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
         <div class="form-top">
             <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $agurkas['photo'] ?>" alt="photo">
+                <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
                 <?php $kiekis = rand(2,9) ?>
-                <div>Agurkas nr. <?= $agurkas['id'] ?></div>
+                <div>Agurkas nr. <?= $agurkas->id ?></div>
             </div>
-            <div class="agurkas-vnt">Agurkų: <?= $agurkas['agurkai'] ?></div>
+            <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
             <h3 class="kiekis" >+<?= $kiekis ?></h3>
-            <input type="hidden" name="kiekis[<?=$agurkas['id'] ?>]" value="<?= $kiekis ?>">
+            <input type="hidden" name="kiekis[<?=$agurkas->id ?>]" value="<?= $kiekis ?>">
         </div>
 
         <?php endforeach ?>

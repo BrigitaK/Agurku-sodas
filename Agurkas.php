@@ -16,7 +16,7 @@ class Agurkas {
 
         //$agurkoObj->photo = $photos[array_rand($photos)]; //objekto foto
         // $agurkoObj->id = $_SESSION['agurku ID'] +1; 
-        //$agurkoObj->count = 0; // objekto count //perkeliam abi eilutes is sodinimo
+        //$agurkoObj->count = 0; // objekto count //perkeliam sias eilutes is sodinimo
     }
 
     public function __get($propertyName) // getas turi viena argumenta, varda tos savybes i kuria mes kreipiames
@@ -35,6 +35,11 @@ class Agurkas {
         //irasom ir mato privatu matomuma
         $this->$propertyName = $value; //$propertyName kreipiuosi i kintamojo savybem kuri yra uzkoduota $propertyName, ir buna id = $value ir kitu atveju count = $value, 
                                         //propertyName tai savybe ir butu visiskai pazodziui isversta ir butu kaip public propertyName
+    }
+
+    public function addAgurkas($agurkai)
+    {
+        $this->count = $this->count + $agurkai;
     }
 
     //visai nebutina

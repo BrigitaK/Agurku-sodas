@@ -10,6 +10,7 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
 }
 if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
     $_SESSION['a'] = [];
+    $_SESSION['obj'] = []; // sukuriam objektu masyva, laikysim agurku objektus
     $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
     $_SESSION['photo'] = '';
 }
@@ -22,15 +23,20 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 
 if(isset($_POST['sodinti'])) {
 
-    $agurkoObj = new Agurkas;//irasomas objektas, pasidarom nauja agurka
+    //sukuriam konstruktoriu
+    $agurkoObj = new Agurkas($_SESSION['agurku ID']);//irasomas objektas, pasidarom nauja agurka
 
-    $agurkoObj->id = $_SESSION['agurku ID'] +1; //paimam objekto id
-    $agurkoObj->count = 0; // objekto count
 
-    $photos = array("./photo/agurkas.jpg", "./photo/agurkas1.jpg", "./photo/agurkas2.jpg");
-    $agurkoObj->photo = $photos[array_rand($photos)]; //objekto foto
+    // norint ideti objekta i sesija reikia paversti i stringa ir atgal atversti i objekta
+    $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa
 
-    $_SESSION['a'][]= [ //norint ideti objekta i sesija reikia 
+    //kodel mes serializuojam? kadangi mes sita objekta saugosim, bet kokie saugjimai, jeigu mes neturime savo saugojimo irankiuose dokumentinese
+    //duomenu bazese, turime paversti i stringa. Sesija yra masyvas, ir i ji galim deti objektus ir isimti objektus. Verciam, nes jis ir taip bus paverstas
+    //php veikia trumpai, kai php uzbaigia savo darba visi objektai numirsta, todel laikyti to objekto ir kazko updatinti kai kazkas 
+    //ivyksta nera prasmes. Kadangi zinok kad objektas greit numirs, tai mes iskar ji serializuojam ir kai reikia vel i ji kreipiames
+    
+
+    $_SESSION['a'][]= [ 
         'id' => ++$_SESSION['agurku ID'],
         'agurkai' => 0,
     ];
@@ -47,7 +53,9 @@ if(isset($_POST['sodinti'])) {
 if(isset($_POST['rauti'])) {
     foreach($_SESSION['a'] as $index => $agurkas) {
         if ($_POST['rauti'] == $agurkas['id']) {
-            unset($_SESSION['a'][$index]);
+            // unset($_SESSION['a'][$index]);
+            //papildomai reikia israuti ir objekta
+            unset($_SESSION['a'][$index],$_SESSION['obj'][$index]);
             header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
             die;
         }
@@ -186,14 +194,18 @@ if(isset($_POST['rauti'])) {
         <h1>Agurkų sodas</h1>
         <h3>Sodinimas</h3>
         <form action="" method="POST">
-        <?php foreach($_SESSION['a'] as $agurkas): ?>
+        
+        <?php foreach($_SESSION['obj'] as $agurkas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
+        <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
+
+        
         <div class="form-top">
             <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $agurkas['photo'] ?>" alt="photo">
-                <div>Agurkas nr. <?= $agurkas['id'] ?></div>
+                <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
+                <div>Agurkas nr. <?= $agurkas->id ?></div>
             </div>
-            <div class="agurkas-vnt">Agurkų: <?= $agurkas['agurkai'] ?></div>
-            <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas['id'] ?>">Išrauti</button>
+            <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
+            <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas->id ?>">Išrauti</button>
         </div>
         <?php endforeach ?>
         <button class="btn-sodinti" type="submit" name="sodinti">SODINTI</button>

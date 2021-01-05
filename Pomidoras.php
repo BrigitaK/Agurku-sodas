@@ -51,15 +51,15 @@ class Pomidoras {
         if ( is_numeric($pomidorai)){
         
             if($pomidorai < 0) {
-                $_SESSION['msg'] = 'Įveskite teigiamą skaičių.';
+                $_SESSION['msg1'] = 'Įveskite teigiamą skaičių.';
             } 
             else if ( floor($pomidorai) != $pomidorai){
-                $_SESSION['msg'] = 'Įveskite sveiką skaičių.';
+                $_SESSION['msg1'] = 'Įveskite sveiką skaičių.';
             }
 
 
             else if ($this->count < $pomidorai){
-                $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek agurkų nėra.';
+                $_SESSION['ERROR1'] = 'Įvestas skaičius per didelis, tiek agurkų nėra.';
             }
             else if ( $this->count >= $pomidorai){
                 $this->count -= $pomidorai;

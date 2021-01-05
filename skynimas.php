@@ -286,8 +286,8 @@ if (isset($_POST['skynimasP'])) {
             </div>
             <div class="agurkas-vnt">Galima skinti: <?= $pomidoras->count ?></div>
             <?php if ($pomidoras->count != 0) { ?>
-                <?php if(isset($_SESSION['ERROR'])) { echo "<span class='session'>" .$_SESSION['ERROR']. "</span>"; unset($_SESSION['ERROR']); }?>
-                <?php if(isset($_SESSION['msg'])) { echo "<span class='session'>" .$_SESSION['msg']. "</span>"; unset($_SESSION['msg']); }?>
+                <?php if(isset($_SESSION['ERROR1'])) { echo "<span class='session'>" .$_SESSION['ERROR1']. "</span>"; unset($_SESSION['ERROR1']); }?>
+                <?php if(isset($_SESSION['msg1'])) { echo "<span class='session'>" .$_SESSION['msg1']. "</span>"; unset($_SESSION['msg1']); }?>
                 <input class="input" name="kiekis[<?= $pomidoras->id ?>]" value="<?= $kiekis ?>"><br>
                 <button class="btn-skinti" type="submit" name="skinti-visusP" value="<?= $pomidoras->id ?>">Skinti visus</button>
                 <button class="btn-skinti" type="submit" name="skintiP" value="<?= $pomidoras->id ?>">Skinti</button>

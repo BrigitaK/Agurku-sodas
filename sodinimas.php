@@ -5,10 +5,24 @@
 
 session_start();
 
-include __DIR__.'/Darzove.php';
-include __DIR__.'/Agurkas.php';
-include __DIR__.'/Pomidoras.php';
-include __DIR__.'/Moliugas.php';
+spl_autoload_register(function ($class){
+
+    $prefix = '';
+    $base_dir = '';
+
+    $len = strlen($prefix);
+    if (strncmp($prefix, $class, $len) !== 0) {
+        return;
+    }
+
+    $relative_class = substr($class, $len);
+    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+
+    if (file_exists($file)) {
+        require $file;
+    }
+});
+
 
 //sukurti klase su statiniais metodais i augunimo metoda ir sesija su agurku id ir sodinimo koda
 //neliesti validaciju
@@ -116,8 +130,7 @@ if(isset($_POST['rauti'])) {
         $agurkas = unserialize($agurkas);
         if ($_POST['rauti'] == $agurkas->id) {
             unset($_SESSION['obj'][$index]);
-            header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
-            die;
+            $agurkas->redirect(sodinimas);
         }
     }
 }
@@ -128,8 +141,7 @@ if(isset($_POST['rautiP'])) {
         $pomidoras = unserialize($pomidoras);
         if ($_POST['rautiP'] == $pomidoras->id) {
             unset($_SESSION['objP'][$index]);
-            header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
-            die;
+            $pomidoras->redirect(sodinimas);
         }
     }
 }
@@ -140,8 +152,7 @@ if(isset($_POST['rautiM'])) {
         $moliugas = unserialize($moliugas);
         if ($_POST['rautiM'] == $moliugas->id) {
             unset($_SESSION['objM'][$index]);
-            header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
-            die;
+            $moliugas->redirect(sodinimas);
         }
     }
 }

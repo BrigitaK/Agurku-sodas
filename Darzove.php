@@ -54,5 +54,9 @@ class Darzove {
 
         $this->count = 0;
     }
+    function redirect($name) {
+        header("Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/$name.php");
+        die;
+    }
 }
 

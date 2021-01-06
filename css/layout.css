@@ -133,4 +133,29 @@ h1, h3 {
     cursor: pointer;
     transition: top 150ms ease-out 0s;
 }
-</style>
+
+    .btn-auginti {
+        margin-top: 45px;
+        border: 2px solid #DCDCDC;
+        background-color: transparent;
+        font-weight: 500;
+        font-size: 17px;
+            text-align: center;
+            padding: 10px 40px;
+            border-radius: 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            margin-bottom: 100px;
+            cursor: pointer;
+            margin-left: 10px;
+    }
+    .btn-auginti:hover {
+        color: black;
+        border: 2px solid #1877f2;
+    }
+    .kiekis {
+        color:red; 
+        margin-top: 20px; 
+        text-align: center;
+        font-size: 30px;
+    }

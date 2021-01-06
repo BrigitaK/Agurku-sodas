@@ -76,109 +76,10 @@ if (isset($_POST['augintiM'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
     <title>Auginimas</title>
 </head>
-<style>
-    body {
-
-    }
-    nav {
-        display: inline-block;
-        float: right;
-        width: 100%;
-        margin-bottom: 60px;
-        background: #e7e9ec;
-        padding: 15px 50px;
-        margin-top: -30px;
-    }
-    nav a {
-        display: inline-block;
-        float: right;
-        text-decoration: none;
-        color: black;
-        margin-left: 15px;
-        padding-top:-10px;
-        margin-top: 15px;
-    }
-    nav a:hover {
-        color: #1877f2;
-    }
-    form {
-        display: inline-block;
-        width: 700px;
-        margin-left: calc(50% - 400px);
-        margin-top: 40px;
-        border: 2px solid #DCDCDC;
-        padding: 40px;
-        border-radius: 10px;
-        margin-bottom: 70px;
-    }
-    h1, h3 {
-        color: #5c565c;
-        text-transform: uppercase;
-        text-align: center;
-        padding-bottom: 20px;
-        
-    }
-    .loggout {
-        margin-top:8px;
-        border: 2px solid #5c565c;
-        padding: 5px 15px;
-        border-radius: 5px;
-    }
-    .loggout:hover {
-        color: black;
-        border: 2px solid #1877f2;
-    }
-    .agurkas-nr {
-        display:inline-block;
-        float: left;
-        width: 25%;
-        text-align: center;
-        border: 2px solid #DCDCDC;
-        border-radius: 10px;
-        margin: 10px;
-        padding: 10px 0;
-    }
-    .agurkas-vnt {
-        display:inline-block;
-        float: left;
-        width: 45%;
-        text-align: center;
-        margin-top: 55px;
-    }
-    .btn-auginti {
-        display: block;
-        max-width: 300px;
-        text-align: center;
-        margin: auto;
-        padding: 10px 50px;
-        margin-top: 45px;
-        border: 2px solid #DCDCDC;
-        background-color: transparent;
-        border-radius: 10px;
-        text-transform: uppercase;
-    }
-    .btn-auginti:hover {
-        color: black;
-        border: 2px solid #1877f2;
-    }
-    .form-top {
-        width: 100%;
-        display: inline-block;
-    }
-    .agurkas-img {
-        display: inline-block;
-        height: 50px;
-        width: 100px;
-    }
-    .kiekis {
-        color:red; 
-        margin-top: 50px; 
-        text-align: left;
-    }
-    
-</style>
 <body>
 
     <nav>
@@ -189,66 +90,57 @@ if (isset($_POST['augintiM'])) {
     </nav>
     
     <main>
-        <h1>Daržovių auginimas</h1>
-        <h3 id="agurkai">Agurkai</h3>
-
-        <form action="#agurkai" method="POST">
-        <?php foreach($_SESSION['obj'] as $agurkas): ?>
-        <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
-        <div class="form-top">
-            <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
-                <?php $kiekis = rand(2,9) ?>
-                <div>Agurkas nr. <?= $agurkas->id ?></div>
+        <h1 id="agurkai">Daržovių auginimas</h1>
+        <div class="container">
+            <form class="form" action="#agurkai" method="POST">
+            <?php foreach($_SESSION['obj'] as $agurkas): ?>
+            <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
+            <div class="form-top">
+                <div class="agurkas-nr">
+                    <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
+                    <?php $kiekis = rand(2,9) ?>
+                    <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
+                </div>
+                <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
+                <h3 class="kiekis" >+<?= $kiekis ?></h3>
+                <input type="hidden" name="kiekis[<?=$agurkas->id ?>]" value="<?= $kiekis ?>">
             </div>
-            <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
-            <h3 class="kiekis" >+<?= $kiekis ?></h3>
-            <input type="hidden" name="kiekis[<?=$agurkas->id ?>]" value="<?= $kiekis ?>">
+            <?php endforeach ?>
+            <?php foreach($_SESSION['objP'] as $pomidoras): ?>
+             <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
+            <div class="form-top">
+                <div class="agurkas-nr">
+                    <img class="agurkas-img" src="<?= $pomidoras->photoP ?>" alt="photo">
+                    <?php $kiekis = rand(1,3) ?>
+                    <div class="name">Pomidoro nr. <?= $pomidoras->id ?></div>
+                </div>
+                <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
+                <h3 class="kiekis" >+<?= $kiekis ?></h3>
+                <input type="hidden" name="kiekis[<?=$pomidoras->id ?>]" value="<?= $kiekis ?>">
+            </div>
+            <?php endforeach ?>
+            <?php foreach($_SESSION['objM'] as $moliugas): ?>
+            <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
+            <div class="form-top">
+                <div class="agurkas-nr">
+                    <img class="agurkas-img" src="<?= $moliugas->photoM ?>" alt="photo">
+                    <?php $kiekis = rand(1,3) ?>
+                    <div>Moliūgo nr. <?= $moliugas->id ?></div>
+                </div>
+                <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>
+                <h3 class="kiekis" >+<?= $kiekis ?></h3>
+                <input type="hidden" name="kiekis[<?=$moliugas->id ?>]" value="<?= $kiekis ?>">
+            </div>
+            <?php endforeach ?>
+
+            <div class="sodinti">
+                <button class="btn-auginti" type="submit" name="auginti">AUGINTI AGURKUS</button>
+                <button class="btn-auginti" type="submit" name="augintiP">AUGINTI POMIDORUS</button>
+                <button class="btn-auginti" type="submit" name="augintiM">AUGINTI MOLIŪGUS</button>
+            </div>
+            </form>
         </div>
 
-        <?php endforeach ?>
-        <button class="btn-auginti" type="submit" name="auginti">AUGINTI</button>
-        </form>
-
-        <h3 id="pomidorai">Pomidorai</h3>
-
-        <form action="#pomidorai" method="POST">
-        <?php foreach($_SESSION['objP'] as $pomidoras): ?>
-        <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
-        <div class="form-top">
-            <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $pomidoras->photoP ?>" alt="photo">
-                <?php $kiekis = rand(1,3) ?>
-                <div>Pomidoro nr. <?= $pomidoras->id ?></div>
-            </div>
-            <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
-            <h3 class="kiekis" >+<?= $kiekis ?></h3>
-            <input type="hidden" name="kiekis[<?=$pomidoras->id ?>]" value="<?= $kiekis ?>">
-        </div>
-
-        <?php endforeach ?>
-        <button class="btn-auginti" type="submit" name="augintiP">AUGINTI</button>
-        </form>
-
-        <h3 id="moliugai">Moliūgai</h3>
-
-        <form action="#moliugai" method="POST">
-        <?php foreach($_SESSION['objM'] as $moliugas): ?>
-        <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
-        <div class="form-top">
-            <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $moliugas->photoM ?>" alt="photo">
-                <?php $kiekis = rand(1,3) ?>
-                <div>Moliūgo nr. <?= $moliugas->id ?></div>
-            </div>
-            <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>
-            <h3 class="kiekis" >+<?= $kiekis ?></h3>
-            <input type="hidden" name="kiekis[<?=$moliugas->id ?>]" value="<?= $kiekis ?>">
-        </div>
-
-        <?php endforeach ?>
-        <button class="btn-auginti" type="submit" name="augintiM">AUGINTI</button>
-        </form>
     </main>
 
 </body>

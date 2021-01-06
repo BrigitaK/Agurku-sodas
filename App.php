@@ -137,7 +137,121 @@ class App {
     }
 
     public static function skintiAgurkus(){
+        foreach ($_SESSION['obj'] as $index => $agurkas ) {
+            $agurkas = unserialize($agurkas); // <----- agurko objektas
+            $agurkas->skinti($_POST['kiekis'][$agurkas->id]); // <------- atimam agurka
+            $agurkas = serialize($agurkas); // <------ vel stringas
+            $_SESSION['obj'][$index] = $agurkas; // <----- uzsaugom agurkus
+        }
+        App::redirect(skynimas);
+    }
 
+    public static function skintiPomidorus(){
+        foreach ($_SESSION['objP'] as $index => $pomidoras ) {
+            $pomidoras = unserialize($pomidoras); // <----- agurko objektas
+            $pomidoras->skinti($_POST['kiekis'][$pomidoras->id]); // <------- atimam agurka
+            $pomidoras = serialize($pomidoras); // <------ vel stringas
+            $_SESSION['objP'][$index] = $pomidoras; // <----- uzsaugom agurkus
+        }
+        App::redirect(skynimas);
+    }
+
+    public static function skintiMoliugus(){
+        foreach ($_SESSION['objM'] as $index => $moliugas ) {
+            $moliugas = unserialize($moliugas); // <----- agurko objektas
+            $moliugas->skinti($_POST['kiekis'][$moliugas->id]); // <------- atimam agurka
+            $moliugas = serialize($moliugas); // <------ vel stringas
+            $_SESSION['objM'][$index] = $moliugas; // <----- uzsaugom agurkus
+        }
+        App::redirect(skynimas);
+    }
+
+    public static function skintiVisusAgurkus(){
+        foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
+            $agurkas = unserialize($agurkas); //agurko objektas
+            if ($_POST['skinti-visus'] == $agurkas->id) {
+                $agurkas->skintiVisus($_POST['skinti-visus'][$agurkas->id]);// atimam agurka
+                $agurkas = serialize($agurkas); // vel stringas
+                $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
+            }
+        }
+        App::redirect(skynimas); 
+    }
+
+    public static function skintiVisusPomidorus(){
+        foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
+            $pomidoras = unserialize($pomidoras); //agurko objektas
+            if ($_POST['skinti-visusP'] == $pomidoras->id) {
+                $pomidoras->skintiVisus($_POST['skinti-visusP'][$pomidoras->id]);// atimam agurka
+                $pomidoras = serialize($pomidoras); // vel stringas
+                $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
+            }
+        }
+        App::redirect(skynimas);
+    }
+
+    public static function skintiVisusMoliugus(){
+        foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
+            $moliugas = unserialize($moliugas); //agurko objektas
+            if ($_POST['skinti-visusM'] == $moliugas->id) {
+                $moliugas->skintiVisus($_POST['skinti-visusM'][$moliugas->id]);// atimam agurka
+                $moliugas = serialize($moliugas); // vel stringas
+                $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
+            }
+        }
+        App::redirect(skynimas); 
+    }
+
+    public static function visuAgurkuNuskynimas(){
+        foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
+            $agurkas = unserialize($agurkas); //agurko objektas
+            $agurkas->skintiVisus($_POST['skynimas'][$agurkas->id]);// atimam agurka
+            $agurkas = serialize($agurkas); // vel stringas
+            $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
+        }
+        App::redirect(skynimas); 
+    }
+
+    public static function visuPomidoruNuskynimas(){
+        foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
+            $pomidoras = unserialize($pomidoras); //agurko objektas
+            $pomidoras->skintiVisus($_POST['skynimas'][$pomidoras->id]);// atimam agurka
+            $pomidoras = serialize($pomidoras); // vel stringas
+            $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
+        }
+        App::redirect(skynimas);
+    }
+
+    public static function visuMoliuguNuskynimas(){
+        foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
+            $moliugas = unserialize($moliugas); //agurko objektas
+            $moliugas->skintiVisus($_POST['skynimas'][$moliugas->id]);// atimam agurka
+            $moliugas = serialize($moliugas); // vel stringas
+            $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
+        }
+        App::redirect(skynimas);
+    }
+
+    public static function visuDarzoviuNuskynimas(){
+        foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
+            $moliugas = unserialize($moliugas); //agurko objektas
+            $moliugas->skintiVisus($_POST['skynimas'][$moliugas->id]);// atimam agurka
+            $moliugas = serialize($moliugas); // vel stringas
+            $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
+        }
+        foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
+            $pomidoras = unserialize($pomidoras); //agurko objektas
+            $pomidoras->skintiVisus($_POST['skynimas'][$pomidoras->id]);// atimam agurka
+            $pomidoras = serialize($pomidoras); // vel stringas
+            $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
+        }
+        foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
+            $agurkas = unserialize($agurkas); //agurko objektas
+            $agurkas->skintiVisus($_POST['skynimas'][$agurkas->id]);// atimam agurka
+            $agurkas = serialize($agurkas); // vel stringas
+            $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
+        }
+        App::redirect(skynimas);
     }
 
     public static function redirect($name) {

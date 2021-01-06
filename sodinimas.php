@@ -129,119 +129,11 @@ if(isset($_POST['rautiM'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
     <title>Sodinimas</title>
 </head>
-<style>
-    body {
 
-    }
-    nav {
-        display: inline-block;
-        float: right;
-        width: 100%;
-        margin-bottom: 60px;
-        background: #e7e9ec;
-        padding: 15px 50px;
-        margin-top: -30px;
-    }
-    nav a {
-        display: inline-block;
-        float: right;
-        text-decoration: none;
-        color: black;
-        margin-left: 15px;
-        padding-top:-10px;
-        margin-top: 15px;
-    }
-    nav a:hover {
-        color: #1877f2;
-    }
-    form {
-        display: inline-block;
-        width: 700px;
-        margin-left: calc(50% - 400px);
-        margin-top: 40px;
-        border: 2px solid #DCDCDC;
-        padding: 40px;
-        border-radius: 10px;
-        margin-bottom: 70px;
-    }
-
-    h1, h3 {
-        color: #5c565c;
-        text-transform: uppercase;
-        text-align: center;
-        padding-bottom: 20px;
-        
-    }
-    .loggout {
-        margin-top:8px;
-        border: 2px solid #5c565c;
-        padding: 5px 15px;
-        border-radius: 5px;
-    }
-    .loggout:hover {
-        color: black;
-        border: 2px solid #1877f2;
-    }
-    .agurkas-nr {
-        display:inline-block;
-        float: left;
-        width: 25%;
-        text-align: center;
-        border: 2px solid #DCDCDC;
-        border-radius: 10px;
-        margin: 10px;
-        padding: 10px 0;
-    }
-    .agurkas-vnt {
-        display:inline-block;
-        float: left;
-        width: 45%;
-        text-align: center;
-        margin-top: 55px;
-    }
-    .btn-sodinti {
-        display: block;
-        max-width: 300px;
-        text-align: center;
-        margin: auto;
-        padding: 10px 50px;
-        margin-top: 45px;
-        border: 2px solid #DCDCDC;
-        background-color: transparent;
-        border-radius: 10px;
-        text-transform: uppercase;
-    }
-    .btn-sodinti:hover {
-        color: black;
-        border: 2px solid #1877f2;
-    }
-    .btn-israuti {
-        border: 2px solid #DCDCDC;
-        display:inline-block;
-        float: right;
-        width: 25%;
-        margin-top: 45px;
-        padding: 10px;
-        background-color: transparent;
-        border-radius: 10px;
-        text-transform: uppercase;
-    }
-    .btn-israuti:hover {
-        color: black;
-        border: 2px solid #1877f2;
-    }
-    .form-top {
-        width: 100%;
-        display: inline-block;
-    }
-    .agurkas-img {
-        display: inline-block;
-        height: 50px;
-        width: 100px;
-    }
-</style>
 <body>
     <nav>
     <a class="loggout" href="login.php?logout">Atsijungti</a>
@@ -251,63 +143,53 @@ if(isset($_POST['rautiM'])) {
     </nav>
     
     <main>
-        <h1>Daržovių sodinimas</h1>
-        <h3 id="agurkai">Agurkai</h3>
-        <form action="#agurkai" method="POST">
-        
-        <?php foreach($_SESSION['obj'] as $agurkas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
-        <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
-
-        
-        <div class="form-top">
-            <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
-                <div>Agurkas nr. <?= $agurkas->id ?></div>
+        <h1 id="agurkai">Daržovių sodinimas</h1>
+        <div class="container">
+            <form class="form" action="#agurkai" method="POST">
+            
+            <?php foreach($_SESSION['obj'] as $agurkas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
+            <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
+            <div class="form-top">
+                <div class="agurkas-nr">
+                    <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
+                    <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
+                </div>
+                <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
+                <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas->id ?>">Išrauti</button>
             </div>
-            <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
-            <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas->id ?>">Išrauti</button>
-        </div>
-        <?php endforeach ?>
-        <button class="btn-sodinti" type="submit" name="sodinti">SODINTI</button>
-        </form>
-
-        <h3 id="pomidorai">Pomidorai</h3>
-        <form action="#pomidorai" method="POST">
-        
-        <?php foreach($_SESSION['objP'] as $pomidoras): //paverciam i obj, norint panaudoti reikia isserializuoti?>
-        <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
-
-        
-        <div class="form-top">
-            <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $pomidoras->photoP ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
-                <div>Pomidoras nr. <?= $pomidoras->id ?></div>
+            <?php endforeach ?>
+            <?php foreach($_SESSION['objP'] as $pomidoras): //paverciam i obj, norint panaudoti reikia isserializuoti?>
+            <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
+            <div class="form-top">
+                <div class="agurkas-nr">
+                    <img class="agurkas-img" src="<?= $pomidoras->photoP ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
+                    <div class="name">Pomidoras nr. <?= $pomidoras->id ?></div>
+                </div>
+                <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
+                <button class="btn-israuti" type="submit" name="rautiP" value="<?= $pomidoras->id ?>">Išrauti</button>
             </div>
-            <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
-            <button class="btn-israuti" type="submit" name="rautiP" value="<?= $pomidoras->id ?>">Išrauti</button>
-        </div>
-        <?php endforeach ?>
-        <button class="btn-sodinti" type="submit" name="sodintiP">SODINTI</button>
-        </form>
+            <?php endforeach ?>
+            <?php foreach($_SESSION['objM'] as $moliugas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
+            <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
 
-        <h3 id="moliugai">Moliūgai</h3>
-        <form action="#moliugai" method="POST">
-        
-        <?php foreach($_SESSION['objM'] as $moliugas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
-        <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
-
-        
-        <div class="form-top">
-            <div class="agurkas-nr">
-                <img class="agurkas-img" src="<?= $moliugas->photoM ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
-                <div>Moliūgo nr. <?= $moliugas->id ?></div>
+            
+            <div class="form-top">
+                <div class="agurkas-nr">
+                    <img class="agurkas-img" src="<?= $moliugas->photoM ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
+                    <div class="name">Moliūgo nr. <?= $moliugas->id ?></div>
+                </div>
+                <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>
+                <button class="btn-israuti" type="submit" name="rautiM" value="<?= $moliugas->id ?>">Išrauti</button>
             </div>
-            <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>
-            <button class="btn-israuti" type="submit" name="rautiM" value="<?= $moliugas->id ?>">Išrauti</button>
+            <?php endforeach ?>
+            <div class="sodinti">
+                <button class="btn-sodinti" type="submit" name="sodinti">SODINTI AGURKUS</button>
+                <button class="btn-sodinti" type="submit" name="sodintiP">SODINTI POMIDORUS</button>
+                <button class="btn-sodinti" type="submit" name="sodintiM">SODINTI MOLIŪGUS</button>
+            </div>
+            </form>
         </div>
-        <?php endforeach ?>
-        <button class="btn-sodinti" type="submit" name="sodintiM">SODINTI</button>
-        </form>
+       
     </main>
 
 </body>

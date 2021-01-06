@@ -2,6 +2,7 @@
 
 session_start();
 
+include __DIR__.'/Darzove.php';
 include __DIR__.'/Agurkas.php';
 include __DIR__.'/Pomidoras.php';
 include __DIR__.'/Moliugas.php';
@@ -37,7 +38,7 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 if (isset($_POST['skintiP'])) {
     foreach ($_SESSION['objP'] as $index => $pomidoras ) {
         $pomidoras = unserialize($pomidoras); // <----- agurko objektas
-        $pomidoras->skintiPomidorus($_POST['kiekis'][$pomidoras->id]); // <------- atimam agurka
+        $pomidoras->skinti($_POST['kiekis'][$pomidoras->id]); // <------- atimam agurka
         $pomidoras = serialize($pomidoras); // <------ vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // <----- uzsaugom agurkus
     }
@@ -49,7 +50,7 @@ die;
 if (isset($_POST['skintiM'])) {
     foreach ($_SESSION['objM'] as $index => $moliugas ) {
         $moliugas = unserialize($moliugas); // <----- agurko objektas
-        $moliugas->skintiMoliugus($_POST['kiekis'][$moliugas->id]); // <------- atimam agurka
+        $moliugas->skinti($_POST['kiekis'][$moliugas->id]); // <------- atimam agurka
         $moliugas = serialize($moliugas); // <------ vel stringas
         $_SESSION['objM'][$index] = $moliugas; // <----- uzsaugom agurkus
     }
@@ -79,7 +80,7 @@ if (isset($_POST['skinti-visusP'])) {
     foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
         $pomidoras = unserialize($pomidoras); //agurko objektas
         if ($_POST['skinti-visusP'] == $pomidoras->id) {
-            $pomidoras->skintiVisusPomidorus($_POST['skinti-visusP'][$pomidoras->id]);// atimam agurka
+            $pomidoras->skintiVisus($_POST['skinti-visusP'][$pomidoras->id]);// atimam agurka
             $pomidoras = serialize($pomidoras); // vel stringas
             $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
         }
@@ -95,7 +96,7 @@ if (isset($_POST['skinti-visusM'])) {
     foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
         $moliugas = unserialize($moliugas); //agurko objektas
         if ($_POST['skinti-visusM'] == $moliugas->id) {
-            $moliugas->skintiVisusMoliugus($_POST['skinti-visusM'][$moliugas->id]);// atimam agurka
+            $moliugas->skintiVisus($_POST['skinti-visusM'][$moliugas->id]);// atimam agurka
             $moliugas = serialize($moliugas); // vel stringas
             $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
         }
@@ -122,7 +123,7 @@ if (isset($_POST['skynimasP'])) {
 
     foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
         $pomidoras = unserialize($pomidoras); //agurko objektas
-        $pomidoras->skintiVisusPomidorus($_POST['skynimas'][$pomidoras->id]);// atimam agurka
+        $pomidoras->skintiVisus($_POST['skynimas'][$pomidoras->id]);// atimam agurka
         $pomidoras = serialize($pomidoras); // vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
     }
@@ -135,7 +136,7 @@ if (isset($_POST['skynimasM'])) {
 
     foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
         $moliugas = unserialize($moliugas); //agurko objektas
-        $moliugas->skintiVisusMoliugus($_POST['skynimas'][$moliugas->id]);// atimam agurka
+        $moliugas->skintiVisus($_POST['skynimas'][$moliugas->id]);// atimam agurka
         $moliugas = serialize($moliugas); // vel stringas
         $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
     }
@@ -148,13 +149,13 @@ if (isset($_POST['skynimasV'])) {
 
     foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
         $moliugas = unserialize($moliugas); //agurko objektas
-        $moliugas->skintiVisusMoliugus($_POST['skynimas'][$moliugas->id]);// atimam agurka
+        $moliugas->skintiVisus($_POST['skynimas'][$moliugas->id]);// atimam agurka
         $moliugas = serialize($moliugas); // vel stringas
         $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
     }
     foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
         $pomidoras = unserialize($pomidoras); //agurko objektas
-        $pomidoras->skintiVisusPomidorus($_POST['skynimas'][$pomidoras->id]);// atimam agurka
+        $pomidoras->skintiVisus($_POST['skynimas'][$pomidoras->id]);// atimam agurka
         $pomidoras = serialize($pomidoras); // vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
     }
@@ -233,7 +234,7 @@ if (isset($_POST['skynimasV'])) {
             <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
             <div class="form-top">
                 <div class="agurkas-nr">
-                    <img class="agurkas-img" src="<?= $pomidoras->photoP ?>" alt="photo">
+                    <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo">
                     <div class="name">Pomidoro nr. <?= $pomidoras->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Galima skinti: <span class="count"><?= $pomidoras->count ?></span></div>
@@ -250,7 +251,7 @@ if (isset($_POST['skynimasV'])) {
             <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
             <div class="form-top">
                 <div class="agurkas-nr">
-                    <img class="agurkas-img" src="<?= $moliugas->photoM ?>" alt="photo">
+                    <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo">
                     <div class="name">Moliūgo nr. <?= $moliugas->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Galima skinti: <span class="count"><?= $moliugas->count ?></span></div>

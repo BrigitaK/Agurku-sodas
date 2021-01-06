@@ -2,6 +2,7 @@
 
 session_start();
 
+include __DIR__.'/Darzove.php';
 include __DIR__.'/Agurkas.php';
 include __DIR__.'/Pomidoras.php';
 include __DIR__.'/Moliugas.php';
@@ -28,7 +29,7 @@ if (isset($_POST['auginti'])) {
     //auginimas su objektu
     foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
         $agurkas = unserialize($agurkas); //agurko objektas
-        $agurkas->addAgurkas($_POST['kiekis'][$agurkas->id]);// pridedam agurka
+        $agurkas->add($_POST['kiekis'][$agurkas->id]);// pridedam agurka
         $agurkas = serialize($agurkas); // vel stringas
         $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
     }
@@ -44,7 +45,7 @@ if (isset($_POST['augintiP'])) {
     //auginimas su objektu
     foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
         $pomidoras = unserialize($pomidoras); //agurko objektas
-        $pomidoras->addPomidoras($_POST['kiekis'][$pomidoras->id]);// pridedam agurka
+        $pomidoras->add($_POST['kiekis'][$pomidoras->id]);// pridedam agurka
         $pomidoras = serialize($pomidoras); // vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
     }
@@ -60,7 +61,7 @@ if (isset($_POST['augintiM'])) {
     //auginimas su objektu
     foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
         $moliugas = unserialize($moliugas); //agurko objektas
-        $moliugas->addMoliugas($_POST['kiekis'][$moliugas->id]);// pridedam agurka
+        $moliugas->add($_POST['kiekis'][$moliugas->id]);// pridedam agurka
         $moliugas = serialize($moliugas); // vel stringas
         $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
     }
@@ -74,19 +75,19 @@ if (isset($_POST['augintiV'])) {
 
     foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
         $moliugas = unserialize($moliugas); //agurko objektas
-        $moliugas->addMoliugas($_POST['kiekis'][$moliugas->id]);// pridedam agurka
+        $moliugas->add($_POST['kiekis'][$moliugas->id]);// pridedam agurka
         $moliugas = serialize($moliugas); // vel stringas
         $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
     }
     foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
         $pomidoras = unserialize($pomidoras); //agurko objektas
-        $pomidoras->addPomidoras($_POST['kiekis'][$pomidoras->id]);// pridedam agurka
+        $pomidoras->add($_POST['kiekis'][$pomidoras->id]);// pridedam agurka
         $pomidoras = serialize($pomidoras); // vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
     }
     foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
         $agurkas = unserialize($agurkas); //agurko objektas
-        $agurkas->addAgurkas($_POST['kiekis'][$agurkas->id]);// pridedam agurka
+        $agurkas->add($_POST['kiekis'][$agurkas->id]);// pridedam agurka
         $agurkas = serialize($agurkas); // vel stringas
         $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
     }
@@ -136,7 +137,7 @@ if (isset($_POST['augintiV'])) {
              <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
             <div class="form-top">
                 <div class="agurkas-nr">
-                    <img class="agurkas-img" src="<?= $pomidoras->photoP ?>" alt="photo">
+                    <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo">
                     <?php $kiekis = rand(1,3) ?>
                     <div class="name">Pomidoro nr. <?= $pomidoras->id ?></div>
                 </div>
@@ -149,7 +150,7 @@ if (isset($_POST['augintiV'])) {
             <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
             <div class="form-top">
                 <div class="agurkas-nr">
-                    <img class="agurkas-img" src="<?= $moliugas->photoM ?>" alt="photo">
+                    <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo">
                     <?php $kiekis = rand(1,3) ?>
                     <div>Moliūgo nr. <?= $moliugas->id ?></div>
                 </div>

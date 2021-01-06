@@ -1,10 +1,20 @@
 <?php
 
+//padaryti pomidoru ir agurku teva
+//
+
 session_start();
 
+include __DIR__.'/Darzove.php';
 include __DIR__.'/Agurkas.php';
 include __DIR__.'/Pomidoras.php';
 include __DIR__.'/Moliugas.php';
+
+//sukurti klase su statiniais metodais i augunimo metoda ir sesija su agurku id ir sodinimo koda
+//neliesti validaciju
+//app redirech auginimas
+//tevas turi tureti metoda k
+//klase app, turi tureti statiniu metodu ir tie statiniai metodai ir jie turi buti irasomi
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
@@ -18,11 +28,11 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 
     $_SESSION['objP'] = []; // sukuriam objektu masyva, laikysim pomidoru objektus
     $_SESSION['pomidoru ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
-    $_SESSION['photoP'] = '';
+    $_SESSION['photo'] = '';
 
     $_SESSION['objM'] = []; // sukuriam objektu masyva, laikysim pomidoru objektus
     $_SESSION['moliugu ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
-    $_SESSION['photoM'] = '';
+    $_SESSION['photo'] = '';
 }
 
 //sodinimo scenarijus
@@ -176,7 +186,7 @@ if(isset($_POST['rautiM'])) {
             <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
             <div class="form-top">
                 <div class="agurkas-nr">
-                    <img class="agurkas-img" src="<?= $pomidoras->photoP ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
+                    <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
                     <div class="name">Pomidoras nr. <?= $pomidoras->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
@@ -189,7 +199,7 @@ if(isset($_POST['rautiM'])) {
             
             <div class="form-top">
                 <div class="agurkas-nr">
-                    <img class="agurkas-img" src="<?= $moliugas->photoM ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
+                    <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
                     <div class="name">Moliūgo nr. <?= $moliugas->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>

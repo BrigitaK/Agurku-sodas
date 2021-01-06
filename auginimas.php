@@ -28,7 +28,6 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 }
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-
     App::redirect(login);
 }
 

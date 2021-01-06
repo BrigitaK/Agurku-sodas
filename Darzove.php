@@ -54,5 +54,6 @@ class Darzove {
 
         $this->count = 0;
     }
+
 }
 

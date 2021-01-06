@@ -20,12 +20,7 @@ spl_autoload_register(function ($class){
     }
 });
 
-if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
-    $_SESSION['a'] = [];
-    $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
-    $_SESSION['pomidoru ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
-    $_SESSION['moliugu ID'] = 0; //kad moliugai nesikartotu yra naujas kintamasis
-}
+App::session();
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     App::redirect(login);
@@ -33,79 +28,22 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
 
 //auginimo scenarijus
 if (isset($_POST['auginti'])) {
-    //foreach ($_SESSION['a'] as $index => &$agurkas ) {
-    //    $agurkas['agurkai'] += $_POST['kiekis'][$agurkas['id']];
-    //}
-
-    //objektai yra perduodami pagal referenca
-    //auginimas su objektu
-    foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
-        $agurkas = unserialize($agurkas); //agurko objektas
-        $agurkas->add($_POST['kiekis'][$agurkas->id]);// pridedam agurka
-        $agurkas = serialize($agurkas); // vel stringas
-        $_SESSION['obj'][$index] = $agurkas; // uzsaugom agur
-    }
-
-    
-    App::redirect(auginimas);
+    App::augintiAgurka();
 }
 
 //auginimam pomidorus
 if (isset($_POST['augintiP'])) {
-
-    //objektai yra perduodami pagal referenca
-    //auginimas su objektu
-    foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
-        $pomidoras = unserialize($pomidoras); //agurko objektas
-        $pomidoras->add($_POST['kiekis'][$pomidoras->id]);// pridedam agurka
-        $pomidoras = serialize($pomidoras); // vel stringas
-        $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
-    }
-
-    
-    App::redirect(auginimas);
+    App::augintiPomidora();
 }
 
 //auginimam moliugus
 if (isset($_POST['augintiM'])) {
-
-    //objektai yra perduodami pagal referenca
-    //auginimas su objektu
-    foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
-        $moliugas = unserialize($moliugas); //agurko objektas
-        $moliugas->add($_POST['kiekis'][$moliugas->id]);// pridedam agurka
-        $moliugas = serialize($moliugas); // vel stringas
-        $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
-    }
-
-    
-    App::redirect(auginimas);
+    App::augintiMoliuga();
 }
 
 //auginimam visus
 if (isset($_POST['augintiV'])) {
-
-    foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
-        $moliugas = unserialize($moliugas); //agurko objektas
-        $moliugas->add($_POST['kiekis'][$moliugas->id]);// pridedam agurka
-        $moliugas = serialize($moliugas); // vel stringas
-        $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
-    }
-    foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
-        $pomidoras = unserialize($pomidoras); //agurko objektas
-        $pomidoras->add($_POST['kiekis'][$pomidoras->id]);// pridedam agurka
-        $pomidoras = serialize($pomidoras); // vel stringas
-        $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
-    }
-    foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
-        $agurkas = unserialize($agurkas); //agurko objektas
-        $agurkas->add($_POST['kiekis'][$agurkas->id]);// pridedam agurka
-        $agurkas = serialize($agurkas); // vel stringas
-        $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
-    }
-
-    
-    App::redirect(auginimas);
+    App::augintiVisasDarzoves();
 }
 
 ?>

@@ -83,6 +83,58 @@ class App {
             }
         }
     }
+
+    public static function augintiAgurka(){
+        foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
+            $agurkas = unserialize($agurkas); //agurko objektas
+            $agurkas->add($_POST['kiekis'][$agurkas->id]);// pridedam agurka
+            $agurkas = serialize($agurkas); // vel stringas
+            $_SESSION['obj'][$index] = $agurkas; // uzsaugom agur
+        }
+        App::redirect(auginimas);
+    }
+
+    public static function augintiPomidora(){
+        foreach ($_SESSION['objP'] as $index => $pomidoras ) { 
+            $pomidoras = unserialize($pomidoras); 
+            $pomidoras->add($_POST['kiekis'][$pomidoras->id]);
+            $pomidoras = serialize($pomidoras); 
+            $_SESSION['objP'][$index] = $pomidoras; 
+        }
+        App::redirect(auginimas);
+    }
+
+    public static function augintiMoliuga(){
+        foreach ($_SESSION['objM'] as $index => $moliugas ) { 
+            $moliugas = unserialize($moliugas); 
+            $moliugas->add($_POST['kiekis'][$moliugas->id]);
+            $moliugas = serialize($moliugas); 
+            $_SESSION['objM'][$index] = $moliugas; 
+        }
+        App::redirect(auginimas);
+    }
+
+    public static function augintiVisasDarzoves(){
+        foreach ($_SESSION['objM'] as $index => $moliugas ) { 
+            $moliugas = unserialize($moliugas); 
+            $moliugas->add($_POST['kiekis'][$moliugas->id]);
+            $moliugas = serialize($moliugas); 
+            $_SESSION['objM'][$index] = $moliugas; 
+        }
+        foreach ($_SESSION['objP'] as $index => $pomidoras ) { 
+            $pomidoras = unserialize($pomidoras); 
+            $pomidoras->add($_POST['kiekis'][$pomidoras->id]);
+            $pomidoras = serialize($pomidoras); 
+            $_SESSION['objP'][$index] = $pomidoras; 
+        }
+        foreach ($_SESSION['obj'] as $index => $agurkas ) { 
+            $agurkas = unserialize($agurkas); 
+            $agurkas->add($_POST['kiekis'][$agurkas->id]);
+            $agurkas = serialize($agurkas); 
+            $_SESSION['obj'][$index] = $agurkas; 
+        }
+        App::redirect(auginimas);
+    }
     public static function redirect($name) {
         header("Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/$name.php");
         die;

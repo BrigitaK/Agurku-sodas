@@ -72,7 +72,7 @@ h1, h3 {
     font-weight: 500;
     font-size: 15px;
         text-align: center;
-        padding: 10px 40px;
+        padding: 10px 36px;
         border-radius: 20px;
         text-decoration: none;
         text-transform: uppercase;
@@ -141,7 +141,7 @@ h1, h3 {
         font-weight: 500;
         font-size: 15px;
             text-align: center;
-            padding: 10px 40px;
+            padding: 10px 36px;
             border-radius: 20px;
             text-decoration: none;
             text-transform: uppercase;
@@ -194,12 +194,11 @@ h1, h3 {
         width: 50%;
         text-align: center;
         cursor: pointer;
-        min-width: 135px;
+        min-width: 152px;
         height: 37px;
-        padding: 8px 20px;
+        padding: 8px 14px;
         font-size: 16px;
         line-height: 20px;
-        margin-left: 5%;
     }
     .btn-skinti:hover {
         color: black;

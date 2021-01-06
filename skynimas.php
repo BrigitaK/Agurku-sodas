@@ -187,11 +187,15 @@ if (isset($_POST['skynimasV'])) {
         position: absolute;
         bottom: -3px;
         width: 27%;
+        margin-left: 3px;
+        text-align: left;
     }
     .agurkas-vnt {
         position: relative;
         margin-top: 10px;
         margin-right: 10px;
+
+        margin-bottom: 15px;
     }
 </style>
 <body>

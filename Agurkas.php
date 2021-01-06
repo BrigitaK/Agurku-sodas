@@ -9,5 +9,9 @@ class Agurkas extends Darzove {
         $photos = array("./photo/agurkas1.jpg", "./photo/agurkas3.jpg", "./photo/agurkas2.jpg");
         $this->photo = $photos[array_rand($photos)];
     }
+
+    public function auginti() {
+        return rand(2, 9);
+    }
 }
 

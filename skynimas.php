@@ -95,9 +95,9 @@ if (isset($_POST['skinti-visusM'])) {
     foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
         $moliugas = unserialize($moliugas); //agurko objektas
         if ($_POST['skinti-visusM'] == $moliugas->id) {
-            $moliugas->skintiVisusMoliugus($_POST['skinti-visusP'][$moliugas->id]);// atimam agurka
+            $moliugas->skintiVisusMoliugus($_POST['skinti-visusM'][$moliugas->id]);// atimam agurka
             $moliugas = serialize($moliugas); // vel stringas
-            $_SESSION['objP'][$index] = $moliugas; // uzsaugom agurkus
+            $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
         }
     }
 

@@ -9,5 +9,9 @@ class Moliugas extends Darzove {
         $photos = array("./photo/moliugas.jpg", "./photo/moliugas1.jpg", "./photo/moliugas2.jpg");
         $this->photo = $photos[array_rand($photos)];
     }
+
+    public function auginti() {
+        return rand(1, 3);
+    }
 }
 

@@ -138,7 +138,7 @@ if (isset($_POST['augintiV'])) {
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
-                    <?php $kiekis = rand(2,9) ?>
+                    <?php $kiekis = $agurkas->auginti() ?>
                     <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
@@ -151,7 +151,7 @@ if (isset($_POST['augintiV'])) {
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo">
-                    <?php $kiekis = rand(1,3) ?>
+                    <?php $kiekis = $pomidoras->auginti() ?>
                     <div class="name">Pomidoro nr. <?= $pomidoras->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
@@ -164,7 +164,7 @@ if (isset($_POST['augintiV'])) {
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo">
-                    <?php $kiekis = rand(1,3) ?>
+                    <?php $kiekis = $moliugas->auginti() ?>
                     <div>Moliūgo nr. <?= $moliugas->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>

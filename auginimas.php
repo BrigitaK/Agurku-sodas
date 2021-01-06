@@ -28,8 +28,8 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
 }
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
-    die;
+
+    App::redirect(login);
 }
 
 //auginimo scenarijus
@@ -44,11 +44,11 @@ if (isset($_POST['auginti'])) {
         $agurkas = unserialize($agurkas); //agurko objektas
         $agurkas->add($_POST['kiekis'][$agurkas->id]);// pridedam agurka
         $agurkas = serialize($agurkas); // vel stringas
-        $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
+        $_SESSION['obj'][$index] = $agurkas; // uzsaugom agur
     }
 
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
-    die;
+    
+    App::redirect(auginimas);
 }
 
 //auginimam pomidorus
@@ -63,8 +63,8 @@ if (isset($_POST['augintiP'])) {
         $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
     }
 
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
-    die;
+    
+    App::redirect(auginimas);
 }
 
 //auginimam moliugus
@@ -79,8 +79,8 @@ if (isset($_POST['augintiM'])) {
         $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
     }
 
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
-    die;
+    
+    App::redirect(auginimas);
 }
 
 //auginimam visus
@@ -105,8 +105,8 @@ if (isset($_POST['augintiV'])) {
         $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
     }
 
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
-    die;
+    
+    App::redirect(auginimas);
 }
 
 ?>

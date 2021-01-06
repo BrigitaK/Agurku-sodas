@@ -31,8 +31,8 @@ spl_autoload_register(function ($class){
 //klase app, turi tureti statiniu metodu ir tie statiniai metodai ir jie turi buti irasomi
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
-    die;
+    
+    App::redirect(login);
 }
 if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
     $_SESSION['a'] = [];
@@ -74,8 +74,7 @@ if(isset($_POST['sodinti'])) {
     //    'id' => ++$_SESSION['agurku ID'],
     //    'agurkai' => 0,
     //];
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
-    die;
+    App::redirect(sodinimas);
     //po post einam antra karta, kad eitume per get
 }
 
@@ -85,8 +84,8 @@ if(isset($_POST['sodintiP'])) {
     $pomidoroObj = new Pomidoras($_SESSION['pomidoru ID']);//irasomas objektas, pasidarom nauja agurka
     ++$_SESSION['pomidoru ID'];
     $_SESSION['objP'][]= serialize($pomidoroObj); //irasom serializuota objekta paversta i stringa
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
-    die;
+    
+    App::redirect(sodinimas);
 }
 
 if(isset($_POST['sodintiM'])) {
@@ -94,8 +93,8 @@ if(isset($_POST['sodintiM'])) {
     $moliugoObj = new Moliugas($_SESSION['moliugu ID']);//irasomas objektas, pasidarom nauja agurka
     ++$_SESSION['moliugu ID'];
     $_SESSION['objM'][]= serialize($moliugoObj); //irasom serializuota objekta paversta i stringa
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
-    die;
+    
+    App::redirect(sodinimas);
 }
 if(isset($_POST['sodintiV'])) {
 
@@ -108,8 +107,8 @@ if(isset($_POST['sodintiV'])) {
     $agurkoObj = new Agurkas($_SESSION['agurku ID']);//irasomas objektas, pasidarom nauja agurka
     ++$_SESSION['agurku ID'];
     $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
-    die;
+    
+    App::redirect(sodinimas);
 }
 
 //Jeigu norim atvaizduoti, tai darom su get
@@ -130,7 +129,7 @@ if(isset($_POST['rauti'])) {
         $agurkas = unserialize($agurkas);
         if ($_POST['rauti'] == $agurkas->id) {
             unset($_SESSION['obj'][$index]);
-            $agurkas->redirect(sodinimas);
+            App::redirect(sodinimas);
         }
     }
 }
@@ -141,7 +140,7 @@ if(isset($_POST['rautiP'])) {
         $pomidoras = unserialize($pomidoras);
         if ($_POST['rautiP'] == $pomidoras->id) {
             unset($_SESSION['objP'][$index]);
-            $pomidoras->redirect(sodinimas);
+            App::redirect(sodinimas);
         }
     }
 }
@@ -152,7 +151,7 @@ if(isset($_POST['rautiM'])) {
         $moliugas = unserialize($moliugas);
         if ($_POST['rautiM'] == $moliugas->id) {
             unset($_SESSION['objM'][$index]);
-            $moliugas->redirect(sodinimas);
+            App::redirect(sodinimas);
         }
     }
 }

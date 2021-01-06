@@ -2,6 +2,8 @@
 
 session_start();
 
+session_start();
+
 spl_autoload_register(function ($class){
 
     $prefix = '';
@@ -21,8 +23,7 @@ spl_autoload_register(function ($class){
 });
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
-    die;
+    App::redirect(login);
 }
 if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
     $_SESSION['a'] = [];
@@ -43,8 +44,8 @@ if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei 
             $agurkas = serialize($agurkas); // <------ vel stringas
             $_SESSION['obj'][$index] = $agurkas; // <----- uzsaugom agurkus
         }
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die;
+    
+    App::redirect(skynimas);
     }
 
 //skynimo Pomidoru scenarijus
@@ -55,8 +56,7 @@ if (isset($_POST['skintiP'])) {
         $pomidoras = serialize($pomidoras); // <------ vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // <----- uzsaugom agurkus
     }
-header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-die;
+    App::redirect(skynimas);
 }
 
 //skynimo moliugu scenarijus
@@ -67,8 +67,7 @@ if (isset($_POST['skintiM'])) {
         $moliugas = serialize($moliugas); // <------ vel stringas
         $_SESSION['objM'][$index] = $moliugas; // <----- uzsaugom agurkus
     }
-header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-die;
+    App::redirect(skynimas);
 }
 
 //skynimo Agurku scenarijus 
@@ -82,9 +81,7 @@ if (isset($_POST['skinti-visus'])) {
             $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
         }
     }
-
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die;   
+    App::redirect(skynimas);  
 }
 
 //skynimo Pomidoru scenarijus 
@@ -98,9 +95,7 @@ if (isset($_POST['skinti-visusP'])) {
             $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
         }
     }
-
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die;   
+    App::redirect(skynimas); 
 }
 
 //skynimo moliugu scenarijus 
@@ -114,9 +109,7 @@ if (isset($_POST['skinti-visusM'])) {
             $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
         }
     }
-
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die;   
+    App::redirect(skynimas); 
 }
 //visu agurku nuskynimas
 if (isset($_POST['skynimas'])) {
@@ -127,8 +120,7 @@ if (isset($_POST['skynimas'])) {
         $agurkas = serialize($agurkas); // vel stringas
         $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
     }
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die; 
+    App::redirect(skynimas); 
 }
 
 //visu pomidoru nuskynimas
@@ -140,8 +132,7 @@ if (isset($_POST['skynimasP'])) {
         $pomidoras = serialize($pomidoras); // vel stringas
         $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
     }
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die; 
+    App::redirect(skynimas);
 }
 
 //visu moliugu nuskynimas
@@ -153,8 +144,7 @@ if (isset($_POST['skynimasM'])) {
         $moliugas = serialize($moliugas); // vel stringas
         $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
     }
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die; 
+    App::redirect(skynimas);
 }
 
 //visu moliugu nuskynimas
@@ -178,8 +168,7 @@ if (isset($_POST['skynimasV'])) {
         $agurkas = serialize($agurkas); // vel stringas
         $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
     }
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php');
-    die; 
+    App::redirect(skynimas);
 }
 
 

@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') { //JEIGU PASPAUDE MYGTUKA SUMBIT
            }
     }
     $_SESSION['msg'] = "<span style='display: block; max-width: 300px; text-align:center; margin: auto; margin-top: 20px; font-size: 20px; color: #5c565c; text-transform: uppercase'>
-    Bad email or password.</span>";
+    Bad name or password.</span>";
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
     die;
 }
@@ -100,7 +100,7 @@ if(isset($_SESSION['msg'])) {
     }
 </style>
 <body>
-    <h1>Agurkų sodas</h1>
+    <h1>Daržovių sodas</h1>
     <p>Norėdami prisijungti įveskite: vardas: Jonukas, password: 123</p>
     <div><?= $msg ?? '' ?></div>
     <form action="" method="POST">

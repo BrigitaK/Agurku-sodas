@@ -69,6 +69,32 @@ if (isset($_POST['augintiM'])) {
     die;
 }
 
+//auginimam visus
+if (isset($_POST['augintiV'])) {
+
+    foreach ($_SESSION['objM'] as $index => $moliugas ) { // serializuotas stringas
+        $moliugas = unserialize($moliugas); //agurko objektas
+        $moliugas->addMoliugas($_POST['kiekis'][$moliugas->id]);// pridedam agurka
+        $moliugas = serialize($moliugas); // vel stringas
+        $_SESSION['objM'][$index] = $moliugas; // uzsaugom agurkus
+    }
+    foreach ($_SESSION['objP'] as $index => $pomidoras ) { // serializuotas stringas
+        $pomidoras = unserialize($pomidoras); //agurko objektas
+        $pomidoras->addPomidoras($_POST['kiekis'][$pomidoras->id]);// pridedam agurka
+        $pomidoras = serialize($pomidoras); // vel stringas
+        $_SESSION['objP'][$index] = $pomidoras; // uzsaugom agurkus
+    }
+    foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
+        $agurkas = unserialize($agurkas); //agurko objektas
+        $agurkas->addAgurkas($_POST['kiekis'][$agurkas->id]);// pridedam agurka
+        $agurkas = serialize($agurkas); // vel stringas
+        $_SESSION['obj'][$index] = $agurkas; // uzsaugom agurkus
+    }
+
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php');
+    die;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -137,6 +163,7 @@ if (isset($_POST['augintiM'])) {
                 <button class="btn-auginti" type="submit" name="auginti">AUGINTI AGURKUS</button>
                 <button class="btn-auginti" type="submit" name="augintiP">AUGINTI POMIDORUS</button>
                 <button class="btn-auginti" type="submit" name="augintiM">AUGINTI MOLIŪGUS</button>
+                <button class="btn-auginti" type="submit" name="augintiV">AUGINTI VISUS</button>
             </div>
             </form>
         </div>

@@ -13,7 +13,7 @@ nav {
     margin-bottom: 60px;
     background: #e7e9ec;
     padding: 15px 50px;
-    margin-top: -30px;
+    margin-top: -10px;
 }
 nav a {
     display: inline-block;
@@ -63,14 +63,14 @@ h1, h3 {
 }
 .sodinti {
     width: 100%;
-    text-align: center
+    text-align: center;
 }
 .btn-sodinti {
     margin-top: 45px;
     border: 2px solid #DCDCDC;
     background-color: transparent;
     font-weight: 500;
-    font-size: 17px;
+    font-size: 15px;
         text-align: center;
         padding: 10px 40px;
         border-radius: 20px;
@@ -139,7 +139,7 @@ h1, h3 {
         border: 2px solid #DCDCDC;
         background-color: transparent;
         font-weight: 500;
-        font-size: 17px;
+        font-size: 15px;
             text-align: center;
             padding: 10px 40px;
             border-radius: 20px;
@@ -147,7 +147,7 @@ h1, h3 {
             text-transform: uppercase;
             margin-bottom: 100px;
             cursor: pointer;
-            margin-left: 10px;
+            margin-left: 9px;
     }
     .btn-auginti:hover {
         color: black;
@@ -158,4 +158,100 @@ h1, h3 {
         margin-top: 20px; 
         text-align: center;
         font-size: 30px;
+    }
+
+
+    .btn-skinti-visus {
+        border: 2px solid #DCDCDC;
+        width: 24%;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: transparent;
+        border-radius: 20px;
+        text-transform: uppercase;
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+        min-width: 120px;
+        height: 37px;
+        padding: 8px 4px;
+        font-size: 16px;
+        line-height: 20px;
+        margin-left: 4px;
+    }
+    .btn-skinti-visus:hover {
+        color: black;
+        border: 2px solid #1877f2;
+    }
+    .btn-skinti {
+        border: 2px solid #DCDCDC;
+        width: 25%;
+        margin-top: 10px;
+        background-color: transparent;
+        border-radius: 20px;
+        text-transform: uppercase;
+        display: inline-block;
+        width: 50%;
+        text-align: center;
+        cursor: pointer;
+        min-width: 135px;
+        height: 37px;
+        padding: 8px 20px;
+        font-size: 16px;
+        line-height: 20px;
+        margin-left: 5%;
+    }
+    .btn-skinti:hover {
+        color: black;
+        border: 2px solid #1877f2;
+    }
+   
+    .input {
+        border: 2px solid #DCDCDC;
+        display: inline-block;
+        float: left;
+        width: 35%;
+        margin-top: 12px;
+        background-color: transparent;
+        text-transform: uppercase;
+        text-align: center;
+        cursor: pointer;
+        height: 30px;
+        font-size: 16px;
+    }
+    .input:hover {
+        color: black;
+        border: 2px solid #1877f2;
+    }
+    .btn-skinti-i {
+        border: 2px solid #DCDCDC;
+        background-color: transparent;
+        border-radius: 20px;
+        text-transform: uppercase;
+        display: inline-block;
+        float: right;
+        width: 60%;
+        text-align: center;
+        cursor: pointer;
+        height: 37px;
+        font-size: 16px;
+        margin-top:-9px;
+    }
+    .btn-skinti-i:hover {
+        color: black;
+        border: 2px solid #1877f2;
+    }
+    .skinti-input {
+        display: inline-block;
+        width:100%;
+    }
+    .agurkas-vnt .count {
+        color: red;
+        font-size: 25px;
+    }
+
+    .skinti {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 100px;
     }

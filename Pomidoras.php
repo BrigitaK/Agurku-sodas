@@ -11,7 +11,7 @@ class Pomidoras {
     {
         $this->id = $lastId + 1;
         $this->count = 0;
-        $photosP = array("./photo/pomidoras1.jpg", "./photo/pomidoras2.jpg", "./photo/pomidoras3.jpg");
+        $photosP = array("./photo/pomidoras1.jpg", "./photo/pomidoras2.jpg");
         $this->photoP = $photosP[array_rand($photosP)];
 
 
@@ -51,15 +51,15 @@ class Pomidoras {
         if ( is_numeric($pomidorai)){
         
             if($pomidorai < 0) {
-                $_SESSION['msg1'] = 'Įveskite teigiamą skaičių.';
+                $_SESSION['msg'] = 'Įveskite teigiamą skaičių.';
             } 
             else if ( floor($pomidorai) != $pomidorai){
-                $_SESSION['msg1'] = 'Įveskite sveiką skaičių.';
+                $_SESSION['msg'] = 'Įveskite sveiką skaičių.';
             }
 
 
             else if ($this->count < $pomidorai){
-                $_SESSION['ERROR1'] = 'Įvestas skaičius per didelis, tiek pomidorų nėra.';
+                $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek pomidorų nėra.';
             }
             else if ( $this->count >= $pomidorai){
                 $this->count -= $pomidorai;

@@ -73,6 +73,20 @@ if(isset($_POST['sodintiM'])) {
     header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
     die;
 }
+if(isset($_POST['sodintiV'])) {
+
+    $moliugoObj = new Moliugas($_SESSION['moliugu ID']);//irasomas objektas, pasidarom nauja agurka
+    ++$_SESSION['moliugu ID'];
+    $_SESSION['objM'][]= serialize($moliugoObj); //irasom serializuota objekta paversta i stringa
+    $pomidoroObj = new Pomidoras($_SESSION['pomidoru ID']);//irasomas objektas, pasidarom nauja agurka
+    ++$_SESSION['pomidoru ID'];
+    $_SESSION['objP'][]= serialize($pomidoroObj); //irasom serializuota objekta paversta i stringa
+    $agurkoObj = new Agurkas($_SESSION['agurku ID']);//irasomas objektas, pasidarom nauja agurka
+    ++$_SESSION['agurku ID'];
+    $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa
+    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
+    die;
+}
 
 //Jeigu norim atvaizduoti, tai darom su get
 //jei norim kazka nusiusti, tai einam su post
@@ -186,6 +200,7 @@ if(isset($_POST['rautiM'])) {
                 <button class="btn-sodinti" type="submit" name="sodinti">SODINTI AGURKUS</button>
                 <button class="btn-sodinti" type="submit" name="sodintiP">SODINTI POMIDORUS</button>
                 <button class="btn-sodinti" type="submit" name="sodintiM">SODINTI MOLIŪGUS</button>
+                <button class="btn-sodinti" type="submit" name="sodintiV">SODINTI VISUS</button>
             </div>
             </form>
         </div>

@@ -25,15 +25,8 @@ spl_autoload_register(function ($class){
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     App::redirect(login);
 }
-if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
-    $_SESSION['a'] = [];
-    $_SESSION['agurku ID'] = 0;
-    $_SESSION['pomidoru ID'] = 0; 
-    $_SESSION['moliugu ID'] = 0; 
-}
 
-//Jeigu norim atvaizduoti, tai darom su get
-//jei norim kazka nusiusti, tai einam su post
+App::session();
 
 
 //skynimo Agurku scenarijus

@@ -135,6 +135,11 @@ class App {
         }
         App::redirect(auginimas);
     }
+
+    public static function skintiAgurkus(){
+
+    }
+
     public static function redirect($name) {
         header("Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/$name.php");
         die;

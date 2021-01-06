@@ -186,7 +186,7 @@ if (isset($_POST['skynimasV'])) {
     .agurkas-vnt .count {
         position: absolute;
         bottom: -3px;
-        margin-left: 5px;
+        width: 27%;
     }
     .agurkas-vnt {
         position: relative;

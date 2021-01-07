@@ -3,8 +3,7 @@
 class App {
 
     public static function session() {
-        if(!isset($_SESSION['a'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
-            $_SESSION['a'] = [];
+        if(!isset($_SESSION['obj']) && !isset($_SESSION['objP']) && !isset($_SESSION['objM'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
             $_SESSION['obj'] = []; // sukuriam objektu masyva, laikysim agurku objektus
             $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
             $_SESSION['photo'] = '';
@@ -13,8 +12,8 @@ class App {
             $_SESSION['pomidoru ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
             $_SESSION['photo'] = '';
         
-            $_SESSION['objM'] = []; // sukuriam objektu masyva, laikysim pomidoru objektus
-            $_SESSION['moliugu ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
+            $_SESSION['objM'] = []; // sukuriam objektu masyva, laikysim moliugu objektus
+            $_SESSION['moliugu ID'] = 0; //kad moliugai nesikartotu yra naujas kintamasis
             $_SESSION['photo'] = '';
         }
     }

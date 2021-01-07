@@ -83,6 +83,7 @@ h1, h3 {
 .btn-sodinti:hover {
     color: black;
     border: 2px solid #1877f2;
+    border-radius: 20px;
 }
 .btn-israuti {
     border: 2px solid #DCDCDC;
@@ -106,6 +107,7 @@ h1, h3 {
 .btn-israuti:hover {
     color: black;
     border: 2px solid #1877f2;
+    border-radius: 20px;
 }
 .form-top {
     padding: 20px;
@@ -152,6 +154,7 @@ h1, h3 {
     .btn-auginti:hover {
         color: black;
         border: 2px solid #1877f2;
+        border-radius: 20px;
     }
     .kiekis {
         color:red; 
@@ -182,16 +185,15 @@ h1, h3 {
     .btn-skinti-visus:hover {
         color: black;
         border: 2px solid #1877f2;
+        border-radius: 20px;
     }
     .btn-skinti {
         border: 2px solid #DCDCDC;
-        width: 25%;
         margin-top: 10px;
         background-color: transparent;
         border-radius: 20px;
         text-transform: uppercase;
         display: inline-block;
-        width: 50%;
         text-align: center;
         cursor: pointer;
         min-width: 152px;
@@ -203,6 +205,7 @@ h1, h3 {
     .btn-skinti:hover {
         color: black;
         border: 2px solid #1877f2;
+        border-radius: 20px;
     }
    
     .input {
@@ -239,6 +242,7 @@ h1, h3 {
     .btn-skinti-i:hover {
         color: black;
         border: 2px solid #1877f2;
+        border-radius: 20px;
     }
     .skinti-input {
         display: inline-block;

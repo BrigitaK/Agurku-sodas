@@ -1,0 +1,12 @@
+{
+    "name": "mac/agurku-sodas",
+    "description": "Darzoviu sodas",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "BrigitaK",
+            "email": "70912981+BrigitaK@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}

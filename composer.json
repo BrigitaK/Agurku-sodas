@@ -8,5 +8,17 @@
             "email": "70912981+BrigitaK@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "ramsey/uuid": "^3.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Main\\": "inc",
+            "Cucumber\\": "inc",
+            "Pumpkin\\": "inc",
+            "Tomatoes\\": "inc",
+            "Vege\\": "inc",
+            "Greenhouse\\": "inc"
+        }
+    }
 }

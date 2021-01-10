@@ -2,33 +2,25 @@
 
 session_start();
 
-spl_autoload_register(function ($class){
+include __DIR__ . '/vendor/autoload.php';
 
-    $prefix = '';
-    $base_dir = '';
+use Main\App;
+use Cucumber\Agurkas;
+use Tomatoes\Pomidoras;
+use Pumpkin\Moliugas;
+use Vege\Darzove;
+use Greenhouse\Siltnamis;
 
-    $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
-        return;
-    }
-
-    $relative_class = substr($class, $len);
-    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-
-    if (file_exists($file)) {
-        require $file;
-    }
-});
+App::session();
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     App::redirect(login);
 }
 
-App::session();
-
 
 if(isset($_POST['sodinti'])) {
     App::sodintiAgurka();
+    App::redirect(sodinimas);
 }
 
 

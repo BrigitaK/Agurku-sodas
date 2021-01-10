@@ -1,5 +1,9 @@
 <?php 
 
+namespace Cucumber;
+
+use Vege\Darzove;
+
 class Agurkas extends Darzove {
 
     public function __construct($lastId)

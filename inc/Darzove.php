@@ -1,6 +1,10 @@
 <?php 
 
-class Darzove {
+namespace Vege;
+
+use Greenhouse\Siltnamis;
+
+abstract class Darzove implements Siltnamis{
 
     public $id, $count, $photo; 
 
@@ -54,6 +58,9 @@ class Darzove {
 
         $this->count = 0;
     }
+
+
+    abstract public function auginti();
 
 }
 

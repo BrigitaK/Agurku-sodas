@@ -1,17 +1,21 @@
 <?php 
 
-class Pomidoras extends Darzove {
+namespace Pumpkin;
+
+use Vege\Darzove;
+
+class Moliugas extends Darzove {
 
     public function __construct($lastId)
     {
         $this->id = $lastId + 1;
         $this->count = 0;
-        $photos = array("./photo/pomidoras1.jpg", "./photo/pomidoras2.jpg");
+        $photos = array("./photo/moliugas.jpg", "./photo/moliugas1.jpg", "./photo/moliugas2.jpg");
         $this->photo = $photos[array_rand($photos)];
     }
 
     public function auginti() {
-        return rand(1, 5);
+        return rand(1, 3);
     }
 }
 

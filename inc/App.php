@@ -1,5 +1,12 @@
 <?php 
 
+namespace Main;
+
+use Cucumber\Agurkas;
+use Tomatoes\Pomidoras;
+use Pumpkin\Moliugas;
+use Main\App;
+
 class App {
 
     public static function session() {
@@ -23,7 +30,7 @@ class App {
         $_SESSION['agurku ID']++;
         // norint ideti objekta i sesija reikia paversti i stringa ir atgal atversti i objekta
         $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa
-        App::redirect(sodinimas);
+       
     }
 
     public static function sodintiPomidora() {

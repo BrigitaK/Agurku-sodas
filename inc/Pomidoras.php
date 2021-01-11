@@ -18,4 +18,3 @@ class Pomidoras extends Darzove {
         return rand(1, 5);
     }
 }
-

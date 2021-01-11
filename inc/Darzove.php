@@ -8,13 +8,12 @@ abstract class Darzove implements Siltnamis {
 
     public $id, $count, $photo; 
 
-
     public function __construct($lastId)
     {
     
     }
 
-    public function __get($propertyName) 
+  public function __get($propertyName) 
     {
         return $this->$propertyName;
     }
@@ -61,4 +60,3 @@ abstract class Darzove implements Siltnamis {
     abstract public function auginti();
 
 }
-

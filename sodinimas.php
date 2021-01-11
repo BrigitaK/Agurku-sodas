@@ -7,16 +7,9 @@ include __DIR__ . '/vendor/autoload.php';
 
 Main\App::session();
 
-if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-    Main\App::redirect(login);
-}
-
-
-if(isset($_POST['sodinti'])) {
+if (isset($_POST['sodinti'])) {
     Main\App::sodintiAgurka();
-    Main\App::redirect(sodinimas);
 }
-
 
 if(isset($_POST['sodintiP'])) {
     Main\App::sodintiPomidora();
@@ -25,6 +18,7 @@ if(isset($_POST['sodintiP'])) {
 if(isset($_POST['sodintiM'])) {
     Main\App::sodintiMoliuga();
 }
+
 if(isset($_POST['sodintiV'])) {
     Main\App::sodintiVisasDarzoves();
 }
@@ -66,9 +60,9 @@ if(isset($_POST['rautiM'])) {
     </nav>
     
     <main>
-        <h1 id="agurkai">Daržovių sodinimas</h1>
+        <h1>Daržovių sodinimas</h1>
         <div class="container">
-            <form class="form" action="#agurkai" method="POST">
+            <form class="form" action="" method="POST">
             
             <?php foreach($_SESSION['obj'] as $agurkas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
             <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>

@@ -6,7 +6,7 @@ use Vegetable\Darzove;
 
 class Agurkas extends Darzove {
 
-    public function __construct($lastId)
+   public function __construct($lastId)
     {
         $this->id = $lastId + 1;
         $this->count = 0;

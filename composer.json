@@ -9,8 +9,8 @@
         "psr-4": {
             "Main\\": "inc",
             "Cucumber\\": "inc",
-            "Pumpkin\\": "inc",
             "Tomatoes\\": "inc",
+            "Pumpkin\\": "inc",
             "Vegetable\\": "inc",
             "Greenhouse\\": "inc"
         }

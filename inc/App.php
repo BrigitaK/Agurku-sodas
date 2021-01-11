@@ -3,13 +3,13 @@
 namespace Main;
 
 use Cucumber\Agurkas;
-use Tomatoes\Pomidoras;
 use Pumpkin\Moliugas;
+use Tomatoes\Pomidoras;
 
 class App {
 
     public static function session() {
-        if(!isset($_SESSION['obj']) && !isset($_SESSION['objP']) && !isset($_SESSION['objM'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
+        if(!isset($_SESSION['obj'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
             $_SESSION['obj'] = []; // sukuriam objektu masyva, laikysim agurku objektus
             $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
             $_SESSION['photo'] = '';
@@ -25,10 +25,11 @@ class App {
     }
 
     public static function sodintiAgurka() {
-        $agurkoObj = new Agurkas($_SESSION['agurku ID']);//irasomas objektas, pasidarom nauja agurka
-        $_SESSION['agurku ID']++;
+        $agurkoObj = new Agurkas($_SESSION['ID']);//irasomas objektas, pasidarom nauja agurka
         // norint ideti objekta i sesija reikia paversti i stringa ir atgal atversti i objekta
         $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa 
+        $_SESSION['agurku ID']++;
+        App::redirect(sodinimas);
     }
 
     public static function sodintiPomidora() {

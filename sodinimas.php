@@ -19,7 +19,7 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
 
 
 if(isset($_POST['sodinti'])) {
-    App::sodintiAgurka();
+    BrigitaK\App::sodintiAgurka();
     App::redirect(sodinimas);
 }
 

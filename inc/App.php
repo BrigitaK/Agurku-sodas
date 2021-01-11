@@ -5,7 +5,6 @@ namespace Main;
 use Cucumber\Agurkas;
 use Tomatoes\Pomidoras;
 use Pumpkin\Moliugas;
-use Main\App;
 
 class App {
 

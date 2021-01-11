@@ -4,7 +4,7 @@ namespace Vege;
 
 use Greenhouse\Siltnamis;
 
-abstract class Darzove implements Siltnamis{
+abstract class Darzoves implements Siltnamis {
 
     public $id, $count, $photo; 
 
@@ -58,8 +58,6 @@ abstract class Darzove implements Siltnamis{
 
         $this->count = 0;
     }
-
-
     abstract public function auginti();
 
 }

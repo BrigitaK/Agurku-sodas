@@ -1,6 +1,6 @@
 <?php 
 
-namespace Cucumber;
+/*namespace Cucumber;
 
 use Vegetable\Darzove;
 
@@ -17,5 +17,33 @@ class Agurkas extends Darzove {
     public function auginti() {
         return rand(2, 9);
     }
-}
+}*/
 
+namespace Cucumber;
+
+use Vegetable\Darzove;
+
+class Agurkas extends Darzove {
+
+    
+
+    public function __construct($lastId) 
+    {
+        $this->id = $lastId + 1;
+        $this->count = 0;
+        $photos = [
+            "./img/Agurkai/agurkas1.jpg", 
+            "./img/Agurkai/agurkas2.jpg", 
+            "./img/Agurkai/agurkas3.jpg", 
+            "./img/Agurkai/agurkas4.jpg",
+            "./img/Agurkai/agurkas5.jpg",
+    ];
+        $this->photo = $photos[array_rand($photos)];
+    }
+
+    public function auginti()
+    {
+        return rand(2, 9);
+    }
+
+}

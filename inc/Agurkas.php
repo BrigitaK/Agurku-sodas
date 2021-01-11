@@ -2,7 +2,7 @@
 
 namespace Cucumber;
 
-use Vege\Darzove;
+use Vegetable\Darzove;
 
 class Agurkas extends Darzove {
 

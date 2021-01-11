@@ -2,7 +2,7 @@
 
 namespace Tomatoes;
 
-use Vege\Darzove;
+use Vegetable\Darzove;
 
 class Pomidoras extends Darzove {
 

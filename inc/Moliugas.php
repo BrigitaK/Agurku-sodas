@@ -2,7 +2,7 @@
 
 namespace Pumpkin;
 
-use Vege\Darzove;
+use Vegetable\Darzove;
 
 class Moliugas extends Darzove {
 

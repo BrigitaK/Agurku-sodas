@@ -1,10 +1,10 @@
 <?php 
 
-namespace Vege;
+namespace Vegetable;
 
 use Greenhouse\Siltnamis;
 
-abstract class Darzoves implements Siltnamis {
+abstract class Darzove implements Siltnamis {
 
     public $id, $count, $photo; 
 

@@ -28,8 +28,7 @@ class App {
         $agurkoObj = new Agurkas($_SESSION['agurku ID']);//irasomas objektas, pasidarom nauja agurka
         $_SESSION['agurku ID']++;
         // norint ideti objekta i sesija reikia paversti i stringa ir atgal atversti i objekta
-        $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa
-       
+        $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa 
     }
 
     public static function sodintiPomidora() {

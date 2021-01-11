@@ -4,51 +4,45 @@ session_start();
 
 include __DIR__ . '/vendor/autoload.php';
 
-use Main\App;
-use Cucumber\Agurkas;
-use Tomatoes\Pomidoras;
-use Pumpkin\Moliugas;
-use Vege\Darzove;
-use Greenhouse\Siltnamis;
 
-App::session();
+Main\App::session();
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-    App::redirect(login);
+    Main\App::redirect(login);
 }
 
 
 if(isset($_POST['sodinti'])) {
-    BrigitaK\App::sodintiAgurka();
-    App::redirect(sodinimas);
+    Main\App::sodintiAgurka();
+    Main\App::redirect(sodinimas);
 }
 
 
 if(isset($_POST['sodintiP'])) {
-    App::sodintiPomidora();
+    Main\App::sodintiPomidora();
 }
 
 if(isset($_POST['sodintiM'])) {
-    App::sodintiMoliuga();
+    Main\App::sodintiMoliuga();
 }
 if(isset($_POST['sodintiV'])) {
-    App::sodintiVisasDarzoves();
+    Main\App::sodintiVisasDarzoves();
 }
 
 //isrovimo scenarijus
 
 if(isset($_POST['rauti'])) {
-    App::rautiAgurka();
+    Main\App::rautiAgurka();
 }
 
 //raunam Pomidora
 if(isset($_POST['rautiP'])) {
-    App::rautiPomidora();
+    Main\App::rautiPomidora();
 }
 
 //raunam moliuga
 if(isset($_POST['rautiM'])) {
-    App::rautiMoliuga();
+    Main\App::rautiMoliuga();
 }
 
 ?>

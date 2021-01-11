@@ -2,12 +2,6 @@
     "name": "mac/agurku-sodas",
     "description": "Darzoviu sodas",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "BrigitaK",
-            "email": "70912981+BrigitaK@users.noreply.github.com"
-        }
-    ],
     "require": {
         "ramsey/uuid": "^3.9"
     },
@@ -17,7 +11,7 @@
             "Cucumber\\": "inc",
             "Pumpkin\\": "inc",
             "Tomatoes\\": "inc",
-            "Vege\\": "inc",
+            "Vegetable\\": "inc",
             "Greenhouse\\": "inc"
         }
     }

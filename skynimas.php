@@ -4,63 +4,61 @@ session_start();
 
 include __DIR__ . '/vendor/autoload.php'; // <-------- autoloadiname vendoriaus faila
 
-use Main\App;
-    use Cucumber\Agurkas;
     
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-    App::redirect(login);
+    Main\App::redirect(login);
 }
 
-App::session();
+Main\App::session();
 
 
 //skynimo Agurku scenarijus
     if (isset($_POST['skinti'])) {
-      App::skintiAgurkus();
+        Main\App::skintiAgurkus();
     }
 
 //skynimo Pomidoru scenarijus
 if (isset($_POST['skintiP'])) {
-    App::skintiPomidorus();
+    Main\App::skintiPomidorus();
 }
 
 //skynimo moliugu scenarijus
 if (isset($_POST['skintiM'])) {
-    App::skintiMoliugus();
+    Main\App::skintiMoliugus();
 }
 
 //skynimo Agurku scenarijus 
 if (isset($_POST['skinti-visus'])) {
-    App::skintiVisusAgurkus();
+    Main\App::skintiVisusAgurkus();
 }
 
 //skynimo Pomidoru scenarijus 
 if (isset($_POST['skinti-visusP'])) {
-    App::skintiVisusPomidorus();
+    Main\App::skintiVisusPomidorus();
 }
 
 //skynimo moliugu scenarijus 
 if (isset($_POST['skinti-visusM'])) {
-    App::skintiVisusMoliugus();
+    Main\App::skintiVisusMoliugus();
 }
 //visu agurku nuskynimas
 if (isset($_POST['skynimas'])) {
-    App::visuAgurkuNuskynimas();
+    Main\App::visuAgurkuNuskynimas();
 }
 
 //visu pomidoru nuskynimas
 if (isset($_POST['skynimasP'])) {
-    App::visuPomidoruNuskynimas();
+    Main\App::visuPomidoruNuskynimas();
 }
 
 //visu moliugu nuskynimas
 if (isset($_POST['skynimasM'])) {
-    App::visuMoliuguNuskynimas();
+    Main\App::visuMoliuguNuskynimas();
 }
 
 //visu moliugu nuskynimas
 if (isset($_POST['skynimasV'])) {
-    App::visuDarzoviuNuskynimas();
+    Main\App::visuDarzoviuNuskynimas();
 }
 
 ?>

@@ -4,33 +4,30 @@ session_start();
 
 include __DIR__ . '/vendor/autoload.php'; // <-------- autoloadiname vendoriaus faila
 
-use Main\App;
-use Cucumber\Agurkas;
-
-App::session();
+Main\App::session();
 
 if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-    App::redirect(login);
+    Main\App::redirect(login);
 }
 
 //auginimo scenarijus
 if (isset($_POST['auginti'])) {
-    App::augintiAgurka();
+    Main\App::augintiAgurka();
 }
 
 //auginimam pomidorus
 if (isset($_POST['augintiP'])) {
-    App::augintiPomidora();
+    Main\App::augintiPomidora();
 }
 
 //auginimam moliugus
 if (isset($_POST['augintiM'])) {
-    App::augintiMoliuga();
+    Main\App::augintiMoliuga();
 }
 
 //auginimam visus
 if (isset($_POST['augintiV'])) {
-    App::augintiVisasDarzoves();
+    Main\App::augintiVisasDarzoves();
 }
 
 ?>

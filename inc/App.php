@@ -8,48 +8,52 @@ use Tomatoes\Pomidoras;
 
 class App {
 
-    public static function session(){
-        if (!isset($_SESSION['obj'])&&!isset($_SESSION['objB'])){
-            $_SESSION['obj'] = []; // agurku objektai
-            $_SESSION['objM'] = []; 
-            $_SESSION['objP'] = [];
-            $_SESSION['aID'] = 0;
-            $_SESSION['mID'] = 0;
-            $_SESSION['pID'] = 0;
-            
+    public static function session() {
+        if(!isset($_SESSION['obj'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
+            $_SESSION['obj'] = []; // sukuriam objektu masyva, laikysim agurku objektus
+            $_SESSION['agurku ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
+            $_SESSION['photo'] = '';
+
+            $_SESSION['objP'] = []; // sukuriam objektu masyva, laikysim pomidoru objektus
+            $_SESSION['pomidoru ID'] = 0; //kad pomidorai nesikartotu yra naujas kintamasis
+            $_SESSION['photo'] = '';
+
+            $_SESSION['objM'] = []; // sukuriam objektu masyva, laikysim moliugu objektus
+            $_SESSION['moliugu ID'] = 0; //kad moliugai nesikartotu yra naujas kintamasis
+            $_SESSION['photo'] = '';
         }
     }
 
-    public static function sodintiAgurkus()
-    {
-        $agurkoObj = new Agurkas($_SESSION['aID']);
-        $_SESSION['obj'][] = serialize($agurkoObj); //objektas paverstas i stringa
-        $_SESSION['aID']++;
+    public static function sodintiAgurkus() {
+        $agurkoObj = new Agurkas($_SESSION['agurku ID']);//irasomas objektas, pasidarom nauja agurka
+        // norint ideti objekta i sesija reikia paversti i stringa ir atgal atversti i objekta
+        $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa 
+        $_SESSION['agurku ID']++;
     }
 
     public static function sodintiMoliugus()
     {
-        $moliugoObj = new Moliugas($_SESSION['mID']);
+        $moliugoObj = new Moliugas($_SESSION['moliugu ID']);
         $_SESSION['objM'][] = serialize($moliugoObj); //objektas paverstas i stringa
-        $_SESSION['mID']++;
+        $_SESSION['moliugu ID']++;
     }
 
     public static function sodintiPomidorus() {
-        $pomidoroObj = new Pomidoras($_SESSION['pID']);
+        $pomidoroObj = new Pomidoras($_SESSION['pomidoru ID']);
         $_SESSION['objP'][] = serialize($pomidoroObj); //objektas paverstas i stringa
-        $_SESSION['pID']++;
+        $_SESSION['pomidoru ID']++;
     }
 
     public static function sodintiVisasDarzoves() {
-        $agurkoObj = new Agurkas($_SESSION['aID']);
-        $_SESSION['obj'][] = serialize($agurkoObj); //objektas paverstas i stringa
-        $_SESSION['aID']++;
-        $moliugoObj = new Moliugas($_SESSION['mID']);
-        $_SESSION['objM'][] = serialize($moliugoObj); //objektas paverstas i stringa
-        $_SESSION['mID']++;
-        $pomidoroObj = new Pmidoras($_SESSION['pID']);
-        $_SESSION['objP'][] = serialize($pomidoroObj); //objektas paverstas i stringa
-        $_SESSION['pID']++;
+        $moliugoObj = new Moliugas($_SESSION['moliugu ID']);
+        ++$_SESSION['moliugu ID'];
+        $_SESSION['objM'][]= serialize($moliugoObj);
+        $pomidoroObj = new Pomidoras($_SESSION['pomidoru ID']);
+        ++$_SESSION['pomidoru ID'];
+        $_SESSION['objP'][]= serialize($pomidoroObj);
+        $agurkoObj = new Agurkas($_SESSION['agurku ID']);
+        ++$_SESSION['agurku ID'];
+        $_SESSION['obj'][]= serialize($agurkoObj);
     }
 
     public static function rautiAgurka(){
@@ -82,12 +86,14 @@ class App {
         }
     }
 
-    public static function augintiAgurka(){
-        foreach ($_SESSION['obj'] as $index => $agurkas ) { // serializuotas stringas
-            $agurkas = unserialize($agurkas); //agurko objektas
-            $agurkas->add($_POST['kiekis'][$agurkas->id]);// pridedam agurka
-            $agurkas = serialize($agurkas); // vel stringas
-            $_SESSION['obj'][$index] = $agurkas; // uzsaugom agur
+    public static function augintiAgurkus()
+    {
+            // scenarijus su objektiniais agurkais
+        foreach($_SESSION['obj'] as $index => $agurkas) { // serializuotas stringas
+            $agurkas = unserialize($agurkas); // agurku objektas
+            $agurkas->add($_POST['kiekis'][$agurkas->id]); // pridedame agurko metodo skaiciavima
+            $agurkas = serialize($agurkas); // vel verciame i stringa
+            $_SESSION['obj'][$index] = $agurkas; // atgal uzsaugome i sesija agurkus
         }
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 include __DIR__ . '/vendor/autoload.php'; // <-------- autoloadiname vendoriaus faila
@@ -12,7 +11,8 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
 
 //auginimo scenarijus
 if (isset($_POST['auginti'])) {
-    Main\App::augintiAgurka();
+    Main\App::augintiAgurkus();
+    Main\App::redirect(auginimas);
 }
 
 //auginimam pomidorus
@@ -51,15 +51,15 @@ if (isset($_POST['augintiV'])) {
     </nav>
     
     <main>
-        <h1 id="agurkai">Daržovių auginimas</h1>
+        <h1>Daržovių auginimas</h1>
         <div class="container">
-            <form class="form" action="#agurkai" method="POST">
+            <form class="form" action="" method="POST">
             <?php foreach($_SESSION['obj'] as $agurkas): ?>
             <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
-                    <?php $kiekis = $agurkas->auginti() ?>
+                    <?php $kiekis = $agurkas->auga() ?>
                     <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
@@ -72,7 +72,7 @@ if (isset($_POST['augintiV'])) {
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo">
-                    <?php $kiekis = $pomidoras->auginti() ?>
+                    <?php $kiekis = $pomidoras->auga() ?>
                     <div class="name">Pomidoro nr. <?= $pomidoras->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
@@ -85,7 +85,7 @@ if (isset($_POST['augintiV'])) {
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo">
-                    <?php $kiekis = $moliugas->auginti() ?>
+                    <?php $kiekis = $moliugas->auga() ?>
                     <div>Moliūgo nr. <?= $moliugas->id ?></div>
                 </div>
                 <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>

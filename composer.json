@@ -8,8 +8,8 @@
     "autoload": {
         "psr-4": {
             "Main\\": "inc",
+            "Tomato\\": "inc",
             "Cucumber\\": "inc",
-            "Tomatoes\\": "inc",
             "Pumpkin\\": "inc",
             "Vegetables\\": "inc",
             "Greenhouse\\": "inc"

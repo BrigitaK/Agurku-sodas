@@ -1,15 +1,6 @@
 <?php
 
-session_start();
-
-include __DIR__ . '/vendor/autoload.php';
-
-
 Main\App::session();
-
-if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-    Main\App::redirect(login);
-}
 
 // SODINIMO SCENARIJUS AGURKU
 
@@ -21,15 +12,13 @@ if (isset($_POST['sodinti'])) {
     Main\App::redirect(sodinimas);
 }
 
-
-
-if(isset($_POST['sodintiP'])) {
-    Main\App::sodintiPomidorus();
+if(isset($_POST['sodintiM'])) {
+    Main\App::sodintiMoliugus();
     Main\App::redirect(sodinimas);
 }
 
-if(isset($_POST['sodintiM'])) {
-    Main\App::sodintiMoliugus();
+if(isset($_POST['sodintiP'])) {
+    Main\App::sodintiPomidorus();
     Main\App::redirect(sodinimas);
 }
 

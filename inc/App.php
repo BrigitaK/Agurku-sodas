@@ -4,7 +4,7 @@ namespace Main;
 
 use Cucumber\Agurkas;
 use Pumpkin\Moliugas;
-use Tomatoes\Pomidoras;
+use Tomato\Pomidoras;
 
 class App {
 
@@ -32,7 +32,8 @@ class App {
         $_SESSION['ID']++;
     }
 
-    public static function sodintiPomidorus() {
+    public static function sodintiPomidorus() 
+    {
         $pomidoroObj = new Pomidoras($_SESSION['ID']);
         $_SESSION['objP'][] = serialize($pomidoroObj); //objektas paverstas i stringa
         $_SESSION['ID']++;

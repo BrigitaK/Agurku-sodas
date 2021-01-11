@@ -1,13 +1,6 @@
 <?php
-session_start();
-
-include __DIR__ . '/vendor/autoload.php'; // <-------- autoloadiname vendoriaus faila
 
 Main\App::session();
-
-if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
-    Main\App::redirect(login);
-}
 
 //auginimo scenarijus
 if (isset($_POST['auginti'])) {

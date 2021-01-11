@@ -7,20 +7,35 @@ include __DIR__ . '/vendor/autoload.php';
 
 Main\App::session();
 
-if (isset($_POST['sodinti'])) {
-    Main\App::sodintiAgurka();
+if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
+    Main\App::redirect(login);
 }
 
+// SODINIMO SCENARIJUS AGURKU
+
+
+if (isset($_POST['sodinti'])) {
+
+
+    Main\App::sodintiAgurkus();
+    Main\App::redirect(sodinimas);
+}
+
+
+
 if(isset($_POST['sodintiP'])) {
-    Main\App::sodintiPomidora();
+    Main\App::sodintiPomidorus();
+    Main\App::redirect(sodinimas);
 }
 
 if(isset($_POST['sodintiM'])) {
-    Main\App::sodintiMoliuga();
+    Main\App::sodintiMoliugus();
+    Main\App::redirect(sodinimas);
 }
 
 if(isset($_POST['sodintiV'])) {
     Main\App::sodintiVisasDarzoves();
+    Main\App::redirect(sodinimas);
 }
 
 //isrovimo scenarijus

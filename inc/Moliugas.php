@@ -2,7 +2,7 @@
 
 namespace Pumpkin;
 
-use Vegetable\Darzove;
+use Vegetables\Darzove;
 
 class Moliugas extends Darzove {
 
@@ -14,8 +14,7 @@ class Moliugas extends Darzove {
         $this->photo = $photos[array_rand($photos)];
     }
 
-    public function auginti() {
+    public function auga() {
         return rand(1, 3);
     }
 }
-

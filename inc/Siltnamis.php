@@ -4,5 +4,5 @@ namespace Greenhouse;
 
 interface Siltnamis {
 
-    function auginti();
+    function auga();
 }

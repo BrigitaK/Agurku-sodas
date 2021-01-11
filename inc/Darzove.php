@@ -1,6 +1,6 @@
 <?php 
 
-namespace Vegetable;
+namespace Vegetables;
 
 use Greenhouse\Siltnamis;
 
@@ -52,6 +52,6 @@ abstract class Darzove implements Siltnamis {
 
         $this->count = 0;
     }
-    abstract public function auginti();
+    abstract public function auga();
 
 }

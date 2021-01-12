@@ -9,51 +9,63 @@ $store = new Main\Store('darzoves');
 
 //skynimo Agurku scenarijus
     if (isset($_POST['skinti'])) {
-        Main\App::skintiAgurkus();
+        $store->skintiAgurkus();
+        Main\App::redirect(skynimas);
     }
 
 //skynimo Pomidoru scenarijus
 if (isset($_POST['skintiP'])) {
-    Main\App::skintiPomidorus();
+    $store->skintiPomidorus();
+    Main\App::redirect(skynimas);
 }
 
 //skynimo moliugu scenarijus
 if (isset($_POST['skintiM'])) {
-    Main\App::skintiMoliugus();
+    $store->skintiMoliugus();
+    Main\App::redirect(skynimas);
 }
 
 //skynimo Agurku scenarijus 
 if (isset($_POST['skinti-visus'])) {
-    Main\App::skintiVisusAgurkus();
+    $store->skintiVisusAgurkus();
+    Main\App::redirect(skynimas);
 }
 
 //skynimo Pomidoru scenarijus 
 if (isset($_POST['skinti-visusP'])) {
-    Main\App::skintiVisusPomidorus();
+    $store->skintiVisusPomidorus();
+    Main\App::redirect(skynimas);
 }
 
 //skynimo moliugu scenarijus 
 if (isset($_POST['skinti-visusM'])) {
-    Main\App::skintiVisusMoliugus();
+    $store->skintiVisusMoliugus();
+    Main\App::redirect(skynimas);
 }
 //visu agurku nuskynimas
 if (isset($_POST['skynimas'])) {
-    Main\App::visuAgurkuNuskynimas();
+    $store->visuAgurkuNuskynimas();
+    Main\App::redirect(skynimas);
 }
 
 //visu pomidoru nuskynimas
 if (isset($_POST['skynimasP'])) {
-    Main\App::visuPomidoruNuskynimas();
+    $store->visuPomidoruNuskynimas();
+    Main\App::redirect(skynimas);
 }
 
 //visu moliugu nuskynimas
 if (isset($_POST['skynimasM'])) {
-    Main\App::visuMoliuguNuskynimas();
+    $store->visuMoliuguNuskynimas();
+    Main\App::redirect(skynimas);
 }
 
-//visu moliugu nuskynimas
+//visu darzoviu nuskynimas
 if (isset($_POST['skynimasV'])) {
-    Main\App::visuDarzoviuNuskynimas();
+    $store->visuAgurkuNuskynimas();
+    $store->visuPomidoruNuskynimas();
+    $store->visuMoliuguNuskynimas();
+    Main\App::redirect(skynimas);
 }
 
 ?>

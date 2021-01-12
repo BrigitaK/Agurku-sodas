@@ -39,7 +39,7 @@ abstract class Darzove implements Siltnamis {
                 $_SESSION['ERROR'] = 'Įvestas skaičius per didelis, tiek nėra.';
             }
             else if ( $this->count >= $darzoves){
-                $this->count -= $darzoves;
+                $this->count = $this->count - $darzoves;
             }
         }
 

@@ -15,6 +15,7 @@ if (isset($_POST['sodinti'])) {
     Main\App::redirect('sodinimas');
 }
 
+
 if(isset($_POST['sodintiM'])) {
     $moliugoObj = new Main\Moliugas($store->getNewId());
     $store->addNewM($moliugoObj);
@@ -65,6 +66,9 @@ if(isset($_POST['rautiM'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/layout.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" defer integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script><!-- defer nurodo, kad uzsikrautu veliau-->
+    <script src="http://localhost:8888/dashboard/agurkai/agurku-sodas/js/app.js" defer></script> <!-- cia rasyti pilna kelia -->
+    <script>const apiUrl = "http://localhost:8888/dashboard/agurkai/agurku-sodas/js/app.js" </script>
     <title>Sodinimas</title>
 </head>
 
@@ -77,11 +81,14 @@ if(isset($_POST['rautiM'])) {
     </nav>
     
     <main>
+
+
+
         <h1>Daržovių sodinimas</h1>
         <div class="container">
             <form class="form" action="<?= URL.'sodinimas' ?>" method="POST">
             <?php foreach($store->getAll() as $agurkas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
-            <div class="form-top">
+            <div class="form-top" id="sodinti">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
                     <div class="name">Agurkas nr. <?= $agurkas->id ?></div>

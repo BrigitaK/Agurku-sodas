@@ -1,5 +1,9 @@
 <?php
 
+if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
+    Main\App::redirect(login);
+}
+
 Main\App::session();
 
 
@@ -81,18 +85,18 @@ if (isset($_POST['skynimasV'])) {
 </style>
 <body>
     <nav>
-    <a class="loggout" href="login.php?logout">Atsijungti</a>
-    <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php">Skynimas</a>
-    <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php">Auginimas</a>
-    <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php">Sodinimas</a>
+        <a class="loggout" href="login/logout">Atsijungti</a>
+        <a href="<?= URL.'skynimas' ?>">Skynimas</a>
+        <a href="<?= URL.'auginimas' ?>">Auginimas</a>
+        <a href="<?= URL.'sodinimas' ?>">Sodinimas</a>
     </nav>
     
     <main>
-        <h1 id="agurkai">Daržovių skynimas</h1>
+        <h1>Daržovių skynimas</h1>
         <div class="container">
             <?php if(isset($_SESSION['ERROR'])) { echo "<span class='session'>" .$_SESSION['ERROR']. "</span>"; unset($_SESSION['ERROR']); }?>
             <?php if(isset($_SESSION['msg'])) { echo "<span class='session'>" .$_SESSION['msg']. "</span>"; unset($_SESSION['msg']); }?>
-            <form class="form" action="#agurkai" method="POST">
+            <form class="form" action="<?= URL.'skynimas' ?>" method="POST">
             <?php foreach($_SESSION['obj'] as $agurkas): ?>
             <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
             <div class="form-top">

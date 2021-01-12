@@ -3,8 +3,7 @@ session_start();
 
 if(isset($_GET['logout'])) {
     $_SESSION['logged'] = 0;
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
-    die;
+    Main\App::redirect(login);
 }
 
 if(isset($_SESSION['logged']) && 1 == $_SESSION['logged']) {
@@ -20,14 +19,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') { //JEIGU PASPAUDE MYGTUKA SUMBIT
             md5($_POST['pass'] ?? '') === $user['pass']){
                $_SESSION['vardas'] = $user['name'];
                $_SESSION['logged'] = 1;
-               header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php');
-               die;
+               Main\App::redirect(sodinimas);
            }
     }
     $_SESSION['msg'] = "<span style='display: block; max-width: 300px; text-align:center; margin: auto; margin-top: 20px; font-size: 20px; color: #5c565c; text-transform: uppercase'>
     Bad name or password.</span>";
-    header('Location: http://localhost:8888/dashboard/agurkai/agurku-sodas/login.php');
-    die;
+    Main\App::redirect(login);
 }
 
 if(isset($_SESSION['msg'])) {
@@ -103,7 +100,7 @@ if(isset($_SESSION['msg'])) {
     <h1>Daržovių sodas</h1>
     <p>Norėdami prisijungti įveskite: vardas: Jonukas, password: 123</p>
     <div><?= $msg ?? '' ?></div>
-    <form action="" method="POST">
+    <form action="<?= URL.'login' ?>" method="POST">
         <input type="text" name="vardas" placeholder="Vardas">
         <br><br>
         <input type="password" name="pass" value="" placeholder="Password">

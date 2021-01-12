@@ -1,5 +1,9 @@
 <?php
 
+if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
+    Main\App::redirect(login);
+}
+
 Main\App::session();
 
 //auginimo scenarijus
@@ -37,16 +41,16 @@ if (isset($_POST['augintiV'])) {
 <body>
 
     <nav>
-    <a class="loggout" href="login.php?logout">Atsijungti</a>
-    <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/skynimas.php">Skynimas</a>
-    <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas.php">Auginimas</a>
-    <a href="http://localhost:8888/dashboard/agurkai/agurku-sodas/sodinimas.php">Sodinimas</a>
+    <a class="loggout" href="login/logout">Atsijungti</a>
+    <a href="<?= URL.'skynimas' ?>">Skynimas</a>
+    <a href="<?= URL.'auginimas' ?>">Auginimas</a>
+    <a href="<?= URL.'sodinimas' ?>">Sodinimas</a>
     </nav>
     
     <main>
         <h1>Daržovių auginimas</h1>
         <div class="container">
-            <form class="form" action="" method="POST">
+            <form class="form" action="<?= URL.'auginimas' ?>" method="POST">
             <?php foreach($_SESSION['obj'] as $agurkas): ?>
             <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
             <div class="form-top">

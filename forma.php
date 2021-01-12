@@ -1,7 +1,7 @@
 
 
 
-<form action="" method="post"> 
+<form action="<?= URL.'login' ?>" method="post"> 
 
 <input type="text" name="x" value="<?= $_POST['x'] ?? '' ?>"><br>
 <input type="text" name="y" value="<?= $_POST['y'] ?? '' ?>"><br>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Greenhouse;
+namespace Main;
 
 interface Siltnamis {
 

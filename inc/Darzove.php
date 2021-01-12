@@ -1,8 +1,6 @@
 <?php 
 
-namespace Vegetables;
-
-use Greenhouse\Siltnamis;
+namespace Main;
 
 abstract class Darzove implements Siltnamis {
 

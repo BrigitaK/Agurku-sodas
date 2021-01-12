@@ -12,7 +12,6 @@
             "Cucumber\\": "inc",
             "Pumpkin\\": "inc",
             "Vegetables\\": "inc",
-            "Sodas\\": "class",
             "Greenhouse\\": "inc"
         }
     }

@@ -1,8 +1,6 @@
 <?php 
 
-namespace Cucumber;
-
-use Vegetables\Darzove;
+namespace Main;
 
 class Agurkas extends Darzove {
 

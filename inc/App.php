@@ -2,27 +2,30 @@
 
 namespace Main;
 
-use Cucumber\Agurkas;
-use Pumpkin\Moliugas;
-use Tomato\Pomidoras;
 
 class App {
 
-    public static function session() {
-        if(!isset($_SESSION['obj'])) {//jeigu nesetinta sesija. Gali buti nesetintas. Jei pirma karta ateini i puslapi, sitas masyvas bus tuscias.
-            $_SESSION['obj'] = []; // sukuriam objektu masyva, laikysim agurku objektus
-            $_SESSION['ID'] = 0; //kad agurkai nesikartotu yra naujas kintamasis
-            $_SESSION['photo'] = '';
-            $_SESSION['objP'] = []; // sukuriam objektu masyva, laikysim pomidoru objektus
-            $_SESSION['objM'] = []; // sukuriam objektu masyva, laikysim moliugu objektus
+    public static function route() {
+
+        $uri = str_replace(INSTALL_FOLDER, '', $_SERVER['REQUEST_URI']);
+        $uri = explode ('/', $uri);
+
+        if('sodinimas' == $uri[0]) {
+            include DIR.'/sodinimas.php';
+        }
+        elseif('auginimas' == $uri[0]) {
+            include DIR.'/auginimas.php';
+        }
+        elseif('skynimas' == $uri[0]) {
+            include DIR.'/skynimas.php';
+        }
+        elseif('login' == $uri[0]) {
+            include DIR.'/login.php';
         }
     }
 
     public static function sodintiAgurkus() {
-        $agurkoObj = new Agurkas($_SESSION['ID']);//irasomas objektas, pasidarom nauja agurka
-        // norint ideti objekta i sesija reikia paversti i stringa ir atgal atversti i objekta
-        $_SESSION['obj'][]= serialize($agurkoObj); //irasom serializuota objekta paversta i stringa 
-        $_SESSION['ID']++;
+        
     }
 
     public static function sodintiMoliugus()
@@ -52,13 +55,8 @@ class App {
     }
 
     public static function rautiAgurka(){
-        foreach($_SESSION['obj'] as $index => $agurkas) {
-            $agurkas = unserialize($agurkas);
-            if ($_POST['rauti'] == $agurkas->id) {
-                unset($_SESSION['obj'][$index]);
-                App::redirect(sodinimas);
-            }
-        }
+        Main\Store::remove($_POST['rauti']);
+        App::redirect('sodinimas');
     }
 
     public static function rautiPomidora(){
@@ -66,7 +64,7 @@ class App {
             $pomidoras = unserialize($pomidoras);
             if ($_POST['rautiP'] == $pomidoras->id) {
                 unset($_SESSION['objP'][$index]);
-                App::redirect(sodinimas);
+                App::redirect('sodinimas');
             }
         }
     }
@@ -76,7 +74,7 @@ class App {
             $moliugas = unserialize($moliugas);
             if ($_POST['rautiM'] == $moliugas->id) {
                 unset($_SESSION['objM'][$index]);
-                App::redirect(sodinimas);
+                App::redirect('sodinimas');
             }
         }
     }
@@ -99,7 +97,7 @@ class App {
             $pomidoras = serialize($pomidoras); 
             $_SESSION['objP'][$index] = $pomidoras; 
         }
-        App::redirect(auginimas);
+        App::redirect('auginimas');
     }
 
     public static function augintiMoliuga(){
@@ -109,7 +107,7 @@ class App {
             $moliugas = serialize($moliugas); 
             $_SESSION['objM'][$index] = $moliugas; 
         }
-        App::redirect(auginimas);
+        App::redirect('auginimas');
     }
 
     public static function augintiVisasDarzoves(){
@@ -131,7 +129,7 @@ class App {
             $agurkas = serialize($agurkas); 
             $_SESSION['obj'][$index] = $agurkas; 
         }
-        App::redirect(auginimas);
+        App::redirect('auginimas');
     }
 
     public static function skintiAgurkus(){
@@ -252,8 +250,8 @@ class App {
         App::redirect(skynimas);
     }
 
-    public static function redirect($name) {
-        header("Location: $name");
+    public static function redirect($url) {
+        header("Location: $url");
         die;
     }
 }

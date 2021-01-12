@@ -1,8 +1,6 @@
 <?php 
 
-namespace Tomato;
-
-use Vegetables\Darzove;
+namespace Main;
 
 class Pomidoras extends Darzove {
 
@@ -10,7 +8,7 @@ class Pomidoras extends Darzove {
     {
         $this->id = $lastId + 1;
         $this->count = 0;
-        $photos = array("./photo/agurkas1.jpg", "./photo/agurkas3.jpg", "./photo/agurkas2.jpg");
+        $photos = array("./photo/pomidoras1.jpg", "./photo/pomidoras2.jpg", "./photo/pomidoras3.jpg");
         $this->photo = $photos[array_rand($photos)];
     }
 

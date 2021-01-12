@@ -1,8 +1,6 @@
 <?php 
 
-namespace Pumpkin;
-
-use Vegetables\Darzove;
+namespace Main;
 
 class Moliugas extends Darzove {
 

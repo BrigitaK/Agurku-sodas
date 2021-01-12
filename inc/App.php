@@ -24,60 +24,8 @@ class App {
         }
     }
 
-    public static function sodintiAgurkus() {
-        
-    }
 
-    public static function sodintiMoliugus()
-    {
-        $moliugoObj = new Moliugas($_SESSION['ID']);
-        $_SESSION['objM'][] = serialize($moliugoObj); //objektas paverstas i stringa
-        $_SESSION['ID']++;
-    }
-
-    public static function sodintiPomidorus() 
-    {
-        $pomidoroObj = new Pomidoras($_SESSION['ID']);
-        $_SESSION['objP'][] = serialize($pomidoroObj); //objektas paverstas i stringa
-        $_SESSION['ID']++;
-    }
-
-    public static function sodintiVisasDarzoves() {
-        $moliugoObj = new Moliugas($_SESSION['ID']);
-        ++$_SESSION['ID'];
-        $_SESSION['objM'][]= serialize($moliugoObj);
-        $pomidoroObj = new Pomidoras($_SESSION['ID']);
-        ++$_SESSION['ID'];
-        $_SESSION['objP'][]= serialize($pomidoroObj);
-        $agurkoObj = new Agurkas($_SESSION['ID']);
-        ++$_SESSION['ID'];
-        $_SESSION['obj'][]= serialize($agurkoObj);
-    }
-
-    public static function rautiAgurka(){
-        Main\Store::remove($_POST['rauti']);
-        App::redirect('sodinimas');
-    }
-
-    public static function rautiPomidora(){
-        foreach($_SESSION['objP'] as $index => $pomidoras) {
-            $pomidoras = unserialize($pomidoras);
-            if ($_POST['rautiP'] == $pomidoras->id) {
-                unset($_SESSION['objP'][$index]);
-                App::redirect('sodinimas');
-            }
-        }
-    }
-
-    public static function rautiMoliuga(){
-        foreach($_SESSION['objM'] as $index => $moliugas) {
-            $moliugas = unserialize($moliugas);
-            if ($_POST['rautiM'] == $moliugas->id) {
-                unset($_SESSION['objM'][$index]);
-                App::redirect('sodinimas');
-            }
-        }
-    }
+    
 
     public static function augintiAgurkus()
     {
@@ -250,8 +198,9 @@ class App {
         App::redirect(skynimas);
     }
 
-    public static function redirect($url) {
-        header("Location: $url");
-        die;
+    public static function redirect($url)
+    {
+        header('Location: '.URL.$url);
+        exit;
     }
 }

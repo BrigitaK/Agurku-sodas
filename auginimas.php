@@ -4,27 +4,32 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     Main\App::redirect(login);
 }
 
-Main\App::session();
+$store = new Main\Store('darzoves');
 
 //auginimo scenarijus
 if (isset($_POST['auginti'])) {
-    Main\App::augintiAgurkus();
+    $store->augintiAgurkus();
     Main\App::redirect(auginimas);
 }
 
 //auginimam pomidorus
 if (isset($_POST['augintiP'])) {
-    Main\App::augintiPomidora();
+    $store->augintiPomidorus();
+    Main\App::redirect(auginimas);
 }
 
 //auginimam moliugus
 if (isset($_POST['augintiM'])) {
-    Main\App::augintiMoliuga();
+    $store->augintiMoliugus();
+    Main\App::redirect(auginimas);
 }
 
 //auginimam visus
 if (isset($_POST['augintiV'])) {
-    Main\App::augintiVisasDarzoves();
+    $store->augintiAgurkus();
+    $store->augintiPomidorus();
+    $store->augintiMoliugus();
+    Main\App::redirect(auginimas);
 }
 
 ?>
@@ -51,8 +56,7 @@ if (isset($_POST['augintiV'])) {
         <h1>Daržovių auginimas</h1>
         <div class="container">
             <form class="form" action="<?= URL.'auginimas' ?>" method="POST">
-            <?php foreach($_SESSION['obj'] as $agurkas): ?>
-            <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
+            <?php foreach($store->getAll() as $agurkas): ?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
@@ -64,8 +68,7 @@ if (isset($_POST['augintiV'])) {
                 <input type="hidden" name="kiekis[<?=$agurkas->id ?>]" value="<?= $kiekis ?>">
             </div>
             <?php endforeach ?>
-            <?php foreach($_SESSION['objP'] as $pomidoras): ?>
-             <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
+            <?php foreach($store->getAllP() as $pomidoras): ?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo">
@@ -77,8 +80,7 @@ if (isset($_POST['augintiV'])) {
                 <input type="hidden" name="kiekis[<?=$pomidoras->id ?>]" value="<?= $kiekis ?>">
             </div>
             <?php endforeach ?>
-            <?php foreach($_SESSION['objM'] as $moliugas): ?>
-            <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
+            <?php foreach($store->getAllM() as $moliugas): ?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo">

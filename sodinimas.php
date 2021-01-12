@@ -10,41 +10,50 @@ $store = new Main\Store('darzoves');
 
 
 if (isset($_POST['sodinti'])) {
-
     $agurkoObj = new Main\Agurkas($store->getNewId());
     $store->addNew($agurkoObj);
     Main\App::redirect('sodinimas');
 }
 
 if(isset($_POST['sodintiM'])) {
-    Main\App::sodintiMoliugus();
+    $moliugoObj = new Main\Moliugas($store->getNewId());
+    $store->addNewM($moliugoObj);
     Main\App::redirect('sodinimas');
 }
 
 if(isset($_POST['sodintiP'])) {
-    Main\App::sodintiPomidorus();
+    $pomidoroObj = new Main\Pomidoras($store->getNewId());
+    $store->addNewP($pomidoroObj);
     Main\App::redirect('sodinimas');
 }
 
 if(isset($_POST['sodintiV'])) {
-    Main\App::sodintiVisasDarzoves();
+    $agurkoObj = new Main\Agurkas($store->getNewId());
+    $store->addNew($agurkoObj);
+    $moliugoObj = new Main\Moliugas($store->getNewId());
+    $store->addNewM($moliugoObj);
+    $pomidoroObj = new Main\Pomidoras($store->getNewId());
+    $store->addNewP($pomidoroObj);
     Main\App::redirect('sodinimas');
 }
 
 //isrovimo scenarijus
 
 if(isset($_POST['rauti'])) {
-    Main\App::rautiAgurka();
+    $store->remove($_POST['rauti']);
+    Main\App::redirect('sodinimas');
 }
 
 //raunam Pomidora
 if(isset($_POST['rautiP'])) {
-    Main\App::rautiPomidora();
+    $store->removeP($_POST['rautiP']);
+    Main\App::redirect('sodinimas');
 }
 
 //raunam moliuga
 if(isset($_POST['rautiM'])) {
-    Main\App::rautiMoliuga();
+    $store->removeM($_POST['rautiM']);
+    Main\App::redirect('sodinimas');
 }
 
 ?>
@@ -81,7 +90,7 @@ if(isset($_POST['rautiM'])) {
                 <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas->id ?>">Išrauti</button>
             </div>
             <?php endforeach ?>
-            <?php foreach($store->getAll() as $pomidoras): //paverciam i obj, norint panaudoti reikia isserializuoti?>
+            <?php foreach($store->getAllP() as $pomidoras): //paverciam i obj, norint panaudoti reikia isserializuoti?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
@@ -91,7 +100,7 @@ if(isset($_POST['rautiM'])) {
                 <button class="btn-israuti" type="submit" name="rautiP" value="<?= $pomidoras->id ?>">Išrauti</button>
             </div>
             <?php endforeach ?>
-            <?php foreach($store->getAll() as $moliugas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
+            <?php foreach($store->getAllM() as $moliugas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->

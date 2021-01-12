@@ -4,7 +4,7 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     Main\App::redirect(login);
 }
 
-Main\App::session();
+$store = new Main\Store('darzoves');
 
 
 //skynimo Agurku scenarijus
@@ -97,8 +97,7 @@ if (isset($_POST['skynimasV'])) {
             <?php if(isset($_SESSION['ERROR'])) { echo "<span class='session'>" .$_SESSION['ERROR']. "</span>"; unset($_SESSION['ERROR']); }?>
             <?php if(isset($_SESSION['msg'])) { echo "<span class='session'>" .$_SESSION['msg']. "</span>"; unset($_SESSION['msg']); }?>
             <form class="form" action="<?= URL.'skynimas' ?>" method="POST">
-            <?php foreach($_SESSION['obj'] as $agurkas): ?>
-            <?php $agurkas = unserialize($agurkas) // is agurko stringo vel gaunam objekta ?>
+            <?php foreach($store->getAll() as $agurkas): ?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
@@ -114,8 +113,7 @@ if (isset($_POST['skynimasV'])) {
                 <?php } ?>
             </div>
             <?php endforeach ?>
-            <?php foreach($_SESSION['objP'] as $pomidoras): ?>
-            <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
+            <?php foreach($store->getAllP() as $pomidoras): ?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo">
@@ -131,8 +129,7 @@ if (isset($_POST['skynimasV'])) {
                 <?php } ?>
             </div>
             <?php endforeach ?>
-            <?php foreach($_SESSION['objM'] as $moliugas): ?>
-            <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
+            <?php foreach($store->getAllM() as $moliugas): ?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo">

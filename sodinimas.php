@@ -4,7 +4,7 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
     Main\App::redirect(login);
 }
 
-$store = new Main\Store('agurkas');
+$store = new Main\Store('darzoves');
 
 // SODINIMO SCENARIJUS AGURKU
 
@@ -82,7 +82,6 @@ if(isset($_POST['rautiM'])) {
             </div>
             <?php endforeach ?>
             <?php foreach($store->getAll() as $pomidoras): //paverciam i obj, norint panaudoti reikia isserializuoti?>
-            <?php $pomidoras = unserialize($pomidoras) // is agurko stringo vel gaunam objekta ?>
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
@@ -93,9 +92,6 @@ if(isset($_POST['rautiM'])) {
             </div>
             <?php endforeach ?>
             <?php foreach($store->getAll() as $moliugas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
-            <?php $moliugas = unserialize($moliugas) // is agurko stringo vel gaunam objekta ?>
-
-            
             <div class="form-top">
                 <div class="agurkas-nr">
                     <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->

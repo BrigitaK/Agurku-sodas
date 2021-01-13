@@ -140,30 +140,6 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         die;
     
     }
-
-    elseif (isset($rawData['sodintiV'])) {
-        $kiekis = 1;
-
-        foreach(range(1, $kiekis) as $_) {
-            $agurkoObj = new Main\Agurkas($store->getNewId());
-            $store->addNew($agurkoObj);
-            $moliugoObj = new Main\Moliugas($store->getNewId());
-            $store->addNewM($moliugoObj);
-            $pomidoroObj = new Main\Pomidoras($store->getNewId());
-            $store->addNewP($pomidoroObj);
-        }
-        //pasodine agurkus jungsim buferi
-        ob_start();
-        include __DIR__.'/listV.php';//liepsiu listau sugeneruoti nauja sarasa
-        $out = ob_get_contents();//viskas subegs i buferi
-        ob_end_clean();
-        $json = ['listV' => $out];//issiusime agurku lista
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(201);//
-        echo $json;
-        die;
-    }
 }
 
 //isrovimo scenarijus
@@ -231,13 +207,13 @@ if(isset($rawData['rautiM'])) {
     <title>Sodinimas</title>
 </head>
 <style>
-    .list, .listP, .listM {
-        gap: 20px;
+    
+    .listV, .list, .listM, .listP, .form {
+        gap: 35px;
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
         align-content: center;
-        margin-top: 60px;
     }
 </style>
 <body>
@@ -256,7 +232,7 @@ if(isset($rawData['rautiM'])) {
         <div class="container">
             <div id="error"></div>
             <form class="form" action="<?= URL.'sodinimas' ?>" method="POST">
-            <div id="listV">
+            <div class="listV" id="listV">
                 <div class="list" id="list">
                 </div>
                 <div class="listP" id="listP">

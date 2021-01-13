@@ -2,11 +2,13 @@ const buttonSodinti = document.querySelector('.sodinti #sodintiA');
 const buttonSodintiM = document.querySelector('[name="sodintiM"]');
 const buttonSodintiP = document.querySelector('[name="sodintiP"]');
 const buttonSodintiV = document.querySelector('[name="sodintiV"]');
+const buttonAuginti = document.querySelector('[name="auginti"]');
 const buttonIsrauti = document.querySelector('.btn-israuti');
 const list = document.querySelector('#list');
 const listM = document.querySelector('#listM');
 const listP = document.querySelector('#listP');
-const listV = document.querySelector('#listV')
+const listV = document.querySelector('#listV');
+const listAuginimas = document.querySelector('#listAuginimas');
 const errorMsg = document.querySelector('#error');
 
 const addNewList = () => {

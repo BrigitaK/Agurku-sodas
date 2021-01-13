@@ -13,7 +13,6 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     
     //listo scenarijus
     if (isset($rawData['list'])) {
-        // sleep(3);
             ob_start();
             include __DIR__.'/list.php';
             $out = ob_get_contents();
@@ -27,13 +26,12 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         
         }
      //listo scenarijus
-     if (isset($rawData['moliugo'])) {
-        // sleep(3);
+     if (isset($rawData['listM'])) {
             ob_start();
-            include __DIR__.'/moliugo.php';
+            include __DIR__.'/listM.php';
             $out = ob_get_contents();
             ob_end_clean();
-            $json = ['moliugo' => $out];
+            $json = ['listM' => $out];
             $json = json_encode($json);
             header('Content-type: application/json');
             http_response_code(200);
@@ -43,7 +41,6 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         }
         //listo scenarijus
      if (isset($rawData['listP'])) {
-        // sleep(3);
             ob_start();
             include __DIR__.'/listP.php';
             $out = ob_get_contents();
@@ -54,8 +51,8 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
             http_response_code(200);
             echo $json;
             die;
-        
         }
+      
 //agurku sodinimo scenarijus
     elseif (isset($rawData['sodintiA'])) {
         
@@ -110,10 +107,10 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         }
         //pasodine agurkus jungsim buferi
         ob_start();
-        include __DIR__.'/moliugo.php';//liepsiu listau sugeneruoti nauja sarasa
+        include __DIR__.'/listM.php';//liepsiu listau sugeneruoti nauja sarasa
         $out = ob_get_contents();//viskas subegs i buferi
         ob_end_clean();
-        $json = ['moliugo' => $out];//issiusime agurku lista
+        $json = ['listM' => $out];//issiusime agurku lista
         $json = json_encode($json);
         header('Content-type: application/json');
         http_response_code(201);//
@@ -143,35 +140,80 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         die;
     
     }
-}
 
-if(isset($rawData['sodintiV'])) {
-    $agurkoObj = new Main\Agurkas($store->getNewId());
-    $store->addNew($agurkoObj);
-    $moliugoObj = new Main\Moliugas($store->getNewId());
-    $store->addNewM($moliugoObj);
-    $pomidoroObj = new Main\Pomidoras($store->getNewId());
-    $store->addNewP($pomidoroObj);
-    Main\App::redirect('sodinimas');
+    elseif (isset($rawData['sodintiV'])) {
+        $kiekis = 1;
+
+        foreach(range(1, $kiekis) as $_) {
+            $agurkoObj = new Main\Agurkas($store->getNewId());
+            $store->addNew($agurkoObj);
+            $moliugoObj = new Main\Moliugas($store->getNewId());
+            $store->addNewM($moliugoObj);
+            $pomidoroObj = new Main\Pomidoras($store->getNewId());
+            $store->addNewP($pomidoroObj);
+        }
+        //pasodine agurkus jungsim buferi
+        ob_start();
+        include __DIR__.'/listV.php';//liepsiu listau sugeneruoti nauja sarasa
+        $out = ob_get_contents();//viskas subegs i buferi
+        ob_end_clean();
+        $json = ['listV' => $out];//issiusime agurku lista
+        $json = json_encode($json);
+        header('Content-type: application/json');
+        http_response_code(201);//
+        echo $json;
+        die;
+    }
 }
 
 //isrovimo scenarijus
 
 if(isset($rawData['rauti'])) {
-    $store->remove($rawData['rauti']);
-    Main\App::redirect('sodinimas');
+    //$store->remove($rawData['rauti']); //persiduodam rauti per id
+    $store->remove($rawData['id']); 
+
+    ob_start();
+    include __DIR__.'/list.php';//liepsiu listau sugeneruoti nauja sarasa
+    $out = ob_get_contents();//viskas subegs i buferi
+    ob_end_clean();
+    $json = ['list' => $out];//issiusime agurku lista
+    $json = json_encode($json);
+    header('Content-type: application/json');
+    http_response_code(201);//
+    echo $json;
+    die;
 }
 
 //raunam Pomidora
+
 if(isset($rawData['rautiP'])) {
-    $store->removeP($rawData['rautiP']);
-    Main\App::redirect('sodinimas');
+    $store->removeP($rawData['id']); 
+
+    ob_start();
+    include __DIR__.'/listP.php';//liepsiu listau sugeneruoti nauja sarasa
+    $out = ob_get_contents();//viskas subegs i buferi
+    ob_end_clean();
+    $json = ['listP' => $out];//issiusime agurku lista
+    $json = json_encode($json);
+    header('Content-type: application/json');
+    http_response_code(201);//
+    echo $json;
+    die;
 }
 
 //raunam moliuga
 if(isset($rawData['rautiM'])) {
-    $store->removeM($rawData['rautiM']);
-    Main\App::redirect('sodinimas');
+    $store->removeM($rawData['id']); 
+    ob_start();
+    include __DIR__.'/listM.php';
+    $out = ob_get_contents();
+    ob_end_clean();
+    $json = ['listM' => $out];
+    $json = json_encode($json);
+    header('Content-type: application/json');
+    http_response_code(201);
+    echo $json;
+    die;
 }
 
 ?>
@@ -214,20 +256,22 @@ if(isset($rawData['rautiM'])) {
         <div class="container">
             <div id="error"></div>
             <form class="form" action="<?= URL.'sodinimas' ?>" method="POST">
+            <div id="listV">
                 <div class="list" id="list">
                 </div>
                 <div class="listP" id="listP">
                 </div>
-                <div class="listM" id="moliugo">
+                <div class="listM" id="listM">
                 </div>
+            </div>
             <div class="sodinti">
-                <input class="agurkas" type="hidden" name="kiekis" id="cucumber">
+                <input type="hidden" name="kiekis">
                 <button class="btn-sodinti" type="button" id="sodintiA" name="sodintiA">SODINTI AGURKUS</button>
-                <input class="pomidoras" type="hidden" name="kiekisP" id="tomato">
+                <input type="hidden" name="kiekisP">
                 <button class="btn-sodinti" type="button" name="sodintiP">SODINTI POMIDORUS</button>
-                <input class="moliugas" type="hidden" name="kiekisM" id="pumpkin">
+                <input type="hidden" name="kiekisM">
                 <button class="btn-sodinti" type="button" name="sodintiM">SODINTI MOLIŪGUS</button>
-                <input class="darzoves" type="hidden" name="kiekis" id="allV">
+                <input type="hidden" name="kiekisV">
                 <button class="btn-sodinti" type="button" name="sodintiV">SODINTI VISUS</button>
             </div>
             </form>

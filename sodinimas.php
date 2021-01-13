@@ -6,29 +6,34 @@ if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
 
 $store = new Main\Store('darzoves');
 
+
+if('POST' == $_SERVER['REQUEST_METHOD']) {
+    $rawData = file_get_contents("php://input");
+    $rawData = json_decode($rawData,1);
+}
 // SODINIMO SCENARIJUS AGURKU
 
 
-if (isset($_POST['sodinti'])) {
-    $agurkoObj = new Main\Agurkas($store->getNewId());
-    $store->addNew($agurkoObj);
-    Main\App::redirect('sodinimas');
-}
+    if (isset($rawData['sodinti'])) {
+        $agurkoObj = new Main\Agurkas($store->getNewId());
+        $store->addNew($agurkoObj);
+        Main\App::redirect('sodinimas');
+    }
 
 
-if(isset($_POST['sodintiM'])) {
+if(isset($rawData['sodintiM'])) {
     $moliugoObj = new Main\Moliugas($store->getNewId());
     $store->addNewM($moliugoObj);
     Main\App::redirect('sodinimas');
 }
 
-if(isset($_POST['sodintiP'])) {
+if(isset($rawData['sodintiP'])) {
     $pomidoroObj = new Main\Pomidoras($store->getNewId());
     $store->addNewP($pomidoroObj);
     Main\App::redirect('sodinimas');
 }
 
-if(isset($_POST['sodintiV'])) {
+if(isset($rawData['sodintiV'])) {
     $agurkoObj = new Main\Agurkas($store->getNewId());
     $store->addNew($agurkoObj);
     $moliugoObj = new Main\Moliugas($store->getNewId());
@@ -40,20 +45,20 @@ if(isset($_POST['sodintiV'])) {
 
 //isrovimo scenarijus
 
-if(isset($_POST['rauti'])) {
-    $store->remove($_POST['rauti']);
+if(isset($rawData['rauti'])) {
+    $store->remove($rawData['rauti']);
     Main\App::redirect('sodinimas');
 }
 
 //raunam Pomidora
-if(isset($_POST['rautiP'])) {
-    $store->removeP($_POST['rautiP']);
+if(isset($rawData['rautiP'])) {
+    $store->removeP($rawData['rautiP']);
     Main\App::redirect('sodinimas');
 }
 
 //raunam moliuga
-if(isset($_POST['rautiM'])) {
-    $store->removeM($_POST['rautiM']);
+if(isset($rawData['rautiM'])) {
+    $store->removeM($rawData['rautiM']);
     Main\App::redirect('sodinimas');
 }
 
@@ -87,16 +92,18 @@ if(isset($_POST['rautiM'])) {
         <h1>Daržovių sodinimas</h1>
         <div class="container">
             <form class="form" action="<?= URL.'sodinimas' ?>" method="POST">
-            <?php foreach($store->getAll() as $agurkas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
-            <div class="form-top" id="sodinti">
-                <div class="agurkas-nr">
-                    <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
-                    <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
+                <div  id="sodinti">
+                    <?php foreach($store->getAll() as $agurkas): //paverciam i obj, norint panaudoti reikia isserializuoti?>
+                    <div class="form-top">
+                        <div class="agurkas-nr">
+                            <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo"> <!-- kreipiames kaip i savybe -->
+                            <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
+                        </div>
+                        <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
+                        <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas->id ?>">Išrauti</button>
+                    </div>
+                    <?php endforeach ?>
                 </div>
-                <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
-                <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas->id ?>">Išrauti</button>
-            </div>
-            <?php endforeach ?>
             <?php foreach($store->getAllP() as $pomidoras): //paverciam i obj, norint panaudoti reikia isserializuoti?>
             <div class="form-top">
                 <div class="agurkas-nr">

@@ -8,3 +8,4 @@
     <button class="btn-israuti" type="button" name="rauti" value="<?= $agurkas->id ?>">Išrauti</button>
 </div>
 <?php endforeach ?>
+

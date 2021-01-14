@@ -24,10 +24,46 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
             die;
         
         }
+
+        //listo scenarijus
+    if (isset($rawData['listAuginimasM'])) {
+        ob_start();
+        include __DIR__.'/listAuginimasM.php';
+        $out = ob_get_contents();
+        ob_end_clean();
+        $json = ['listAuginimasM' => $out];
+        $json = json_encode($json);
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo $json;
+        die;
+    
+    }
+
+    //listo scenarijus
+    if (isset($rawData['listAuginimasP'])) {
+        ob_start();
+        include __DIR__.'/listAuginimasP.php';
+        $out = ob_get_contents();
+        ob_end_clean();
+        $json = ['listAuginimasP' => $out];
+        $json = json_encode($json);
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo $json;
+        die;
+    
+    }
+
+        //auginam agurkus
         elseif (isset($rawData['auginti'])) {
         
-            $kiekis=1;
-            $store->augintiAgurkus();
+            $kiekis = 1;
+
+            foreach(range(1, $kiekis) as $_) {
+                $store->augintiAgurkus();
+            }
+        
             
             //pasodine agurkus jungsim buferi
             ob_start();
@@ -41,19 +77,45 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
             echo $json;
             die;
         }
+
+        //auginam pomidorus
+        elseif (isset($rawData['augintiP'])) {
+        
+            $kiekis=1;
+            $store->augintiPomidorus();
+            
+            //pasodine agurkus jungsim buferi
+            ob_start();
+            include __DIR__.'/listAuginimasP.php';//liepsiu listau sugeneruoti nauja sarasa
+            $out = ob_get_contents();//viskas subegs i buferi
+            ob_end_clean();
+            $json = ['listAuginimasP' => $out];//issiusime agurku lista
+            $json = json_encode($json);
+            header('Content-type: application/json');
+            http_response_code(201);//
+            echo $json;
+            die;
+        }
+
+        //auginam moliugus
+        elseif (isset($rawData['augintiM'])) {
+        
+            $kiekis=1;
+            $store->augintiMoliugus();
+            
+            //pasodine agurkus jungsim buferi
+            ob_start();
+            include __DIR__.'/listAuginimasM.php';//liepsiu listau sugeneruoti nauja sarasa
+            $out = ob_get_contents();//viskas subegs i buferi
+            ob_end_clean();
+            $json = ['listAuginimasM' => $out];//issiusime agurku lista
+            $json = json_encode($json);
+            header('Content-type: application/json');
+            http_response_code(201);//
+            echo $json;
+            die;
+        }
     }
-
-//auginimam pomidorus
-if (isset($_POST['augintiP'])) {
-    $store->augintiPomidorus();
-    Main\App::redirect(auginimas);
-}
-
-//auginimam moliugus
-if (isset($_POST['augintiM'])) {
-    $store->augintiMoliugus();
-    Main\App::redirect(auginimas);
-}
 
 //auginimam visus
 if (isset($_POST['augintiV'])) {
@@ -100,55 +162,19 @@ if (isset($_POST['augintiV'])) {
         <div class="container">
             <form class="form" action="<?= URL.'auginimas' ?>" method="POST">
             <div id="listAuginimas">
-            <?php foreach($store->getAll() as $agurkas): ?>
-            <div class="form-top">
-                <div class="agurkas-nr agurkas">
-                    <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
-                    <?php $kiekis = $agurkas->auga() ?>
-                    <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
-                </div>
-                <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
-                <h3 class="kiekis" >+<?= $kiekis ?></h3>
-                <input type="hidden" id="kiekis" name="kiekis[<?=$agurkas->id ?>]" value="<?= $kiekis ?>">
-            </div>
-            <?php endforeach ?>
             </div>
             <div id="listAuginimasP">
-            <?php foreach($store->getAllP() as $pomidoras): ?>
-            <div class="form-top">
-                <div class="agurkas-nr">
-                    <img class="agurkas-img" src="<?= $pomidoras->photo ?>" alt="photo">
-                    <?php $kiekis = $pomidoras->auga() ?>
-                    <div class="name">Pomidoro nr. <?= $pomidoras->id ?></div>
-                </div>
-                <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
-                <h3 class="kiekis" >+<?= $kiekis ?></h3>
-                <input type="hidden" name="kiekis[<?=$pomidoras->id ?>]" value="<?= $kiekis ?>">
-            </div>
-            <?php endforeach ?>
             </div>
                 <div id="listAuginimasM">
-                <?php foreach($store->getAllM() as $moliugas): ?>
-                <div class="form-top">
-                    <div class="agurkas-nr">
-                        <img class="agurkas-img" src="<?= $moliugas->photo ?>" alt="photo">
-                        <?php $kiekis = $moliugas->auga() ?>
-                        <div>Moliūgo nr. <?= $moliugas->id ?></div>
-                    </div>
-                    <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>
-                    <h3 class="kiekis" >+<?= $kiekis ?></h3>
-                    <input type="hidden" name="kiekis[<?=$moliugas->id ?>]" value="<?= $kiekis ?>">
-                </div>
-                <?php endforeach ?>
                 </div>
             
 
             <div class="sodinti">
                 <input type="hidden" name="kiekis">
                 <button class="btn-auginti" type="button" name="auginti">AUGINTI AGURKUS</button>
-                <button class="btn-auginti" type="submit" name="augintiP">AUGINTI POMIDORUS</button>
-                <button class="btn-auginti" type="submit" name="augintiM">AUGINTI MOLIŪGUS</button>
-                <button class="btn-auginti" type="submit" name="augintiV">AUGINTI VISUS</button>
+                <button class="btn-auginti" type="button" name="augintiP">AUGINTI POMIDORUS</button>
+                <button class="btn-auginti" type="button" name="augintiM">AUGINTI MOLIŪGUS</button>
+                <button class="btn-auginti" type="button" name="augintiV">AUGINTI VISUS</button>
             </div>
             </form>
         </div>

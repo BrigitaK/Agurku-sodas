@@ -36,7 +36,6 @@ const addNewList = () => {
 const addNewListP = () => {
     const pomidorai = document.querySelectorAll('.pomidoras');
     pomidorai.forEach(pomidoras => {
-        console.log(pomidoras);
         pomidoras.querySelector('[type=button]').addEventListener('click', () => {
             const id = pomidoras.querySelector('[name=rautiP]').value;
             axios.post(apiUrl, {
@@ -167,6 +166,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// //agurku auginimas
+// buttonAuginti.addEventListener('click', () =>{
+//     const count5 = document.querySelector('[name=kiekis]').value;
+    
+
+//     axios.post(apiUrlA, {
+//         kiekis: count5,
+//         auginti:1
+//     })
+//     .then(function(response) {
+//         listAuginimas.innerHTML = response.data.listAuginimas;
+//         errorMsg.innerHTML = '';
+//     })
+//     .catch(function(error) {
+//         errorMsg.innerHTML = error.response.data.msg;
+//     });
+
+    
+// });
 //agurku sodinimas
 buttonSodinti.addEventListener('click', () =>{
     const count = document.querySelector('[name=kiekis]').value;
@@ -178,26 +196,6 @@ buttonSodinti.addEventListener('click', () =>{
     })
     .then(function(response) {
         list.innerHTML = response.data.list;
-        errorMsg.innerHTML = '';
-    })
-    .catch(function(error) {
-        errorMsg.innerHTML = error.response.data.msg;
-    });
-
-    
-});
-
-//agurku auginimas
-buttonAuginti.addEventListener('click', () =>{
-    const count5 = document.querySelector('[name=kiekis]').value;
-    
-
-    axios.post(apiUrlA, {
-        kiekis: count5,
-        auginti:1
-    })
-    .then(function(response) {
-        listAuginimas.innerHTML = response.data.listAuginimas;
         errorMsg.innerHTML = '';
     })
     .catch(function(error) {

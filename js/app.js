@@ -121,6 +121,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    axios.post(apiUrlA, {
+            listAuginimas: 1,
+        })
+        .then(function(response) {
+            listAuginimas.innerHTML = response.data.listAugnimas;
+            errorMsg.innerHTML = '';
+        })
+        .catch(function(error) {
+            errorMsg.innerHTML = error.response.data.msg;
+        });
+
+});
+
 
 //agurku sodinimas
 buttonSodinti.addEventListener('click', () =>{
@@ -141,6 +155,26 @@ buttonSodinti.addEventListener('click', () =>{
 
     
 });
+
+//agurku auginimas
+// buttonAuginti.addEventListener('click', () =>{
+//     const count5 = document.querySelector('[name=kiekis]').value;
+    
+
+//     axios.post(apiUrl, {
+//         kiekis: count5,
+//         auginti:1
+//     })
+//     .then(function(response) {
+//         listAuginimas.innerHTML = response.data.listAuginimas;
+//         errorMsg.innerHTML = '';
+//     })
+//     .catch(function(error) {
+//         errorMsg.innerHTML = error.response.data.msg;
+//     });
+
+    
+// });
 //moliugu sodinimas
 buttonSodintiM.addEventListener('click', () =>{
     const count1 = document.querySelector('[name=kiekisM]').value;

@@ -84,7 +84,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         }
         //pasodine agurkus jungsim buferi
         ob_start();
-        include __DIR__.'/list.php';//liepsiu listau sugeneruoti nauja sarasa
+        include __DIR__.'/list.php';//liepsiu listui sugeneruoti nauja sarasa
         $out = ob_get_contents();//viskas subegs i buferi
         ob_end_clean();
         $json = ['list' => $out];//issiusime agurku lista
@@ -138,7 +138,31 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         http_response_code(201);//
         echo $json;
         die;
-    
+    }
+    elseif (isset($rawData['sodintiV'])) {
+        
+        //$kiekis = $rawData['kiekis'];
+        $kiekis = 1;
+
+        foreach(range(1, $kiekis) as $_) {
+            $pomidoroObj = new Main\Pomidoras($store->getNewId());
+            $store->addNewP($pomidoroObj);
+            $moliugoObj = new Main\Moliugas($store->getNewId());
+            $store->addNewM($moliugoObj);
+            $agurkoObj = new Main\Agurkas($store->getNewId());
+            $store->addNew($agurkoObj);
+        }
+        //pasodine agurkus jungsim buferi
+        ob_start();
+        include __DIR__.'/listV.php';//liepsiu listau sugeneruoti nauja sarasa
+        $out = ob_get_contents();//viskas subegs i buferi
+        ob_end_clean();
+        $json = ['listV' => $out];//issiusime agurku lista
+        $json = json_encode($json);
+        header('Content-type: application/json');
+        http_response_code(201);//
+        echo $json;
+        die;
     }
 }
 
@@ -231,7 +255,7 @@ if(isset($rawData['rautiM'])) {
         <h1>Daržovių sodinimas</h1>
         <div class="container">
             <div id="error"></div>
-            <form class="form" action="<?= URL.'sodinimas' ?>" method="POST">
+            <form class="form" action="" method="POST">
             <div class="listV" id="listV">
                 <div class="list" id="list">
                 </div>

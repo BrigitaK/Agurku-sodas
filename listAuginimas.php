@@ -1,4 +1,3 @@
-
 <?php foreach($store->getAll() as $agurkas): ?>
 <div class="form-top">
     <div class="agurkas-nr agurkas">

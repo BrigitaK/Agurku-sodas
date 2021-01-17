@@ -120,7 +120,7 @@ class Store {
         foreach($this->data['obj'] as $index => $obj)
         {
             $obj = unserialize($obj); 
-            $obj->add($_POST['kiekis'][$obj->id]);
+            $obj->add($obj->auga());
             $obj = serialize($obj); 
             $this->data['obj'][$index] = $obj;
         }

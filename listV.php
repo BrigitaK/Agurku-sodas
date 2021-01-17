@@ -6,6 +6,7 @@
             <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
         </div>
         <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
+        <div class="agurkas-vnt">Kaina: <?= $agurkas->priceD() ?></div>
         <button class="btn-israuti" type="submit" name="rauti" value="<?= $agurkas->id ?>">Išrauti</button>
     </div>
     <?php endforeach ?>
@@ -18,6 +19,7 @@
             <div class="name">Moliūgo nr. <?= $moliugas->id ?></div>
         </div>
         <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>
+        <div class="agurkas-vnt">Kaina: <?= $moliugas->priceD() ?></div>
         <button class="btn-israuti" type="submit" name="rautiM" value="<?= $moliugas->id ?>">Išrauti</button>
     </div>
     <?php endforeach ?>
@@ -30,6 +32,7 @@
             <div class="name">Pomidoras nr. <?= $pomidoras->id ?></div>
         </div>
         <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
+        <div class="agurkas-vnt">Kaina: <?= $pomidoras->priceD() ?></div>
         <button class="btn-israuti" type="submit" name="rautiP" value="<?= $pomidoras->id ?>">Išrauti</button>
     </div>
     <?php endforeach ?>

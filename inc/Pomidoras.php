@@ -10,7 +10,8 @@ class Pomidoras extends Darzove {
         $this->count = 0;
         $photos = array("./photo/pomidoras1.jpg", "./photo/pomidoras2.jpg", "./photo/pomidoras3.jpg");
         $this->photo = $photos[array_rand($photos)];
-        $this->priceE = 1.2;
+        $this->priceE = 1.5;
+        $this->dKursas = 1.21;
     }
 
     public function auga() {
@@ -18,8 +19,14 @@ class Pomidoras extends Darzove {
     }
     public function priceD()
     {
-        $this->priceE = 1.2;
-        return $this->priceE;
+        // $url = file_get_contents("https://free.currconv.com/api/v7/convert?q=eur_usd&compact=ultra&apiKey=fcb8cfbc519ccc63fe6f");
+        // $json = json_decode($url, true);
+        // $rate = implode(" ",$json);
+        // $total = $rate * $amount;
+        // $rounded = round($total,2);
+        $total = $this->priceE * $this->dKursas;
+        $rounded = round($total,2);
+        return $rounded;
     }
     
 }

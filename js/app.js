@@ -190,6 +190,7 @@ buttonSodinti.addEventListener('click', () =>{
     })
     .then(function(response) {
         list.innerHTML = response.data.list;
+        console.log(list);
         errorMsg.innerHTML = '';
     })
     .catch(function(error) {

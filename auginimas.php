@@ -57,13 +57,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
         //auginam agurkus
         elseif (isset($rawData['auginti'])) {
-        
-            $kiekis = 1;
-
-            foreach(range(1, $kiekis) as $_) {
                 $store->augintiAgurkus();
-            }
-        
             
             //pasodine agurkus jungsim buferi
             ob_start();
@@ -117,14 +111,6 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         }
     }
 
-//auginimam visus
-if (isset($_POST['augintiV'])) {
-    $store->augintiAgurkus();
-    $store->augintiPomidorus();
-    $store->augintiMoliugus();
-    Main\App::redirect(auginimas);
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -160,6 +146,7 @@ if (isset($_POST['augintiV'])) {
     <main>
         <h1>Daržovių auginimas</h1>
         <div class="container">
+        <div id="error"></div>
             <form class="form" action="<?= URL.'auginimas' ?>" method="POST">
             <div id="listAuginimas">
             </div>
@@ -170,8 +157,7 @@ if (isset($_POST['augintiV'])) {
             
 
             <div class="sodinti">
-                <input type="hidden" name="kiekis">
-                <button class="btn-auginti" type="button" name="auginti">AUGINTI AGURKUS</button>
+                <button class="btn-auginti auginti" type="button" name="auginti">AUGINTI AGURKUS</button>
                 <button class="btn-auginti" type="button" name="augintiP">AUGINTI POMIDORUS</button>
                 <button class="btn-auginti" type="button" name="augintiM">AUGINTI MOLIŪGUS</button>
                 <button class="btn-auginti" type="button" name="augintiV">AUGINTI VISUS</button>

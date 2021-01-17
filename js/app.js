@@ -2,7 +2,7 @@ const buttonSodinti = document.querySelector('.sodinti #sodintiA');
 const buttonSodintiM = document.querySelector('[name="sodintiM"]');
 const buttonSodintiP = document.querySelector('[name="sodintiP"]');
 const buttonSodintiV = document.querySelector('[name="sodintiV"]');
-const buttonAuginti = document.querySelector('[name="auginti"]');
+const buttonAuginti = document.querySelector('.auginti');
 const buttonIsrauti = document.querySelector('.btn-israuti');
 const list = document.querySelector('#list');
 const listM = document.querySelector('#listM');
@@ -166,25 +166,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// //agurku auginimas
-// buttonAuginti.addEventListener('click', () =>{
-//     const count5 = document.querySelector('[name=kiekis]').value;
-    
+//agurku auginimas
+buttonAuginti.addEventListener('click', () => {
+    axios.post(apiUrlA, {
+        'auginti': 1
+    })
+        .then(function (response) {
+            listAuginimas.innerHTML = response.data.listAuginimas;
+        })
+        .catch(function (error) {
+            errorMsg.innerHTML = error.response.data.msg;
+        });
+});
 
-//     axios.post(apiUrlA, {
-//         kiekis: count5,
-//         auginti:1
-//     })
-//     .then(function(response) {
-//         listAuginimas.innerHTML = response.data.listAuginimas;
-//         errorMsg.innerHTML = '';
-//     })
-//     .catch(function(error) {
-//         errorMsg.innerHTML = error.response.data.msg;
-//     });
-
-    
-// });
 //agurku sodinimas
 buttonSodinti.addEventListener('click', () =>{
     const count = document.querySelector('[name=kiekis]').value;

@@ -14,8 +14,8 @@ class Store {
     {
         $this->fileName = $file;
         if (!file_exists(self::PATH.$this->fileName.'.json')) {
-            file_put_contents(self::PATH.$this->fileName.'.json', json_encode(['obj' => [], 'objP' => [], 'objM' => [],'ID' => 0, 'photo' => '' ])); // pradinis masyvas
-            $this->data = ['obj' => [], 'objP' => [], 'objM' => [],'ID' => 0, 'photo' => '' ];
+            file_put_contents(self::PATH.$this->fileName.'.json', json_encode(['obj' => [], 'objP' => [], 'objM' => [],'ID' => 0, 'priceE' => 1.2 ])); // pradinis masyvas
+            $this->data = ['obj' => [], 'objP' => [], 'objM' => [],'ID' => 0, 'priceE' => 1.2];
         }
         else {
             $this->data = file_get_contents(self::PATH.$this->fileName.'.json'); // nuskaitom faila

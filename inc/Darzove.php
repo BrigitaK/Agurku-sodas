@@ -4,7 +4,7 @@ namespace Main;
 
 abstract class Darzove implements Siltnamis {
 
-    public $id, $count, $photo; 
+    public $id, $count, $photo, $priceE, $dKursas; 
 
   public function __get($propertyName) 
     {
@@ -51,5 +51,6 @@ abstract class Darzove implements Siltnamis {
         $this->count = 0;
     }
     abstract public function auga();
+    abstract public function priceD();
 
 }

@@ -74,8 +74,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
         //auginam pomidorus
         elseif (isset($rawData['augintiP'])) {
-        
-            $kiekis=1;
+    
             $store->augintiPomidorus();
             
             //pasodine agurkus jungsim buferi
@@ -93,8 +92,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
         //auginam moliugus
         elseif (isset($rawData['augintiM'])) {
-        
-            $kiekis=1;
+    
             $store->augintiMoliugus();
             
             //pasodine agurkus jungsim buferi
@@ -158,9 +156,9 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
             <div class="sodinti">
                 <button class="btn-auginti auginti" type="button" name="auginti">AUGINTI AGURKUS</button>
-                <button class="btn-auginti" type="button" name="augintiP">AUGINTI POMIDORUS</button>
-                <button class="btn-auginti" type="button" name="augintiM">AUGINTI MOLIŪGUS</button>
-                <button class="btn-auginti" type="button" name="augintiV">AUGINTI VISUS</button>
+                <button class="btn-auginti augintiP" type="button" name="augintiP">AUGINTI POMIDORUS</button>
+                <button class="btn-auginti augintiM" type="button" name="augintiM">AUGINTI MOLIŪGUS</button>
+                <button class="btn-auginti augintiV" type="button" name="augintiV">AUGINTI VISUS</button>
             </div>
             </form>
         </div>

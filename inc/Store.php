@@ -130,7 +130,7 @@ class Store {
         foreach($this->data['objP'] as $index => $obj)
         {
             $obj = unserialize($obj); 
-            $obj->add($_POST['kiekis'][$obj->id]);
+            $obj->add($obj->auga());
             $obj = serialize($obj); 
             $this->data['objP'][$index] = $obj;
         }
@@ -140,7 +140,7 @@ class Store {
         foreach($this->data['objM'] as $index => $obj)
         {
             $obj = unserialize($obj); 
-            $obj->add($_POST['kiekis'][$obj->id]);
+            $obj->add($obj->auga());
             $obj = serialize($obj); 
             $this->data['objM'][$index] = $obj;
         }

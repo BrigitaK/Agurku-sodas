@@ -6,7 +6,7 @@
                         <div>Moliūgo nr. <?= $moliugas->id ?></div>
                     </div>
                     <div class="agurkas-vnt">Moliūgų: <?= $moliugas->count ?></div>
-                    <h3 class="kiekis" >+<?= $kiekis ?></h3>
+                    <h3 class="kiekis" >+<?=  $moliugas->auga() ?></h3>
                     <input type="hidden" name="kiekis[<?=$moliugas->id ?>]" value="<?= $kiekis ?>">
                 </div>
                 <?php endforeach ?>

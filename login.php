@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-if(isset($_GET['logout'])) {
-    $_SESSION['logged'] = 0;
+if(isset($uri['1']) && $uri['1'] == 'logout') {
     Main\App::redirect(login);
 }
 

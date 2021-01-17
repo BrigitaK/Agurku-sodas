@@ -121,7 +121,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/layout.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" defer integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script><!-- defer nurodo, kad uzsikrautu veliau-->
-    <script src="http://localhost:8888/dashboard/agurkai/agurku-sodas/js/app.js" defer></script> <!-- cia rasyti pilna kelia -->
+    <script src="http://localhost:8888/dashboard/agurkai/agurku-sodas/js/auginimas.js" defer></script> <!-- cia rasyti pilna kelia -->
     <script>const apiUrlA = "http://localhost:8888/dashboard/agurkai/agurku-sodas/auginimas" </script>
     <title>Auginimas</title>
 </head>

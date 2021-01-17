@@ -1,7 +1,10 @@
 <?php
-
-if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
+if(isset($_GET['logout'])) {
+    $_SESSION['logged'] = 0;
     Main\App::redirect(login);
+}
+if(!isset($_SESSION['logged']) || 1 != $_SESSION['logged']) {
+    Main\App::redirect(sodinimas);
 }
 
 $store = new Main\Store('darzoves');

@@ -1,1 +1,5 @@
+<<<<<<< Updated upstream
 {"obj":["O:12:\"Main\\Agurkas\":3:{s:2:\"id\";i:474;s:5:\"count\";i:0;s:5:\"photo\";s:20:\".\/photo\/agurkas2.jpg\";}","O:12:\"Main\\Agurkas\":3:{s:2:\"id\";i:477;s:5:\"count\";i:0;s:5:\"photo\";s:20:\".\/photo\/agurkas1.jpg\";}"],"objP":["O:14:\"Main\\Pomidoras\":3:{s:2:\"id\";i:472;s:5:\"count\";i:0;s:5:\"photo\";s:22:\".\/photo\/pomidoras1.jpg\";}","O:14:\"Main\\Pomidoras\":3:{s:2:\"id\";i:475;s:5:\"count\";i:0;s:5:\"photo\";s:22:\".\/photo\/pomidoras1.jpg\";}"],"objM":["O:13:\"Main\\Moliugas\":3:{s:2:\"id\";i:473;s:5:\"count\";i:0;s:5:\"photo\";s:21:\".\/photo\/moliugas2.jpg\";}","O:13:\"Main\\Moliugas\":3:{s:2:\"id\";i:476;s:5:\"count\";i:0;s:5:\"photo\";s:21:\".\/photo\/moliugas1.jpg\";}"],"ID":477,"photo":""}
+=======
+{"obj":[],"objP":[],"objM":[],"ID":578,"photo":""}
+>>>>>>> Stashed changes

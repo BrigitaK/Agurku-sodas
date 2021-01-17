@@ -22,6 +22,9 @@ class App {
         elseif( $uri[1] == 'login' && 'logout' == $uri[1]){
             include DIR.'/login.php';
         }
+        elseif('login' == $uri[0] && 'logout' == $uri[1]) {
+            include DIR.'/login.php';
+        }
     }
 
     public static function redirect($url)

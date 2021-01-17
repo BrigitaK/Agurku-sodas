@@ -1,12 +1,7 @@
 <?php
 session_start();
 
-<<<<<<< Updated upstream
 if(isset($uri['1']) && $uri['1'] == 'logout') {
-=======
-if(isset($uri[1]) && $uri[1] == 'logout') {
-    $_SESSION['logged'] = 0;
->>>>>>> Stashed changes
     Main\App::redirect(login);
 }
 

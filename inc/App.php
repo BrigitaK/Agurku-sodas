@@ -19,9 +19,6 @@ class App {
         elseif('skynimas' == $uri[0]) {
             include DIR.'/skynimas.php';
         }
-        elseif( $uri[1] == 'login' && 'logout' == $uri[1]){
-            include DIR.'/login.php';
-        }
         elseif('login' == $uri[0] && 'logout' == $uri[1]) {
             include DIR.'/login.php';
         }

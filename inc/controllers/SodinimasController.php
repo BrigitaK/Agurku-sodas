@@ -237,9 +237,10 @@ private $store, $rawData;
     public function rautiM() 
     {
         $this->store->removeM($this->rawData['id']); 
+
         $store = $this->store;//kintamojo perdavimas i views
         ob_start();
-        include DIR.'/views/auginimas/listM.php';
+        include DIR.'/views/sodinimas/listM.php';
         $out = ob_get_contents();
         ob_end_clean();
         $json = ['listM' => $out];

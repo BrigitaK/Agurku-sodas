@@ -14,7 +14,7 @@ const addNewList = () => {
     agurkai.forEach(agurkas => {
         agurkas.querySelector('[type=button]').addEventListener('click', () => {
             const id = agurkas.querySelector('[name=rauti]').value;
-            axios.post(apiUrl+'/rauti/', {
+            axios.post(apiUrl+'/rauti', {
                     id: id,
                 })
                 .then(function(response) {
@@ -33,9 +33,8 @@ const addNewListP = () => {
     pomidorai.forEach(pomidoras => {
         pomidoras.querySelector('[type=button]').addEventListener('click', () => {
             const id = pomidoras.querySelector('[name=rautiP]').value;
-            axios.post(apiUrl, {
+            axios.post(apiUrl+'/rautiP', {
                     id: id,
-                    rautiP: 1
                 })
                 .then(function(response) {
                     listP.innerHTML = response.data.listP;
@@ -54,9 +53,8 @@ const addNewListM = () => {
     moliugai.forEach(moliugas => {
         moliugas.querySelector('[type=button]').addEventListener('click', () => {
             const id = moliugas.querySelector('[name=rautiM]').value;
-            axios.post(apiUrl, {
+            axios.post(apiUrl+'/rautiM', {
                     id: id,
-                    rautiM: 1
                 })
                 .then(function(response) {
                     listM.innerHTML = response.data.listM;
@@ -71,7 +69,7 @@ const addNewListM = () => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.post(apiUrl+'/list/', {
+    axios.post(apiUrl+'/list', {
         })
         .then(function(response) {
             list.innerHTML = response.data.list;
@@ -88,8 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.post(apiUrl, {
-            listP: 1,
+    axios.post(apiUrl+'/listP', {
         })
         .then(function(response) {
             listP.innerHTML = response.data.listP;
@@ -103,8 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.post(apiUrl, {
-            listM: 1,
+    axios.post(apiUrl+'/listM', {
         })
         .then(function(response) {
             listM.innerHTML = response.data.listM;
@@ -123,7 +119,7 @@ buttonSodinti.addEventListener('click', () =>{
     const count = document.querySelector('[name=kiekis]').value;
     
 
-    axios.post(apiUrl + '/sodintiA/', {
+    axios.post(apiUrl+'/sodintiA', {
         kiekis: count,
     })
     .then(function(response) {
@@ -142,9 +138,8 @@ buttonSodintiM.addEventListener('click', () =>{
     const count1 = document.querySelector('[name=kiekisM]').value;
     
 
-    axios.post(apiUrl, {
+    axios.post(apiUrl+'/sodintiM', {
         kiekis: count1,
-        sodintiM:1
     })
     .then(function(response) {
         listM.innerHTML = response.data.listM;
@@ -155,9 +150,8 @@ buttonSodintiP.addEventListener('click', () =>{
     const count2 = document.querySelector('[name=kiekisP]').value;
     
 
-    axios.post(apiUrl, {
+    axios.post(apiUrl+'/sodintiP', {
         kiekis: count2,
-        sodintiP:1
     })
     .then(function(response) {
         listP.innerHTML = response.data.listP;
@@ -168,9 +162,8 @@ buttonSodintiV.addEventListener('click', () =>{
     const count3 = document.querySelector('[name=kiekisV]').value;
     
 
-    axios.post(apiUrl, {
+    axios.post(apiUrl+'/sodintiV', {
         kiekis: count3,
-        sodintiV:1
     })
     .then(function(response) {
         listV.innerHTML = response.data.listV;

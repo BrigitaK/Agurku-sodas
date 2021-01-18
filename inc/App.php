@@ -24,8 +24,32 @@ class App {
             if('sodintiA' == $uri[1]) {
                 return (new SodinimasController)->sodintiA();
             }
+            if('listM' == $uri[1]) {
+                return (new SodinimasController)->listM();
+            }
+            if('rautiM' == $uri[1]) {
+                return (new SodinimasController)->rautiM();
+            }
+            if('sodintiM' == $uri[1]) {
+                return (new SodinimasController)->sodintiM();
+            }
+            if('listP' == $uri[1]) {
+                return (new SodinimasController)->listP();
+            }
+            if('rautiP' == $uri[1]) {
+                return (new SodinimasController)->rautiP();
+            }
+            if('sodintiP' == $uri[1]) {
+                return (new SodinimasController)->sodintiP();
+            }
+            if('listV' == $uri[1]) {
+                return (new SodinimasController)->listV();
+            }
+            if('sodintiV' == $uri[1]) {
+                return (new SodinimasController)->sodintiV();
+            }
             //gera vieta prideti 404 psl
-            
+
         }
         elseif('auginimas' == $uri[0]) {
             include DIR.'/auginimas.php';

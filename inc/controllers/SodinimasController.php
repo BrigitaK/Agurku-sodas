@@ -2,7 +2,7 @@
 
 
 namespace Main\Controllers;
-use Main\App, Main\Store;
+use Main\App, Main\Store, Main\Agurkas, Main\Pomidoras, Main\Moliugas;
 
 class SodinimasController {
 
@@ -33,7 +33,9 @@ private $store, $rawData;
     //listo scenarijus
     public function list()
     {
-        ob_start();
+        //kreipiames i views ir perduodam kintamuosius
+            $store = $this->store;//kintamojo perdavimas i views
+            ob_start();
             include DIR.'/views/sodinimas/list.php';
             $out = ob_get_contents();
             ob_end_clean();
@@ -47,7 +49,9 @@ private $store, $rawData;
      //listo scenarijus
      public function listM() 
      {
-        ob_start();
+        //kreipiames i views ir perduodam kintamuosius
+            $store = $this->store;//kintamojo perdavimas i views
+            ob_start();
             include DIR.'/views/sodinimas/listM.php';
             $out = ob_get_contents();
             ob_end_clean();
@@ -61,7 +65,9 @@ private $store, $rawData;
         //listo scenarijus
     public function listP() 
     {
-        ob_start();
+        //kreipiames i views ir perduodam kintamuosius
+            $store = $this->store; //kintamojo perdavimas i views
+            ob_start();
             include DIR.'/views/sodinimas/listP.php';
             $out = ob_get_contents();
             ob_end_clean();
@@ -99,10 +105,11 @@ private $store, $rawData;
         }
 
         foreach(range(1, $kiekis) as $_) {
-            $agurkoObj = new Main\Agurkas($this->store->getNewId());
+            $agurkoObj = new Agurkas($this->store->getNewId());
             $this->store->addNew($agurkoObj);
         }
         //pasodine agurkus jungsim buferi
+        $store = $this->store;//kintamojo perdavimas i views
         ob_start();
         include DIR.'/views/sodinimas/list.php';//liepsiu listui sugeneruoti nauja sarasa
         $out = ob_get_contents();//viskas subegs i buferi
@@ -122,10 +129,11 @@ private $store, $rawData;
         $kiekis = 1;
 
         foreach(range(1, $kiekis) as $_) {
-            $moliugoObj = new Main\Moliugas($store->getNewId());
+            $moliugoObj = new Moliugas($this->store->getNewId());
             $this->store->addNewM($moliugoObj);
         }
         //pasodine agurkus jungsim buferi
+        $store = $this->store;//kintamojo perdavimas i views
         ob_start();
         include DIR.'/views/sodinimas/listM.php';//liepsiu listau sugeneruoti nauja sarasa
         $out = ob_get_contents();//viskas subegs i buferi
@@ -144,10 +152,11 @@ private $store, $rawData;
         $kiekis = 1;
 
         foreach(range(1, $kiekis) as $_) {
-            $pomidoroObj = new Main\Pomidoras($this->store->getNewId());
+            $pomidoroObj = new Pomidoras($this->store->getNewId());
             $this->store->addNewP($pomidoroObj);
         }
         //pasodine agurkus jungsim buferi
+        $store = $this->store;//kintamojo perdavimas i views
         ob_start();
         include DIR.'/views/sodinimas/listP.php';//liepsiu listau sugeneruoti nauja sarasa
         $out = ob_get_contents();//viskas subegs i buferi
@@ -165,14 +174,15 @@ private $store, $rawData;
         $kiekis = 1;
 
         foreach(range(1, $kiekis) as $_) {
-            $pomidoroObj = new Main\Pomidoras($this->store->getNewId());
+            $pomidoroObj = new Pomidoras($this->store->getNewId());
             $this->store->addNewP($pomidoroObj);
-            $moliugoObj = new Main\Moliugas($this->store->getNewId());
+            $moliugoObj = new Moliugas($this->store->getNewId());
             $this->store->addNewM($moliugoObj);
-            $agurkoObj = new Main\Agurkas($this->store->getNewId());
+            $agurkoObj = new Agurkas($this->store->getNewId());
             $this->store->addNew($agurkoObj);
         }
         //pasodine agurkus jungsim buferi
+        $store = $this->store;//kintamojo perdavimas i views
         ob_start();
         include DIR.'/views/sodinimas/listV.php';//liepsiu listau sugeneruoti nauja sarasa
         $out = ob_get_contents();//viskas subegs i buferi
@@ -192,6 +202,7 @@ private $store, $rawData;
         //$this->store->remove($rawData['rauti']); //persiduodam rauti per id
         $this->store->remove($this->rawData['id']); 
 
+        $store = $this->store;//kintamojo perdavimas i views
         ob_start();
         include DIR.'/views/sodinimas/list.php';//liepsiu listau sugeneruoti nauja sarasa
         $out = ob_get_contents();//viskas subegs i buferi
@@ -209,6 +220,7 @@ private $store, $rawData;
     {
         $this->store->removeP($this->rawData['id']); 
 
+        $store = $this->store;//kintamojo perdavimas i views
         ob_start();
         include DIR.'/views/sodinimas/listP.php';//liepsiu listau sugeneruoti nauja sarasa
         $out = ob_get_contents();//viskas subegs i buferi
@@ -225,6 +237,7 @@ private $store, $rawData;
     public function rautiM() 
     {
         $this->store->removeM($this->rawData['id']); 
+        $store = $this->store;//kintamojo perdavimas i views
         ob_start();
         include DIR.'/views/auginimas/listM.php';
         $out = ob_get_contents();

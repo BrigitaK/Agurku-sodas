@@ -2,9 +2,16 @@
 
 namespace Main;
 
+use Symfony\Component\HttpFoundation\Exception;
 use Main\Controllers\SodinimasController;
 
 class App {
+
+    public static $request;
+
+    public static function start() {
+        self::$request = Request::createFromGlobals();
+    }
 
     public static function route() {
 

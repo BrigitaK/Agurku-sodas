@@ -2,6 +2,7 @@
 
 namespace Main;
 
+use Main\Controllers\SodinimasController;
 
 class App {
 
@@ -11,7 +12,20 @@ class App {
         $uri = explode ('/', $uri);
 
         if('sodinimas' == $uri[0]) {
-            include DIR.'/sodinimas.php';
+            if(!isset($uri[1])) {
+                return (new SodinimasController)->index();
+            }
+            if('list' == $uri[1]) {
+            return (new SodinimasController)->list();
+            }
+            if('rauti' == $uri[1]) {
+                return (new SodinimasController)->rauti();
+            }
+            if('sodintiA' == $uri[1]) {
+                return (new SodinimasController)->sodintiA();
+            }
+            //gera vieta prideti 404 psl
+            
         }
         elseif('auginimas' == $uri[0]) {
             include DIR.'/auginimas.php';

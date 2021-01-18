@@ -12,7 +12,8 @@
             "Cucumber\\": "inc",
             "Pumpkin\\": "inc",
             "Vegetables\\": "inc",
-            "Greenhouse\\": "inc"
+            "Greenhouse\\": "inc",
+            "Main\\Controllers": "inc/controllers"
         }
     }
 }

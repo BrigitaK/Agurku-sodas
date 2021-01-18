@@ -14,9 +14,8 @@ const addNewList = () => {
     agurkai.forEach(agurkas => {
         agurkas.querySelector('[type=button]').addEventListener('click', () => {
             const id = agurkas.querySelector('[name=rauti]').value;
-            axios.post(apiUrl, {
+            axios.post(apiUrl+'/rauti/', {
                     id: id,
-                    rauti: 1
                 })
                 .then(function(response) {
                     list.innerHTML = response.data.list;
@@ -72,8 +71,7 @@ const addNewListM = () => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.post(apiUrl, {
-            list: 1,
+    axios.post(apiUrl+'/list/', {
         })
         .then(function(response) {
             list.innerHTML = response.data.list;
@@ -125,9 +123,8 @@ buttonSodinti.addEventListener('click', () =>{
     const count = document.querySelector('[name=kiekis]').value;
     
 
-    axios.post(apiUrl, {
+    axios.post(apiUrl + '/sodintiA/', {
         kiekis: count,
-        sodintiA:1
     })
     .then(function(response) {
         list.innerHTML = response.data.list;

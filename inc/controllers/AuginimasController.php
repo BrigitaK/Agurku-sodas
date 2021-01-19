@@ -35,7 +35,7 @@ class AuginimasController {
     {
         $store = $this->store;//kintamojo perdavimas i views
             ob_start();
-            include __DIR__.'/views/auginimas/listAuginimas.php';
+            include DIR.'/views/auginimas/listAuginimas.php';
             $out = ob_get_contents();
             ob_end_clean();
             $json = ['listAuginimas' => $out];
@@ -51,7 +51,7 @@ class AuginimasController {
     {
         $store = $this->store;//kintamojo perdavimas i views
         ob_start();
-        include __DIR__.'/views/auginimas/listAuginimasM.php';
+        include DIR.'/views/auginimas/listAuginimasM.php';
         $out = ob_get_contents();
         ob_end_clean();
         $json = ['listAuginimasM' => $out];
@@ -67,7 +67,7 @@ class AuginimasController {
     {
         $store = $this->store;//kintamojo perdavimas i views
         ob_start();
-        include __DIR__.'/views/auginimas/listAuginimasP.php';
+        include DIR.'/views/auginimas/listAuginimasP.php';
         $out = ob_get_contents();
         ob_end_clean();
         $json = ['listAuginimasP' => $out];
@@ -87,7 +87,7 @@ class AuginimasController {
             //pasodine agurkus jungsim buferi
             $store = $this->store;//kintamojo perdavimas i views
             ob_start();
-            include __DIR__.'/views/auginimas/listAuginimas.php';//liepsiu listau sugeneruoti nauja sarasa
+            include DIR.'/views/auginimas/listAuginimas.php';//liepsiu listau sugeneruoti nauja sarasa
             $out = ob_get_contents();//viskas subegs i buferi
             ob_end_clean();
             $json = ['listAuginimas' => $out];//issiusime agurku lista
@@ -107,7 +107,7 @@ class AuginimasController {
             //pasodine agurkus jungsim buferi
             $store = $this->store;//kintamojo perdavimas i views
             ob_start();
-            include __DIR__.'/views/auginimas/listAuginimasP.php';//liepsiu listau sugeneruoti nauja sarasa
+            include DIR.'/views/auginimas/listAuginimasP.php';//liepsiu listau sugeneruoti nauja sarasa
             $out = ob_get_contents();//viskas subegs i buferi
             ob_end_clean();
             $json = ['listAuginimasP' => $out];//issiusime agurku lista
@@ -126,7 +126,7 @@ class AuginimasController {
             //pasodine agurkus jungsim buferi
             $store = $this->store;//kintamojo perdavimas i views
             ob_start();
-            include __DIR__.'/views/auginimas/listAuginimasM.php';//liepsiu listau sugeneruoti nauja sarasa
+            include DIR.'/views/auginimas/listAuginimasM.php';//liepsiu listau sugeneruoti nauja sarasa
             $out = ob_get_contents();//viskas subegs i buferi
             ob_end_clean();
             $json = ['listAuginimasM' => $out];//issiusime agurku lista

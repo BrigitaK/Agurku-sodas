@@ -8,8 +8,7 @@ const listAuginimasM = document.querySelector('#listAuginimasM');
 const errorMsg = document.querySelector('#error');
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.post(apiUrlA, {
-            listAuginimas: 1,
+    axios.post(apiUrlA+'/listAuginimas', {
         })
         .then(function(response) {
             listAuginimas.innerHTML = response.data.listAuginimas;
@@ -22,8 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.post(apiUrlA, {
-            listAuginimasM: 1,
+    axios.post(apiUrlA+'/listAuginimasM', {
         })
         .then(function(response) {
             listAuginimasM.innerHTML = response.data.listAuginimasM;
@@ -36,8 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.post(apiUrlA, {
-            listAuginimasP: 1,
+    axios.post(apiUrlA+'/listAuginimasP', {
         })
         .then(function(response) {
             listAuginimasP.innerHTML = response.data.listAuginimasP;
@@ -52,8 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //agurku auginimas
 buttonAuginti.addEventListener('click', () => {
-    axios.post(apiUrlA, {
-        'auginti': 1
+    axios.post(apiUrlA+'/auginti', {
     })
         .then(function (response) {
             listAuginimas.innerHTML = response.data.listAuginimas;
@@ -66,8 +62,7 @@ buttonAuginti.addEventListener('click', () => {
 
 //pomidoru auginimas
 buttonAugintiP.addEventListener('click', () => {
-    axios.post(apiUrlA, {
-        'augintiP': 1
+    axios.post(apiUrlA+'/augintiP', {
     })
         .then(function (response) {
             listAuginimasP.innerHTML = response.data.listAuginimasP;
@@ -80,8 +75,7 @@ buttonAugintiP.addEventListener('click', () => {
 
 //moliugu auginimas
 buttonAugintiM.addEventListener('click', () => {
-    axios.post(apiUrlA, {
-        'augintiM': 1
+    axios.post(apiUrlA+'/augintiM', {
     })
         .then(function (response) {
             listAuginimasM.innerHTML = response.data.listAuginimasM;

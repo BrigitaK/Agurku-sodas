@@ -3,6 +3,7 @@
 namespace Main;
 
 use Main\Controllers\SodinimasController;
+use Main\Controllers\AuginimasController;
 use Symfony\Component\HttpFoundation\Exception;
 
 class App {
@@ -59,7 +60,30 @@ class App {
 
         }
         elseif('auginimas' == $uri[0]) {
-            include DIR.'/auginimas.php';
+            if(!isset($uri[1])) {
+                return (new AuginimasController)->index();
+            }
+            if('listAuginimas' == $uri[1]) {
+            return (new AuginimasController)->listAuginimas();
+            }
+            if('listAuginimasM' == $uri[1]) {
+                return (new AuginimasController)->listAuginimasM();
+            }
+            if('listAuginimasP' == $uri[1]) {
+                return (new AuginimasController)->listAuginimasP();
+            }
+            if('auginti' == $uri[1]) {
+                return (new AuginimasController)->auginti();
+            }
+            if('augintiM' == $uri[1]) {
+                return (new AuginimasController)->augintiM();
+            }
+            if('augintiP' == $uri[1]) {
+                return (new AuginimasController)->augintiP();
+            }
+
+            //gera vieta prideti 404 psl
+
         }
         elseif('skynimas' == $uri[0]) {
             include DIR.'/skynimas.php';

@@ -4,6 +4,7 @@ namespace Main;
 
 use Main\Controllers\SodinimasController;
 use Main\Controllers\AuginimasController;
+use Main\Controllers\SkynimasController;
 use Symfony\Component\HttpFoundation\Exception;
 
 class App {
@@ -86,7 +87,51 @@ class App {
 
         }
         elseif('skynimas' == $uri[0]) {
-            include DIR.'/skynimas.php';
+            if(!isset($uri[1])) {
+                return (new SkynimasController)->index();
+            }
+            if('listSkynimas' == $uri[1]) {
+            return (new SkynimasController)->listSkynimas();
+            }
+            if('listSkynimasM' == $uri[1]) {
+                return (new SkynimasController)->listSkynimasM();
+            }
+            if('listSkynimasP' == $uri[1]) {
+                return (new SkynimasController)->listSkynimasP();
+            }
+            if('skintiA' == $uri[1]) {
+                return (new SkynimasController)->skintiA();
+            }
+            if('skintiM' == $uri[1]) {
+                return (new SkynimasController)->skintiM();
+            }
+            if('skintiP' == $uri[1]) {
+                return (new SkynimasController)->skintiP();
+            }
+            if('skintiVisusA' == $uri[1]) {
+                return (new SkynimasController)->skintiVisusA();
+            }
+            if('skintiVisusP' == $uri[1]) {
+                return (new SkynimasController)->skintiVisusP();
+            }
+            if('skintiVisusM' == $uri[1]) {
+                return (new SkynimasController)->skintiVisusM();
+            }
+            if('skynimas' == $uri[1]) {
+                return (new SkynimasController)->skynimas();
+            }
+            if('skynimasM' == $uri[1]) {
+                return (new SkynimasController)->skynimasM();
+            }
+            if('skynimasP' == $uri[1]) {
+                return (new SkynimasController)->skynimasP();
+            }
+            if('skynimasV' == $uri[1]) {
+                return (new SkynimasController)->skynimasV();
+            }
+
+            //gera vieta prideti 404 psl
+
         }
         elseif('login' == $uri[0]) {
             include DIR.'/login.php';

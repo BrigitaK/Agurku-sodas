@@ -6,7 +6,7 @@
         <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
     </div>
     <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>
-    <h3 class="kiekis" >+<?= $agurkas->auga()?></h3>
+    <h3 class="kiekis" >+<?= $kiekis?></h3>
     <input type="hidden" id="kiekis" name="kiekis[<?=$agurkas->id ?>]" value="<?= $kiekis ?>">
 </div>
 <?php endforeach ?>

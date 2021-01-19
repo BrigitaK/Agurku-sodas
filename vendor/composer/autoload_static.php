@@ -7,7 +7,12 @@ namespace Composer\Autoload;
 class ComposerStaticInitfbd64d612669aa19cc82bb317508bfc0
 {
     public static $files = array (
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
     );
 
@@ -22,8 +27,14 @@ class ComposerStaticInitfbd64d612669aa19cc82bb317508bfc0
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Polyfill\\Php72\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
+            'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
-            'Sodas\\' => 6,
+            'Symfony\\Component\\Mime\\' => 23,
+            'Symfony\\Component\\HttpFoundation\\' => 33,
         ),
         'R' => 
         array (
@@ -35,6 +46,7 @@ class ComposerStaticInitfbd64d612669aa19cc82bb317508bfc0
         ),
         'M' => 
         array (
+            'Main\\Controllers\\' => 17,
             'Main\\' => 5,
         ),
         'G' => 
@@ -56,13 +68,37 @@ class ComposerStaticInitfbd64d612669aa19cc82bb317508bfc0
         array (
             0 => __DIR__ . '/../..' . '/inc',
         ),
+        'Symfony\\Polyfill\\Php80\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Symfony\\Polyfill\\Php72\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
+        ),
+        'Symfony\\Polyfill\\Intl\\Idn\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
+        ),
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Sodas\\' => 
+        'Symfony\\Component\\Mime\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/class',
+            0 => __DIR__ . '/..' . '/symfony/mime',
+        ),
+        'Symfony\\Component\\HttpFoundation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/http-foundation',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -71,6 +107,10 @@ class ComposerStaticInitfbd64d612669aa19cc82bb317508bfc0
         'Pumpkin\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc',
+        ),
+        'Main\\Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/inc/controllers',
         ),
         'Main\\' => 
         array (
@@ -87,7 +127,12 @@ class ComposerStaticInitfbd64d612669aa19cc82bb317508bfc0
     );
 
     public static $classMap = array (
+        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

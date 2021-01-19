@@ -2,8 +2,8 @@
 
 namespace Main;
 
-use Symfony\Component\HttpFoundation\Exception;
 use Main\Controllers\SodinimasController;
+use Symfony\Component\HttpFoundation\Exception;
 
 class App {
 

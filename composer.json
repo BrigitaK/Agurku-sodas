@@ -3,7 +3,8 @@
     "description": "Darzoviu sodas",
     "license": "MIT",
     "require": {
-        "ramsey/uuid": "^3.9"
+        "ramsey/uuid": "^3.9",
+        "symfony/http-foundation": "^4.4"
     },
     "autoload": {
         "psr-4": {
@@ -13,7 +14,7 @@
             "Pumpkin\\": "inc",
             "Vegetables\\": "inc",
             "Greenhouse\\": "inc",
-            "Main\\Controllers": "inc/controllers"
+            "Main\\Controllers\\": "inc/controllers"
         }
     }
 }

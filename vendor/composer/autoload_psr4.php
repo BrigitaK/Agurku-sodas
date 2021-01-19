@@ -18,7 +18,7 @@ return array(
     'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Pumpkin\\' => array($baseDir . '/inc'),
-    'Main\\Controllers' => array($baseDir . '/inc/controllers'),
+    'Main\\Controllers\\' => array($baseDir . '/inc/controllers'),
     'Main\\' => array($baseDir . '/inc'),
     'Greenhouse\\' => array($baseDir . '/inc'),
     'Cucumber\\' => array($baseDir . '/inc'),

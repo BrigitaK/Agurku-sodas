@@ -16,41 +16,48 @@ $options = [
      
 $pdo = new PDO($dsn, $user, $pass, $options);
 
-//RASYMAS
-//irasom uzklausa
-$sql = "INSERT INTO `products` (`type`, `name`, `price`)
-VALUES (1, 'Pomidoras', 8.78)"; //duomenys surasomi viengubose kabutese
-//issiunciam i db
-$pdo->query($sql);
 
-//REDAGAVIMAS
-$sql = "UPDATE products
-SET price=0.36
-WHERE `name`='Agurkas';";
-//siunciam i db
-$pdo->query($sql);
 
-//TRYNIMAS, visos eilutes istrynimas
-$sql = "DELETE FROM products
-WHERE `name`='Pomidoras';";
-//siunciam i db
-$pdo->query($sql);
+//SKAITYMAS 
+//paprasom kad viska parodytu
+// $sql = "SELECT *
+// FROM customers
+// INNER JOIN products
+// ON customers.id = products.customer_id;";
 
+// $sql = "SELECT customers.id as customer_id,
+//  customers.name as customer_name,
+//  surname,
+//  products.id as product_id,
+//  `type`,
+// products.name as vegetable
+// FROM customers
+// LEFT JOIN products
+// ON customers.id = products.customer_id
+// WHERE customers.name = 'Jonas';"; //gali buti inner, left, right join
+// //ORDER BY customers.name pagal ka surikiuoti
+// $stmt = $pdo->query($sql);//db atsakymas, steitmentas
+
+// //kas steitmente yra, kreipiames i fetch
+// $masyvas = [];
+// //paprasom, kad db pasakytu viska
+// while ($row = $stmt->fetch())
+// {
+//     $masyvas[] = $row;
+// }
 
 //SKAITYMAS
-//paprasom kad viska parodytu
-//$sql = "SELECT `id`, `type`, `name`, `price` FROM `products`;";
-//kai noriu kad parodytu tik 2 tipo
-$sql = "SELECT `id`, `type`, `name`, `price` FROM `products`
-WHERE `type` <> 1
-ORDER BY price DESC;"; //nelygus <>, lygus = , OR, AND, price DESC atvirksciai
+$sql = "SELECT *
 
+FROM authors
+LEFT JOIN connections
+ON authors.id = connections.author_id
+LEFT JOIN books
+ON books.id = connections.book_id;";
 $stmt = $pdo->query($sql);//db atsakymas, steitmentas
 
 //kas steitmente yra, kreipiames i fetch
 $masyvas = [];
-
-
 //paprasom, kad db pasakytu viska
 while ($row = $stmt->fetch())
 {

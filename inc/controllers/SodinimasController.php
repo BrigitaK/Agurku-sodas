@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Main\Controllers;
 use Main\App, Main\Store, Main\Agurkas, Main\Pomidoras, Main\Moliugas;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +11,7 @@ private $store, $rawData;
 
     public function __construct() {
         if('POST' === $_SERVER['REQUEST_METHOD']){
-            $this->store = new Store('darzoves');
+            $this->store = App::store('darzoves');
            // $this->rawData = file_get_contents("php://input");
             $this->rawData = App::$request->getContent(); //symfony
             $this->rawData = json_decode($this->rawData, 1);
@@ -57,7 +56,7 @@ private $store, $rawData;
     public function list()
     {
         //kreipiames i views ir perduodam kintamuosius
-            $store = new Store('darzoves');//kintamojo perdavimas i views
+            $store = $this->store;//kintamojo perdavimas i views
             ob_start();
             include DIR.'/views/sodinimas/list.php';
             $out = ob_get_contents();

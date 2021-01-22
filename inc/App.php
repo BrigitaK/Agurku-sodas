@@ -11,12 +11,25 @@ class App {
 
     public static $request;
 
+    private static $storeSetting = 'json'; // json OR db
+
     public static function start()
     {
         self::$request = Request::createFromGlobals();
     
         return self::route();
     }
+
+    public static function store($type) // <---- factory
+{    
+    if ('json' == self::$storeSetting) {
+        return new JsonStore($type);
+    }
+    if ('db' == self::$storeSetting) {
+        return new DbStore($type);
+    }
+    
+}
 
     public static function route() {
 

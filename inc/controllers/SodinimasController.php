@@ -3,6 +3,8 @@
 
 namespace Main\Controllers;
 use Main\App, Main\Store, Main\Agurkas, Main\Pomidoras, Main\Moliugas;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SodinimasController {
 
@@ -11,7 +13,8 @@ private $store, $rawData;
     public function __construct() {
         if('POST' === $_SERVER['REQUEST_METHOD']){
             $this->store = new Store('darzoves');
-            $this->rawData = file_get_contents("php://input");
+           // $this->rawData = file_get_contents("php://input");
+            $this->rawData = App::$request->getContent(); //symfony
             $this->rawData = json_decode($this->rawData, 1);
         }
     }
@@ -26,25 +29,45 @@ private $store, $rawData;
         }
     }
     //sodinimo puslapio rodymo scenarijus
+    // public function index()
+    // {
+    //     include DIR.'/views/sodinimas/index.php';
+    // }
+
     public function index()
     {
+        $response = new Response(
+            'Content',
+            200,
+            ['content-type' => 'text/html']
+        );
+        ob_start();
         include DIR.'/views/sodinimas/index.php';
+        $out = ob_get_contents();
+        ob_end_clean();
+        
+        $response->setContent($out);
+        $response->prepare(App::$request);
+
+        return $response;
+        
     }
+    
     //listo scenarijus
     public function list()
     {
         //kreipiames i views ir perduodam kintamuosius
-            $store = $this->store;//kintamojo perdavimas i views
+            $store = new Store('darzoves');//kintamojo perdavimas i views
             ob_start();
             include DIR.'/views/sodinimas/list.php';
             $out = ob_get_contents();
             ob_end_clean();
+
             $json = ['list' => $out];
-            $json = json_encode($json);
-            header('Content-type: application/json');
-            http_response_code(200);
-            echo $json;
-            die;
+            $response = new JsonResponse($json); // <---JSON responsas
+            
+            $response->prepare(App::$request);
+            return $response;
     }
      //listo scenarijus
      public function listM() 
@@ -56,11 +79,11 @@ private $store, $rawData;
             $out = ob_get_contents();
             ob_end_clean();
             $json = ['listM' => $out];
-            $json = json_encode($json);
-            header('Content-type: application/json');
-            http_response_code(200);
-            echo $json;
-            die;
+            
+            $response = new JsonResponse($json); // <---JSON responsas
+            
+            $response->prepare(App::$request);
+            return $response;
     }
         //listo scenarijus
     public function listP() 
@@ -72,11 +95,11 @@ private $store, $rawData;
             $out = ob_get_contents();
             ob_end_clean();
             $json = ['listP' => $out];
-            $json = json_encode($json);
-            header('Content-type: application/json');
-            http_response_code(200);
-            echo $json;
-            die;
+           
+            $response = new JsonResponse($json); // <---JSON responsas
+            
+            $response->prepare(App::$request);
+            return $response;
     }
       
 //agurku sodinimo scenarijus

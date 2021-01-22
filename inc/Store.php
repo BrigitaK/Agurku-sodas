@@ -3,7 +3,7 @@
 namespace Main;
 
 
-class JsonStore {
+class Store {
 
     private const PATH = DIR.'/data/';
 

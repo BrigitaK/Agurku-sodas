@@ -5,29 +5,17 @@ namespace Main;
 use Main\Controllers\SodinimasController;
 use Main\Controllers\AuginimasController;
 use Main\Controllers\SkynimasController;
-use Symfony\Component\HttpFoundation\Exception;
+use Symfony\Component\HttpFoundation\Request;
 
 class App {
 
-    private static $storeSetting = 'json';//json arba db
-
     public static $request;
 
-    public static function store($tyoe) //factory, gamins objektus
-    {
-        if('json' == self::$storeSetting)
-        {
-            return new JsonStore($type);
-        }
-        if('db' == self::$storeSetting)
-        {
-            return new DbStore($type);
-        }
-    }
-
-    public static function start() 
+    public static function start()
     {
         self::$request = Request::createFromGlobals();
+    
+        return self::route();
     }
 
     public static function route() {

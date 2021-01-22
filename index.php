@@ -8,6 +8,5 @@ define('DIR', __DIR__);
 
 include __DIR__.'/bootstrap.php';
 
-//App::start();
-App::route();
+App::start()->send();
 

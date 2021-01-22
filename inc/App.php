@@ -9,9 +9,24 @@ use Symfony\Component\HttpFoundation\Exception;
 
 class App {
 
+    private static $storeSetting = 'json';//json arba db
+
     public static $request;
 
-    public static function start() {
+    public static function store($tyoe) //factory, gamins objektus
+    {
+        if('json' == self::$storeSetting)
+        {
+            return new JsonStore($type);
+        }
+        if('db' == self::$storeSetting)
+        {
+            return new DbStore($type);
+        }
+    }
+
+    public static function start() 
+    {
         self::$request = Request::createFromGlobals();
     }
 

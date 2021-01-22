@@ -3,114 +3,143 @@
 namespace Main;
 
 
+use PDO;
+
 class DbStore implements Store{
 
-    private const PATH = DIR.'/data/';
+    private $pdo;
 
-    private $fileName = 'sodas';
-    private $data;
-
-    public function __construct($file)
+    public function __construct($o=null)
     {
-        $this->fileName = $file;
-        if (!file_exists(self::PATH.$this->fileName.'.json')) {
-            file_put_contents(self::PATH.$this->fileName.'.json', json_encode(['obj' => [], 'objP' => [], 'objM' => [],'ID' => 0, 'priceE' => 1.2 ])); // pradinis masyvas
-            $this->data = ['obj' => [], 'objP' => [], 'objM' => [],'ID' => 0, 'priceE' => 1.2];
-        }
-        else {
-            $this->data = file_get_contents(self::PATH.$this->fileName.'.json'); // nuskaitom faila
-            $this->data = json_decode($this->data, 1); // paverciam masyvu
-        }
-    }
-
-    public function __destruct()
-    {
-        file_put_contents(self::PATH.$this->fileName.'.json', json_encode($this->data)); // viska vel uzsaugom faile
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
-    public function getNewId()
-    {
-        return 0;
-    }
-
-    public function addNew(Agurkas $obj)
-    {
-        $this->data['obj'][] = serialize($obj);
-    }
-    public function addNewM(Moliugas $obj)//objektas 
-    {
-        $this->data['objM'][] = serialize($obj);
-    }
-
-    public function addNewP(Pomidoras $obj)//objektas 
-    {
-        $this->data['objP'][] = serialize($obj);
+        $host = 'localhost';
+        $db   = 'darzoviu_baze';
+        $user = 'test';
+        $pass = '123456';
+        $charset = 'utf8mb4';
+        
+        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+        $options = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
+        ];
+             
+        $this->$pdo = new PDO($dsn, $user, $pass, $options);
     }
 
     public function getAll()
     {
-        $all = [];
-        foreach($this->data['obj'] as $obj) {
-            $all[] = unserialize($obj);
+        //SKAITYMAS
+        $sql = "SELECT * FROM darzove
+        ;";
+        $stmt = $this->pdo->query($sql); // saugi
+
+        $agurkuMasyvas = [];
+        while ($row = $stmt->fetch())
+        {
+            if ('agurkas' == $row['type']) {
+                $objA = new Agurkas($row['id']);
+            }
+            $objA->id = $row['id'];
+            $objA->count = $row['count'];
+            $objA->type = $row['type'];
+            $objA->price = $row['price'];
+            $agurkuMasyvas[] = $objA;
         }
-        return $all;
+        return $agurkuMasyvas;
+
     }
+
     public function getAllM()
     {
-        $allM = [];
-        foreach($this->data['objM'] as $obj) {
-            $allM[] = unserialize($obj);
+        //SKAITYMAS
+        $sql = "SELECT * FROM darzove
+        ;";
+        $stmt = $this->pdo->query($sql); // saugi
+
+        $moliuguMasyvas = [];
+        while ($row = $stmt->fetch())
+        {
+            if ('moliugas' == $row['type']) {
+                $objA = new Moliugas($row['id']);
+            }
+            $objA->id = $row['id'];
+            $objA->count = $row['count'];
+            $objA->type = $row['type'];
+            $objA->price = $row['price'];
+            $moliuguMasyvas[] = $objM;
         }
-        return $allM;
+        return $moliuguMasyvas;
+
     }
     public function getAllP()
     {
-        $allP = [];
-        foreach($this->data['objP'] as $obj) {
-            $allP[] = unserialize($obj);
+        //SKAITYMAS
+        $sql = "SELECT * FROM darzove
+        ;";
+        $stmt = $this->pdo->query($sql); // saugi
+
+        $pomidoruMasyvas = [];
+        while ($row = $stmt->fetch())
+        {
+            if ('moliugas' == $row['type']) {
+                $objA = new Moliugas($row['id']);
+            }
+            $objA->id = $row['id'];
+            $objA->count = $row['count'];
+            $objA->type = $row['type'];
+            $objA->price = $row['price'];
+            $pomidoruMasyvas[] = $objP;
         }
-        return $allP;
+        return $pomidoruMasyvas;
+
+    }
+
+    public function getNewId()
+    {
+        return null;
+    }
+
+    public function addNew(Agurkas $obj)
+    {
+        $sql = "INSERT INTO darzove (`count`, `type`, `price`)
+        VALUES ('.$objA->count.', 'agurkas');";
+        $this->pdo->query($sql);
+    }
+    public function addNewM(Moliugas $obj)//objektas 
+    {
+        $sql = "INSERT INTO darzove (`count`, `type`, `price`)
+        VALUES ('.$objM->count.', 'moliugas');";
+        $this->pdo->query($sql);
+    }
+
+    public function addNewP(Pomidoras $obj)//objektas 
+    {
+        $sql = "INSERT INTO darzove (`count`, `type`, `price`)
+        VALUES ('.$objP->count.', 'pomidoras');";
+        $this->pdo->query($sql);
     }
 
 
     public function remove($id)
     {
-        foreach($this->data['obj'] as $index => $obj) {
-            $obj = unserialize($obj);
-            if ($obj->id == $id) {
-                unset($this->data['obj'][$index]);
-            }
-        }
+        $sql = "DELETE FROM darzove
+        WHERE id='".$id."';";
+        $this->pdo->query($sql); // <--- NESAUGU!!!!!!!!!
     }
 
     public function removeM($id)
     {
-        foreach($this->data['objM'] as $index => $obj) {
-            $obj = unserialize($obj);
-            if ($obj->id == $id) {
-                unset($this->data['objM'][$index]);
-            }
-        }
+        $sql = "DELETE FROM darzove
+        WHERE id='".$id."';";
+        $this->pdo->query($sql); // <--- NESAUGU!!!!!!!!!
     }
 
     public function removeP($id)
     {
-        foreach($this->data['objP'] as $index => $obj) {
-            $obj = unserialize($obj);
-            if ($obj->id == $id) {
-                unset($this->data['objP'][$index]);
-            }
-        }
+        $sql = "DELETE FROM darzove
+        WHERE id='".$id."';";
+        $this->pdo->query($sql); // <--- NESAUGU!!!!!!!!!
     }
 
     // public function augintiAgurkus()

@@ -19,17 +19,16 @@ class App {
     
         return self::route();
     }
-
-    public static function store($type) // <---- factory
-{    
-    if ('json' == self::$storeSetting) {
-        return new JsonStore($type);
-    }
-    if ('db' == self::$storeSetting) {
-        return new DbStore($type);
-    }
-    
-}
+      // factory-gamins objektus json arba DB
+      public static function store($type) 
+      {
+          if ('json' == self::$storeSetting) {
+              return new JsonStore($type);
+          }
+          if ('db' == self::$storeSetting) {
+              return new DbStore($type);
+          }
+      }
 
     public static function route() {
 

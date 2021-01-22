@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Main\Controllers;
 use Main\App, Main\Store, Main\Agurkas, Main\Pomidoras, Main\Moliugas;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,17 +56,20 @@ private $store, $rawData;
     //listo scenarijus
     public function list()
     {
+        
         //kreipiames i views ir perduodam kintamuosius
-            $store = $this->store;//kintamojo perdavimas i views
+            $store = App::store('darzoves');//kintamojo perdavimas i views
             ob_start();
             include DIR.'/views/sodinimas/list.php';
             $out = ob_get_contents();
             ob_end_clean();
 
             $json = ['list' => $out];
-            $response = new JsonResponse($json); // <---JSON responsas
-            
+
+            $response = new JsonResponse($json);
+    
             $response->prepare(App::$request);
+    
             return $response;
     }
      //listo scenarijus
@@ -78,10 +82,10 @@ private $store, $rawData;
             $out = ob_get_contents();
             ob_end_clean();
             $json = ['listM' => $out];
-            
-            $response = new JsonResponse($json); // <---JSON responsas
-            
+            $response = new JsonResponse($json);
+    
             $response->prepare(App::$request);
+    
             return $response;
     }
         //listo scenarijus
@@ -94,10 +98,10 @@ private $store, $rawData;
             $out = ob_get_contents();
             ob_end_clean();
             $json = ['listP' => $out];
-           
-            $response = new JsonResponse($json); // <---JSON responsas
-            
+            $response = new JsonResponse($json);
+    
             $response->prepare(App::$request);
+    
             return $response;
     }
       

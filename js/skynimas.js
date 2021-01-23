@@ -1,3 +1,107 @@
+// const buttonHarvestAll = document.querySelector('.skynimas');
+// const listPlace = document.querySelector('#listSkynimas');
+// const errorMsg = document.querySelector('#error');
+// const buttonskinti = document.querySelector('[name="skintiA"]');
+// const buttonskintiP = document.querySelector('skintiP');
+// const buttonskintiM = document.querySelector('skintiM');
+// const buttonskintiVisus = document.querySelector('.skintiVisusA');
+// const buttonskintiVisusP = document.querySelector('.skintiVisusP');
+// const buttonskintiVisusM = document.querySelector('.skintiVisusM');
+// const buttonskynimas = document.querySelector('.skynimasA');
+// const buttonskynimasP = document.querySelector('.skynimasP');
+// const buttonskynimasM = document.querySelector('.skynimasM');
+// const buttonskynimasV = document.querySelector('.skynimasV');
+// const listSkynimas = document.querySelector('#listSkynimas');
+// const listSkynimasP = document.querySelector('#listSkynimasP');
+// const listSkynimasM = document.querySelector('#listSkynimasM');
+// const errorMsg = document.querySelector('#error');
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     axios.post(apiUrl, {
+//         list: 1,
+//     })
+//         .then(function (response) {
+//             console.log(response);
+//             listPlace.innerHTML = response.data.listSkynimas;
+//             harvest();
+//             harvestOne();
+//         })
+//         .catch(function (error) {
+//             console.log(error);
+//             errorMsg.innerHTML = error.response.data.msg;
+//         });
+// })
+
+// const harvestOne = () => {
+//     const darzoves = document.querySelectorAll('.agurkas');
+//     darzoves.forEach(darzove => {
+//         const btn = darzove.querySelector('.skintiVisusA');
+//         if (btn) {
+//             btn.addEventListener('click', () => {
+//                 const id = darzove.querySelector('[name=skintiVisusA]').value;
+//                 axios.post(apiUrl, {
+//                     id: id,
+//                     'skintiVisusA': 1
+//                 })
+//                     .then(function (response) {
+//                         console.log(response);
+//                         listPlace.innerHTML = response.data.listSkynimas;
+//                         harvest();
+//                         harvestOne();
+//                     })
+//                     .catch(function (error) {
+//                         console.log(error);
+//                         errorMsg.innerHTML = error.response.data.msg;
+//                     });
+//             });
+//         }
+//     })
+// }
+
+// const harvest = () => {
+//     const darzoves = document.querySelectorAll('.agurkas');
+//     darzoves.forEach(darzove => {
+//         const btn = darzove.querySelector('.skintiA');
+//         if (btn) {
+//             btn.addEventListener('click', () => {
+//                 const id = darzove.querySelector('[name=skintiA]').value;
+//                 const count = darzove.querySelector('[name=kiekis]').value;
+
+//                 axios.post(apiUrl, {
+//                     id: id,
+//                     'kiek-skinti': count,
+//                     'skintiA': 1
+//                 })
+//                     .then(function (response) {
+//                         console.log(response);
+//                         listPlace.innerHTML = response.data.listSkynimas;
+//                         harvest();
+//                         harvestOne();
+//                     })
+//                     .catch(function (error) {
+//                         console.log(error);
+//                         errorMsg.innerHTML = error.response.data.msg;
+//                     });
+//             });
+//         }
+//     })
+// }
+
+// buttonHarvestAll.addEventListener('click', () => {
+//     axios.post(apiUrl, {
+//         'skynimas': 1
+//     })
+//         .then(function (response) {
+//             console.log(response);
+//             listPlace.innerHTML = response.data.listSkynimas;
+//             harvest();
+//             harvestOne();
+//         })
+//         .catch(function (error) {
+//             console.log(error);
+//             errorMsg.innerHTML = error.response.data.msg;
+//         });
+// });
 const buttonskinti = document.querySelector('[name="skintiA"]');
 const buttonskintiP = document.querySelector('skintiP');
 const buttonskintiM = document.querySelector('skintiM');

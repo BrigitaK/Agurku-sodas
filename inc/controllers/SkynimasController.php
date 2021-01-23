@@ -3,6 +3,8 @@
 
 namespace Main\Controllers;
 use Main\App, Main\Store, Main\Agurkas, Main\Pomidoras, Main\Moliugas;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SkynimasController {
 
@@ -10,7 +12,10 @@ class SkynimasController {
 
     public function __construct() {
         if('POST' === $_SERVER['REQUEST_METHOD']){
-            $this->store = new Store('darzoves');
+            $this->store = App::store('darzoves');
+           // $this->rawData = file_get_contents("php://input");
+            $this->rawData = App::$request->getContent(); //symfony
+            $this->rawData = json_decode($this->rawData, 1);
         }
     }
 
@@ -27,7 +32,21 @@ class SkynimasController {
      //skynimo puslapio rodymo scenarijus
      public function index()
      {
+         $response = new Response(
+             'Content',
+             200,
+             ['content-type' => 'text/html']
+         );
+         ob_start();
          include DIR.'/views/skynimas/index.php';
+         $out = ob_get_contents();
+         ob_end_clean();
+         
+         $response->setContent($out);
+         $response->prepare(App::$request);
+ 
+         return $response;
+         
      }
 
     //listo scenarijus
@@ -39,11 +58,11 @@ class SkynimasController {
             $out = ob_get_contents();
             ob_end_clean();
             $json = ['listSkynimas' => $out];
-            $json = json_encode($json);
-            header('Content-type: application/json');
-            http_response_code(200);
-            echo $json;
-            die;
+            $response = new JsonResponse($json);
+    
+            $response->prepare(App::$request);
+    
+            return $response;
         
     }
 
@@ -55,11 +74,11 @@ class SkynimasController {
         $out = ob_get_contents();
         ob_end_clean();
         $json = ['listSkynimasM' => $out];
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(200);
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     
     }
 
@@ -71,12 +90,11 @@ class SkynimasController {
         $out = ob_get_contents();
         ob_end_clean();
         $json = ['listSkynimasP' => $out];
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(200);
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
     
+        $response->prepare(App::$request);
+
+        return $response;
     }
 
     //skynimo Agurku scenarijus

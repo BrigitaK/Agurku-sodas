@@ -17,7 +17,8 @@ class Agurkas extends Darzove {
     
 
     public function auga() {
-        return rand(2, 9);
+        $this->kiekAugti = rand(2, 9);
+        return $this->kiekAugti;
     }
 
     public function priceD()

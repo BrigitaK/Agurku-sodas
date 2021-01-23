@@ -2,7 +2,7 @@
 <div class="form-top">
     <div class="agurkas-nr agurkas">
         <img class="agurkas-img" src="<?= $agurkas->photo ?>" alt="photo">
-        <?php $kiekis = $agurkas->auga() ?>
+        <?php $kiekis = $agurkas->kiekAugti ?>
         <div class="name">Agurkas nr. <?= $agurkas->id ?></div>
     </div>
     <div class="agurkas-vnt">Agurkų: <?= $agurkas->count ?></div>

@@ -143,15 +143,14 @@ class DbStore implements Store{
         $this->pdo->query($sql); // <--- NESAUGU!!!!!!!!!
     }
 
+
     // public function augintiAgurkus()
     // {
-    //     foreach($this->data['obj'] as $index => $obj)
-    //     {
-    //         $obj = unserialize($obj); 
-    //         $obj->add($obj->auga());
-    //         $obj = serialize($obj); 
-    //         $this->data['obj'][$index] = $obj;
-    //     }
+    //     $sql = "UPDATE darzove
+    //     SET count=add($obj->kiekAugti)
+    //     WHERE `type`='.agurkas.';";
+    //     //siunciam i db
+    //     $this->pdo->query($sql);
     // }
     // public function augintiPomidorus()
     // {

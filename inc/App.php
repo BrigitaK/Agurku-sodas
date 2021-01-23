@@ -11,7 +11,7 @@ class App {
 
     public static $request;
 
-    private static $storeSetting = 'db'; // json OR db
+    private static $storeSetting = 'json'; // json OR db
 
     public static function start()
     {

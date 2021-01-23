@@ -29,10 +29,23 @@ class AuginimasController {
         }
     }
 
-    //auginimo puslapio rodymo scenarijus
     public function index()
     {
+        $response = new Response(
+            'Content',
+            200,
+            ['content-type' => 'text/html']
+        );
+        ob_start();
         include DIR.'/views/auginimas/index.php';
+        $out = ob_get_contents();
+        ob_end_clean();
+        
+        $response->setContent($out);
+        $response->prepare(App::$request);
+
+        return $response;
+        
     }
         
     //listo scenarijus
@@ -44,11 +57,11 @@ class AuginimasController {
             $out = ob_get_contents();
             ob_end_clean();
             $json = ['listAuginimas' => $out];
-            $json = json_encode($json);
-            header('Content-type: application/json');
-            http_response_code(200);
-            echo $json;
-            die;
+            $response = new JsonResponse($json);
+    
+            $response->prepare(App::$request);
+    
+            return $response;
         
     }
 
@@ -60,11 +73,11 @@ class AuginimasController {
         $out = ob_get_contents();
         ob_end_clean();
         $json = ['listAuginimasM' => $out];
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(200);
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+            $response->prepare(App::$request);
+    
+            return $response;
     
     }
 
@@ -76,11 +89,11 @@ class AuginimasController {
         $out = ob_get_contents();
         ob_end_clean();
         $json = ['listAuginimasP' => $out];
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(200);
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     
     }
 
@@ -96,11 +109,11 @@ class AuginimasController {
             $out = ob_get_contents();//viskas subegs i buferi
             ob_end_clean();
             $json = ['listAuginimas' => $out];//issiusime agurku lista
-            $json = json_encode($json);
-            header('Content-type: application/json');
-            http_response_code(201);//
-            echo $json;
-            die;
+            $response = new JsonResponse($json);
+    
+            $response->prepare(App::$request);
+    
+            return $response;
     }
 
         //auginam pomidorus
@@ -116,11 +129,11 @@ class AuginimasController {
             $out = ob_get_contents();//viskas subegs i buferi
             ob_end_clean();
             $json = ['listAuginimasP' => $out];//issiusime agurku lista
-            $json = json_encode($json);
-            header('Content-type: application/json');
-            http_response_code(201);//
-            echo $json;
-            die;
+            $response = new JsonResponse($json);
+    
+            $response->prepare(App::$request);
+    
+            return $response;
         }
 
         //auginam moliugus
@@ -135,10 +148,10 @@ class AuginimasController {
             $out = ob_get_contents();//viskas subegs i buferi
             ob_end_clean();
             $json = ['listAuginimasM' => $out];//issiusime agurku lista
-            $json = json_encode($json);
-            header('Content-type: application/json');
-            http_response_code(201);//
-            echo $json;
-            die;
+            $response = new JsonResponse($json);
+    
+            $response->prepare(App::$request);
+    
+            return $response;
         }
 }

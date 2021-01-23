@@ -114,7 +114,6 @@ class JsonStore implements Store {
             }
         }
     }
-
     public function augintiAgurkus()
     {
         foreach($this->data['obj'] as $index => $obj)

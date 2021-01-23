@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
             harvestA();
             harvestOneA();
         })
-        .catch(function (error) {
-            console.log(error);
-            errorMsg.innerHTML = error.response.data.msg;
-        });
+        // .catch(function (error) {
+        //     console.log(error);
+        //     errorMsg.innerHTML = error.response.data.msg;
+        // });
 })
 
 const harvestA = () => {

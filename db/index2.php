@@ -45,6 +45,12 @@ $pdo = new PDO($dsn, $user, $pass, $options);
 // {
 //     $masyvas[] = $row;
 // }
+//REDAGAVIMAS
+$sql = "UPDATE darzove
+SET count=5
+WHERE `name`='Agurkas';";
+//siunciam i db
+$pdo->query($sql);
 
 //SKAITYMAS
 $sql = "SELECT * FROM darzove;";

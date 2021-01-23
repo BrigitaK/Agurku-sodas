@@ -41,7 +41,7 @@ $pdo->query($sql);
 //kai noriu kad parodytu tik 2 tipo
 $sql = "SELECT `id`, `type`, `name`, `price` FROM `products`
 WHERE `type` <> 1
-ORDER BY price DESC;"; //nelygus <>, lygus = , OR, AND, price DESC atvirksciai
+ORDER BY price DESC;"; //nelygus <>, lygus = , OR, AND, price DEX
 
 $stmt = $pdo->query($sql);//db atsakymas, steitmentas
 

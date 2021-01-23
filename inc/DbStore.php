@@ -24,7 +24,7 @@ class DbStore implements Store{
             PDO::ATTR_EMULATE_PREPARES   => false,
         ];
              
-        $this->$pdo = new PDO($dsn, $user, $pass, $options);
+        $this->pdo = new PDO($dsn, $user, $pass, $options);
     }
 
     public function getAll()
@@ -38,13 +38,12 @@ class DbStore implements Store{
         while ($row = $stmt->fetch())
         {
             if ('agurkas' == $row['type']) {
-                $objA = new Agurkas($row['id']);
+                $obj = new Agurkas($row['id']);
             }
-            $objA->id = $row['id'];
-            $objA->count = $row['count'];
-            $objA->type = $row['type'];
-            $objA->price = $row['price'];
-            $agurkuMasyvas[] = $objA;
+            $obj->id = $row['id'];
+            $obj->count = $row['count'];
+            $obj->type = $row['type'];
+            $agurkuMasyvas[] = $obj;
         }
         return $agurkuMasyvas;
 
@@ -61,12 +60,12 @@ class DbStore implements Store{
         while ($row = $stmt->fetch())
         {
             if ('moliugas' == $row['type']) {
-                $objA = new Moliugas($row['id']);
+                $objM = new Moliugas($row['id']);
             }
-            $objA->id = $row['id'];
-            $objA->count = $row['count'];
-            $objA->type = $row['type'];
-            $objA->price = $row['price'];
+            $objM->id = $row['id'];
+            $objM->count = $row['count'];
+            $objM->type = $row['type'];
+            $objM->price = $row['price'];
             $moliuguMasyvas[] = $objM;
         }
         return $moliuguMasyvas;
@@ -82,13 +81,13 @@ class DbStore implements Store{
         $pomidoruMasyvas = [];
         while ($row = $stmt->fetch())
         {
-            if ('moliugas' == $row['type']) {
-                $objA = new Moliugas($row['id']);
+            if ('pomidoras' == $row['type']) {
+                $objP = new Pomidoras($row['id']);
             }
-            $objA->id = $row['id'];
-            $objA->count = $row['count'];
-            $objA->type = $row['type'];
-            $objA->price = $row['price'];
+            $objP->id = $row['id'];
+            $objP->count = $row['count'];
+            $objP->type = $row['type'];
+            $objP->price = $row['price'];
             $pomidoruMasyvas[] = $objP;
         }
         return $pomidoruMasyvas;
@@ -102,20 +101,20 @@ class DbStore implements Store{
 
     public function addNew(Agurkas $obj)
     {
-        $sql = "INSERT INTO darzove (`count`, `type`, `price`)
-        VALUES ('.$objA->count.', 'agurkas');";
+        $sql = "INSERT INTO darzove (`count`, `type`)
+        VALUES ('.$obj->count.', 'agurkas');";
         $this->pdo->query($sql);
     }
-    public function addNewM(Moliugas $obj)//objektas 
+    public function addNewM(Moliugas $objM)//objektas 
     {
-        $sql = "INSERT INTO darzove (`count`, `type`, `price`)
+        $sql = "INSERT INTO darzove (`count`, `type`)
         VALUES ('.$objM->count.', 'moliugas');";
         $this->pdo->query($sql);
     }
 
-    public function addNewP(Pomidoras $obj)//objektas 
+    public function addNewP(Pomidoras $objP)//objektas 
     {
-        $sql = "INSERT INTO darzove (`count`, `type`, `price`)
+        $sql = "INSERT INTO darzove (`count`, `type`)
         VALUES ('.$objP->count.', 'pomidoras');";
         $this->pdo->query($sql);
     }

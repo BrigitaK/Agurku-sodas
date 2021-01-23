@@ -47,13 +47,7 @@ $pdo = new PDO($dsn, $user, $pass, $options);
 // }
 
 //SKAITYMAS
-$sql = "SELECT *
-
-FROM authors
-LEFT JOIN connections
-ON authors.id = connections.author_id
-LEFT JOIN books
-ON books.id = connections.book_id;";
+$sql = "SELECT * FROM darzove;";
 $stmt = $pdo->query($sql);//db atsakymas, steitmentas
 
 //kas steitmente yra, kreipiames i fetch

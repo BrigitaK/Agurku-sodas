@@ -76,7 +76,7 @@ private $store, $rawData;
      public function listM() 
      {
         //kreipiames i views ir perduodam kintamuosius
-            $store = $this->store;//kintamojo perdavimas i views
+            $store = App::store('darzoves');//kintamojo perdavimas i views
             ob_start();
             include DIR.'/views/sodinimas/listM.php';
             $out = ob_get_contents();
@@ -92,7 +92,7 @@ private $store, $rawData;
     public function listP() 
     {
         //kreipiames i views ir perduodam kintamuosius
-            $store = $this->store; //kintamojo perdavimas i views
+            $store = App::store('darzoves'); //kintamojo perdavimas i views
             ob_start();
             include DIR.'/views/sodinimas/listP.php';
             $out = ob_get_contents();
@@ -141,11 +141,11 @@ private $store, $rawData;
         $out = ob_get_contents();//viskas subegs i buferi
         ob_end_clean();
         $json = ['list' => $out];//issiusime agurku lista
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(201);//
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     
     }
     //moliugu sodinimas
@@ -165,11 +165,11 @@ private $store, $rawData;
         $out = ob_get_contents();//viskas subegs i buferi
         ob_end_clean();
         $json = ['listM' => $out];//issiusime agurku lista
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(201);//
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
     //pomidoru sodinimas
     public function sodintiP() 
@@ -188,11 +188,11 @@ private $store, $rawData;
         $out = ob_get_contents();//viskas subegs i buferi
         ob_end_clean();
         $json = ['listP' => $out];//issiusime agurku lista
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(201);//
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
     public function sodintiV() 
     {
@@ -214,11 +214,11 @@ private $store, $rawData;
         $out = ob_get_contents();//viskas subegs i buferi
         ob_end_clean();
         $json = ['listV' => $out];//issiusime agurku lista
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(201);//
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+            $response->prepare(App::$request);
+    
+            return $response;
     }
 
     //isrovimo scenarijus
@@ -234,11 +234,11 @@ private $store, $rawData;
         $out = ob_get_contents();//viskas subegs i buferi
         ob_end_clean();
         $json = ['list' => $out];//issiusime agurku lista
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(201);//
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
     //raunam Pomidora
 
@@ -252,11 +252,11 @@ private $store, $rawData;
         $out = ob_get_contents();//viskas subegs i buferi
         ob_end_clean();
         $json = ['listP' => $out];//issiusime agurku lista
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(201);//
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
 
     //raunam moliuga
@@ -270,11 +270,11 @@ private $store, $rawData;
         $out = ob_get_contents();
         ob_end_clean();
         $json = ['listM' => $out];
-        $json = json_encode($json);
-        header('Content-type: application/json');
-        http_response_code(201);
-        echo $json;
-        die;
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
 
 }

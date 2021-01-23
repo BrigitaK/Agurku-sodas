@@ -49,14 +49,14 @@ class JsonStore implements Store {
     {
         $this->data['obj'][] = serialize($obj);
     }
-    public function addNewM(Moliugas $obj)//objektas 
+    public function addNewM(Moliugas $objM)//objektas 
     {
-        $this->data['objM'][] = serialize($obj);
+        $this->data['objM'][] = serialize($objM);
     }
 
-    public function addNewP(Pomidoras $obj)//objektas 
+    public function addNewP(Pomidoras $objP)//objektas 
     {
-        $this->data['objP'][] = serialize($obj);
+        $this->data['objP'][] = serialize($objP);
     }
 
     public function getAll()

@@ -153,32 +153,29 @@ class JsonStore implements Store {
         foreach($this->data['obj'] as $index => $obj){
             $obj = unserialize($obj); 
             if ($obj->id == $id) {
-                if ($obj->count < $kiek) break;
-                $obj->count -= $kiekis;
+                $obj->skinti($kiek);
             $obj = serialize($obj); 
             $this->data['obj'][$index] = $obj;
             }
         }
     }
-    public function skintiPomidorus()
+    public function skintiPomidorus($id, $kiek)
     {
         foreach($this->data['objP'] as $index => $obj){
             $obj = unserialize($obj); 
             if ($obj->id == $id) {
-                if ($obj->count < $kiek) break;
-                $obj->count -= $kiekis;
+                $obj->skinti($kiek);
             $obj = serialize($obj); 
             $this->data['objP'][$index] = $obj;
             }
         }
     }
-    public function skintiMoliugus()
+    public function skintiMoliugus($id, $kiek)
     {
         foreach($this->data['objM'] as $index => $obj){
             $obj = unserialize($obj); 
             if ($obj->id == $id) {
-                if ($obj->count < $kiek) break;
-                $obj->count -= $kiekis;
+                $obj->skinti($kiek);
             $obj = serialize($obj); 
             $this->data['objM'][$index] = $obj;
             }

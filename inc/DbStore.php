@@ -144,23 +144,26 @@ class DbStore implements Store{
     }
 
 
-    // public function augintiAgurkus()
-    // {
-    //     $sql = "UPDATE darzove
-    //     SET count=add($obj->kiekAugti)
-    //     WHERE `type`='.agurkas.';";
-    //     //siunciam i db
-    //     $this->pdo->query($sql);
-    // }
+    public function augintiAgurkus()
+    { 
+
+        $sql = "UPDATE darzove
+        SET count=$kiek
+        WHERE `type`='.agurkas.';";
+        //siunciam i db
+        $this->pdo->query($sql);
+    }
     // public function augintiPomidorus()
     // {
-    //     foreach($this->data['objP'] as $index => $obj)
-    //     {
-    //         $obj = unserialize($obj); 
-    //         $obj->add($obj->auga());
-    //         $obj = serialize($obj); 
-    //         $this->data['objP'][$index] = $obj;
-    //     }
+    //     
+        // foreach($this->data['objP'] as $index => $obj)
+        // {
+        //     $obj = unserialize($obj); 
+        //     $obj->add($obj->kiekAugti);
+        //     $obj->auga();
+        //     $obj = serialize($obj); 
+        //     $this->data['objP'][$index] = $obj;
+        // }
     // }
     // public function augintiMoliugus()
     // {

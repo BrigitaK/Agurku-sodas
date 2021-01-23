@@ -45,7 +45,7 @@ abstract class Darzove implements Siltnamis {
 
     }
 
-    public function skintiVisus($darzoves)
+    public function skintiVisus()
     {
 
         $this->count = 0;

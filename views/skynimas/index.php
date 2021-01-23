@@ -25,6 +25,12 @@
 
         margin-bottom: 15px;
     }
+    #listSkynimas, #listSkynimasP, #listSkynimasM {
+            gap: 35px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+    }
 </style>
 <body>
     <nav>

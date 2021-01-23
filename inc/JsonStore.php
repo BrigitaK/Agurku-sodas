@@ -148,39 +148,48 @@ class JsonStore implements Store {
         }
     }
 
-    public function skintiAgurkus()
+    public function skintiAgurkus($id, $kiek)
     {
         foreach($this->data['obj'] as $index => $obj){
             $obj = unserialize($obj); 
-            $obj->skinti($_POST['kiekis'][$obj->id]);
+            if ($obj->id == $id) {
+                if ($obj->count < $kiek) break;
+                $obj->count -= $kiekis;
             $obj = serialize($obj); 
             $this->data['obj'][$index] = $obj;
+            }
         }
     }
     public function skintiPomidorus()
     {
         foreach($this->data['objP'] as $index => $obj){
             $obj = unserialize($obj); 
-            $obj->skinti($_POST['kiekis'][$obj->id]);
+            if ($obj->id == $id) {
+                if ($obj->count < $kiek) break;
+                $obj->count -= $kiekis;
             $obj = serialize($obj); 
             $this->data['objP'][$index] = $obj;
+            }
         }
     }
     public function skintiMoliugus()
     {
         foreach($this->data['objM'] as $index => $obj){
             $obj = unserialize($obj); 
-            $obj->skinti($_POST['kiekis'][$obj->id]);
+            if ($obj->id == $id) {
+                if ($obj->count < $kiek) break;
+                $obj->count -= $kiekis;
             $obj = serialize($obj); 
             $this->data['objM'][$index] = $obj;
+            }
         }
     }
 
-    public function skintiVisusAgurkus(){
+    public function skintiVisusAgurkus($id){
         foreach($this->data['obj'] as $index => $obj){
             $obj = unserialize($obj); 
-            if ($_POST['skinti-visus'] == $obj->id) {
-                $obj->skintiVisus($_POST['skinti-visus'][$obj->id]);
+            if ($obj->id == $id) {
+                $obj->skintiVisus();
                 $obj = serialize($obj); 
                 $this->data['obj'][$index] = $obj; 
             }
@@ -190,8 +199,8 @@ class JsonStore implements Store {
     public function skintiVisusPomidorus(){
         foreach($this->data['objP'] as $index => $obj){
             $obj = unserialize($obj); 
-            if ($_POST['skinti-visusP'] == $obj->id) {
-                $obj->skintiVisus($_POST['skinti-visus'][$obj->id]);
+            if ($obj->id == $id) {
+                $obj->skintiVisus();
                 $obj = serialize($obj); 
                 $this->data['objP'][$index] = $obj; 
             }
@@ -201,8 +210,8 @@ class JsonStore implements Store {
     public function skintiVisusMoliugus(){
         foreach($this->data['objM'] as $index => $obj){
             $obj = unserialize($obj); 
-            if ($_POST['skinti-visusM'] == $obj->id) {
-                $obj->skintiVisus($_POST['skinti-visus'][$obj->id]);
+            if ($obj->id == $id) {
+                $obj->skintiVisus();
                 $obj = serialize($obj); 
                 $this->data['objM'][$index] = $obj; 
             }
@@ -212,7 +221,7 @@ class JsonStore implements Store {
     public function visuAgurkuNuskynimas(){
         foreach($this->data['obj'] as $index => $obj){
             $obj = unserialize($obj); 
-            $obj->skintiVisus($_POST['skynimas'][$obj->id]);// atimam agurka
+            $obj->skintiVisus();// atimam agurka
             $obj = serialize($obj); // vel stringas
             $this->data['obj'][$index] = $obj; // uzsaugom agurkus
         }
@@ -221,7 +230,7 @@ class JsonStore implements Store {
     public function visuPomidoruNuskynimas(){
         foreach($this->data['objP'] as $index => $obj){
             $obj = unserialize($obj); 
-            $obj->skintiVisus($_POST['skynimasP'][$obj->id]);// atimam agurka
+            $obj->skintiVisus();// atimam agurka
             $obj = serialize($obj); // vel stringas
             $this->data['objP'][$index] = $obj; // uzsaugom agurkus
         }
@@ -229,7 +238,7 @@ class JsonStore implements Store {
     public function visuMoliuguNuskynimas(){
         foreach($this->data['objM'] as $index => $obj){
             $obj = unserialize($obj); 
-            $obj->skintiVisus($_POST['skynimasM'][$obj->id]);// atimam agurka
+            $obj->skintiVisus();// atimam agurka
             $obj = serialize($obj); // vel stringas
             $this->data['objM'][$index] = $obj; // uzsaugom agurkus
         }

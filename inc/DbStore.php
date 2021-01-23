@@ -37,7 +37,7 @@ class DbStore implements Store{
         $agurkuMasyvas = [];
         while ($row = $stmt->fetch())
         {
-            if ('agurkas' == $row['type']) {
+            if ('.agurkas.' == $row['type']) {
                 $obj = new Agurkas($row['id']);
             }
             $obj->id = $row['id'];
@@ -59,7 +59,7 @@ class DbStore implements Store{
         $moliuguMasyvas = [];
         while ($row = $stmt->fetch())
         {
-            if ('moliugas' == $row['type']) {
+            if ('.moliugas.' == $row['type']) {
                 $objM = new Moliugas($row['id']);
             }
             $objM->id = $row['id'];
@@ -81,7 +81,7 @@ class DbStore implements Store{
         $pomidoruMasyvas = [];
         while ($row = $stmt->fetch())
         {
-            if ('pomidoras' == $row['type']) {
+            if ('.pomidoras.' == $row['type']) {
                 $objP = new Pomidoras($row['id']);
             }
             $objP->id = $row['id'];
@@ -101,21 +101,21 @@ class DbStore implements Store{
 
     public function addNew(Agurkas $obj)
     {
-        $sql = "INSERT INTO darzove (`count`, `type`)
-        VALUES ('.$obj->count.', 'agurkas');";
+        $sql = "INSERT INTO darzove (`count`, `type`, `price`)
+        VALUES ('.$obj->count.', '.$obj->type.', '.$obj->priceE.');";
         $this->pdo->query($sql);
     }
     public function addNewM(Moliugas $objM)//objektas 
     {
-        $sql = "INSERT INTO darzove (`count`, `type`)
-        VALUES ('.$objM->count.', 'moliugas');";
+        $sql = "INSERT INTO darzove (`count`, `type`, `price`)
+        VALUES ('.$objM->count.', '.$objM->type.', '.$objM->priceE.');";
         $this->pdo->query($sql);
     }
 
     public function addNewP(Pomidoras $objP)//objektas 
     {
-        $sql = "INSERT INTO darzove (`count`, `type`)
-        VALUES ('.$objP->count.', 'pomidoras');";
+        $sql = "INSERT INTO darzove (`count`, `type`, `price`)
+        VALUES ('.$objP->count.', '.$objP->type.', '.$objP->priceE.');";
         $this->pdo->query($sql);
     }
 

@@ -126,6 +126,9 @@ buttonSodinti.addEventListener('click', () =>{
         list.innerHTML = response.data.list;
         console.log(list);
         errorMsg.innerHTML = '';
+        addNewList();
+        addNewListP();
+        addNewListM();
     })
     .catch(function(error) {
         errorMsg.innerHTML = error.response.data.msg;
@@ -143,7 +146,17 @@ buttonSodintiM.addEventListener('click', () =>{
     })
     .then(function(response) {
         listM.innerHTML = response.data.listM;
+        console.log(listM);
+
+        errorMsg.innerHTML = '';
+        addNewListM();
+        addNewList();
+        addNewListP();
     })
+
+    .catch(function(error) {
+        errorMsg.innerHTML = error.response.data.msg;
+    });
 });
 //pomidoru sodinimas
 buttonSodintiP.addEventListener('click', () =>{
@@ -155,7 +168,15 @@ buttonSodintiP.addEventListener('click', () =>{
     })
     .then(function(response) {
         listP.innerHTML = response.data.listP;
+        console.log(listP);
+        addNewListP();
+        addNewListM();
+        addNewList();
     })
+
+    .catch(function(error) {
+        errorMsg.innerHTML = error.response.data.msg;
+    });
 });
 //visu darzoviu sodinimas
 buttonSodintiV.addEventListener('click', () =>{
@@ -167,5 +188,12 @@ buttonSodintiV.addEventListener('click', () =>{
     })
     .then(function(response) {
         listV.innerHTML = response.data.listV;
+        addNewList();
+        addNewListP();
+        addNewListM();
     })
+
+    .catch(function(error) {
+        errorMsg.innerHTML = error.response.data.msg;
+    });
 });

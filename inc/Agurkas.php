@@ -8,6 +8,7 @@ class Agurkas extends Darzove {
     {
         $this->id = $lastId + 1;
         $this->count = 0;
+        $this->type = 'agurkas';
         $photos = array("./photo/agurkas1.jpg", "./photo/agurkas3.jpg", "./photo/agurkas2.jpg");
         $this->photo = $photos[array_rand($photos)];
         $this->priceE = 1.2;

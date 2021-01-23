@@ -4,7 +4,7 @@ namespace Main;
 
 abstract class Darzove implements Siltnamis {
 
-    public $id, $count, $photo, $priceE, $dKursas; 
+    public $id, $count, $photo, $priceE, $dKursas, $type; 
 
   public function __get($propertyName) 
     {

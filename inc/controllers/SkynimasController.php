@@ -118,15 +118,37 @@ class SkynimasController {
     //skynimo Pomidoru scenarijus
     public function skintiP()
     {
-        $this->store->skintiPomidorus();
-        App::redirect(skynimas);
+        $kiekis = (int) $this->rawData['kiek-skintiP'];
+        $this->store->skintiPomidorus($this->rawData['id'], $kiekis);
+        ob_start();
+        $store = $this->store;
+        include DIR.'/views/skynimas/listSkynimasP.php';
+        $out = ob_get_contents();
+        ob_end_clean();
+        $json = ['listSkynimasP' => $out];
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
 
     //skynimo moliugu scenarijus
     public function skintiM()
     {
-        $this->store->skintiMoliugus();
-        App::redirect(skynimas);
+        $kiekis = (int) $this->rawData['kiek-skintiM'];
+        $this->store->skintiMoliugus($this->rawData['id'], $kiekis);
+        ob_start();
+        $store = $this->store;
+        include DIR.'/views/skynimas/listSkynimasM.php';
+        $out = ob_get_contents();
+        ob_end_clean();
+        $json = ['listSkynimasM' => $out];
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
 
     //skynimo Agurku scenarijus 
@@ -149,15 +171,35 @@ class SkynimasController {
     //skynimo Pomidoru scenarijus 
     public function skintiVisusP()
     {
-        $this->store->skintiVisusPomidorus();
-        App::redirect(skynimas);
+        $this->store->skintiVisusPomidorus($this->rawData['id']);
+        ob_start();
+        $store = $this->store;
+        include DIR.'/views/skynimas/listSkynimasP.php';
+        $out = ob_get_contents();
+        ob_end_clean();
+        $json = ['listSkynimasP' => $out];
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
 
     //skynimo moliugu scenarijus 
     public function skintiVisusM()
     {
-        $this->store->skintiVisusMoliugus();
-        App::redirect(skynimas);
+        $this->store->skintiVisusMoliugus($this->rawData['id']);
+        ob_start();
+        $store = $this->store;
+        include DIR.'/views/skynimas/listSkynimasM.php';
+        $out = ob_get_contents();
+        ob_end_clean();
+        $json = ['listSkynimasM' => $out];
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
     //visu agurku nuskynimas
     public function skynimas()
@@ -179,7 +221,7 @@ class SkynimasController {
     //visu pomidoru nuskynimas
     public function skynimasP()
     {
-        $this->store->visuPomdoruNuskynimas();
+        $this->store->visuPomidoruNuskynimas();
         ob_start();
         $store = $this->store;
         include DIR.'/views/skynimas/listSkynimasP.php';
@@ -213,19 +255,8 @@ class SkynimasController {
     //visu darzoviu nuskynimas
     public function skynimasV()
     {
-        $this->store->visuAgurkuNuskynimas();
-        $this->store->visuPomidoruNuskynimas();
-        $this->store->visuMoliuguNuskynimas();
-        ob_start();
-        $store = $this->store;
-        include DIR.'/views/skynimas/listSkynimas.php';
-        $out = ob_get_contents();
-        ob_end_clean();
-        $json = ['listSkynimas' => $out];
-        $response = new JsonResponse($json);
-    
-        $response->prepare(App::$request);
-
-        return $response;
+        $this->store->skynimas();
+        $this->store->skynimasM();
+        $this->store->skynimasP();
     }
 }

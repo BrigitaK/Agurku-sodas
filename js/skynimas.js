@@ -7,7 +7,7 @@
 const buttonskynimas = document.querySelector('.skynimasA');
 const buttonskynimasP = document.querySelector('.skynimasP');
 const buttonskynimasM = document.querySelector('.skynimasM');
-// const buttonskynimasV = document.querySelector('.skynimasV');
+const buttonskynimasV = document.querySelector('.skynimasV');
 const listSkynimas = document.querySelector('#listSkynimas');
 const listSkynimasP = document.querySelector('#listSkynimasP');
 const listSkynimasM = document.querySelector('#listSkynimasM');
@@ -338,16 +338,20 @@ buttonskynimasP.addEventListener('click', () => {
             errorMsg.innerHTML = error.response.data.msg;
         });
 });
-// buttonskynimasV.addEventListener('click', () => {
-//     axios.post(apiUrl+'/skynimasV', {
-//     })
-//         .then(function (response) {
-//             listSkynimas.innerHTML = response.data.listSkynimas;
-//             harvestA();
-//             harvestOneA();
+buttonskynimasV.addEventListener('click', () => {
+    axios.post(apiUrl+'/skynimasV', {
+    })
+        .then(function (response) {
+            listSkynimas.innerHTML = response.data.listSkynimas;
+            skintiPomidorus();
+            skintiVisusPomidorus();
+            skintiAgurkus();
+            skintiVisusAgurkus();
+            skintiMoliugus();
+            skintiVisusMoliugus();
             
-//         })
-//         .catch(function (error) {
-//             errorMsg.innerHTML = error.response.data.msg;
-//         });
-// });
+        })
+        .catch(function (error) {
+            errorMsg.innerHTML = error.response.data.msg;
+        });
+});

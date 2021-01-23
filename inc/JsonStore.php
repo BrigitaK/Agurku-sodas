@@ -196,7 +196,7 @@ class JsonStore implements Store {
         }
     }
 
-    public function skintiVisusPomidorus(){
+    public function skintiVisusPomidorus($id){
         foreach($this->data['objP'] as $index => $obj){
             $obj = unserialize($obj); 
             if ($obj->id == $id) {
@@ -207,7 +207,7 @@ class JsonStore implements Store {
         }
     }
 
-    public function skintiVisusMoliugus(){
+    public function skintiVisusMoliugus($id){
         foreach($this->data['objM'] as $index => $obj){
             $obj = unserialize($obj); 
             if ($obj->id == $id) {

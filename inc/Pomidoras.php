@@ -13,10 +13,12 @@ class Pomidoras extends Darzove {
         $this->photo = $photos[array_rand($photos)];
         $this->priceE = 2.5;
         $this->priceD = 1.21;
+        $this->kiekAugti = rand(1, 6);
     }
 
     public function auga() {
-        return rand(2, 9);
+        $this->kiekAugti = rand(1, 6);
+        return $this->kiekAugti;
     }
     public function priceD()
     {

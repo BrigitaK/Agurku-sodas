@@ -13,6 +13,7 @@ class Agurkas extends Darzove {
         $this->photo = $photos[array_rand($photos)];
         $this->priceE = 1.2;
         $this->priceD = 1.21;
+        $this->kiekAugti = rand(2, 9);
     }
     
 

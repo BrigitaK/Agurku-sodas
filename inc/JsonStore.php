@@ -119,7 +119,8 @@ class JsonStore implements Store {
         foreach($this->data['obj'] as $index => $obj)
         {
             $obj = unserialize($obj); 
-            $obj->add($obj->auga());
+            $obj->add($obj->kiekAugti);
+            $obj->auga();
             $obj = serialize($obj); 
             $this->data['obj'][$index] = $obj;
         }
@@ -129,7 +130,8 @@ class JsonStore implements Store {
         foreach($this->data['objP'] as $index => $obj)
         {
             $obj = unserialize($obj); 
-            $obj->add($obj->auga());
+            $obj->add($obj->kiekAugti);
+            $obj->auga();
             $obj = serialize($obj); 
             $this->data['objP'][$index] = $obj;
         }
@@ -139,7 +141,8 @@ class JsonStore implements Store {
         foreach($this->data['objM'] as $index => $obj)
         {
             $obj = unserialize($obj); 
-            $obj->add($obj->auga());
+            $obj->add($obj->kiekAugti);
+            $obj->auga();
             $obj = serialize($obj); 
             $this->data['objM'][$index] = $obj;
         }

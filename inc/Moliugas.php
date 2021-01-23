@@ -13,10 +13,12 @@ class Moliugas extends Darzove {
         $this->photo = $photos[array_rand($photos)];
         $this->priceE = 1.8;
         $this->priceD = 1.21;
+        $this->kiekAugti = rand(1, 3);
     }
 
     public function auga() {
-        return rand(1, 3);
+        $this->kiekAugti = rand(1, 3);
+        return $this->kiekAugti;
     }
     public function priceD()
     {

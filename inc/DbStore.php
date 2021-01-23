@@ -39,11 +39,11 @@ class DbStore implements Store{
         {
             if ('.agurkas.' == $row['type']) {
                 $obj = new Agurkas($row['id']);
+                $obj->id = $row['id'];
+                $obj->count = $row['count'];
+                $obj->type = $row['type'];
+                $agurkuMasyvas[] = $obj;
             }
-            $obj->id = $row['id'];
-            $obj->count = $row['count'];
-            $obj->type = $row['type'];
-            $agurkuMasyvas[] = $obj;
         }
         return $agurkuMasyvas;
 
@@ -61,12 +61,14 @@ class DbStore implements Store{
         {
             if ('.moliugas.' == $row['type']) {
                 $objM = new Moliugas($row['id']);
-            }
+
             $objM->id = $row['id'];
             $objM->count = $row['count'];
             $objM->type = $row['type'];
             $objM->price = $row['price'];
             $moliuguMasyvas[] = $objM;
+                    
+            }
         }
         return $moliuguMasyvas;
 
@@ -83,12 +85,12 @@ class DbStore implements Store{
         {
             if ('.pomidoras.' == $row['type']) {
                 $objP = new Pomidoras($row['id']);
+                $objP->id = $row['id'];
+                $objP->count = $row['count'];
+                $objP->type = $row['type'];
+                $objP->price = $row['price'];
+                $pomidoruMasyvas[] = $objP;
             }
-            $objP->id = $row['id'];
-            $objP->count = $row['count'];
-            $objP->type = $row['type'];
-            $objP->price = $row['price'];
-            $pomidoruMasyvas[] = $objP;
         }
         return $pomidoruMasyvas;
 

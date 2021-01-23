@@ -3,6 +3,8 @@
 
 namespace Main\Controllers;
 use Main\App, Main\Store, Main\Agurkas, Main\Pomidoras, Main\Moliugas;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AuginimasController {
 
@@ -10,7 +12,10 @@ class AuginimasController {
 
     public function __construct() {
         if('POST' === $_SERVER['REQUEST_METHOD']){
-            $this->store = new Store('darzoves');
+            $this->store = App::store('darzoves');
+           // $this->rawData = file_get_contents("php://input");
+            $this->rawData = App::$request->getContent(); //symfony
+            $this->rawData = json_decode($this->rawData, 1);
         }
     }
 

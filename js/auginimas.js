@@ -100,14 +100,14 @@ buttonAugintiM.addEventListener('click', () => {
         });
 });
 
-buttonAugintiV.addEventListener('click', () => {
-    axios.post(apiUrlA+'/augintiV', {
-    })
-        .then(function (response) {
-            listAuginimasV.innerHTML = response.data.listAuginimasV;
+// buttonAugintiV.addEventListener('click', () => {
+//     axios.post(apiUrlA+'/augintiV', {
+//     })
+//         .then(function (response) {
+//             listAuginimasV.innerHTML = response.data.listAuginimasV;
             
-        })
-        .catch(function (error) {
-            errorMsg.innerHTML = error.response.data.msg;
-        });
-});
+//         })
+//         .catch(function (error) {
+//             errorMsg.innerHTML = error.response.data.msg;
+//         });
+// });

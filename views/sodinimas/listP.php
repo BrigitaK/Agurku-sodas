@@ -5,7 +5,7 @@
         <div class="name">Pomidoras nr. <?= $pomidoras->id ?></div>
     </div>
     <div class="agurkas-vnt">Pomidorų: <?= $pomidoras->count ?></div>
-    <div class="agurkas-vnt">Kaina: <?= $pomidoras->priceD() ?></div>
+    <div class="agurkas-vnt">Kaina: <?= $pomidoras->priceD() ?><span class="valiuta"> USD/vnt.</span></div>
     <button class="btn-israuti" type="button" name="rautiP" value="<?= $pomidoras->id ?>">Išrauti</button>
 </div>
 <?php endforeach ?>

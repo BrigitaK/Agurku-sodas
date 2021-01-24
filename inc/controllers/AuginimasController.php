@@ -97,6 +97,22 @@ class AuginimasController {
     
     }
 
+    // public function listAuginimasV()
+    // {
+    //     $store = $this->store;//kintamojo perdavimas i views
+    //     ob_start();
+    //     include DIR.'/views/auginimas/listAuginimasV.php';
+    //     $out = ob_get_contents();
+    //     ob_end_clean();
+    //     $json = ['listAuginimasV' => $out];
+    //     $response = new JsonResponse($json);
+    
+    //     $response->prepare(App::$request);
+
+    //     return $response;
+    
+    // }
+
         //auginam agurkus
     public function auginti()
     {
@@ -154,4 +170,24 @@ class AuginimasController {
     
             return $response;
         }
+
+        // public function augintiV()
+        // {
+        //     $this->store->augintiAgurkus();
+        //     $this->store->augintiMoliugus();
+        //     $this->store->augintiPomidorus();
+            
+        //     //pasodine agurkus jungsim buferi
+        //     $store = $this->store;//kintamojo perdavimas i views
+        //     ob_start();
+        //     include DIR.'/views/auginimas/listAuginimasV.php';//liepsiu listau sugeneruoti nauja sarasa
+        //     $out = ob_get_contents();//viskas subegs i buferi
+        //     ob_end_clean();
+        //     $json = ['listAuginimasV' => $out];//issiusime agurku lista
+        //     $response = new JsonResponse($json);
+    
+        //     $response->prepare(App::$request);
+    
+        //     return $response;
+        // }
 }

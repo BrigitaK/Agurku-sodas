@@ -33,19 +33,17 @@
         <div class="container">
         <div id="error"></div>
             <form class="form" action="<?= URL.'auginimas' ?>" method="POST">
-            <div id="listAuginimas">
-            </div>
-            <div id="listAuginimasP">
-            </div>
-                <div id="listAuginimasM">
-                </div>
+                <div id="listAuginimas"></div>
+                <div id="listAuginimasP"></div>
+                <div id="listAuginimasM"></div>
+           
             
 
             <div class="sodinti">
                 <button class="btn-auginti auginti" type="button" name="auginti">AUGINTI AGURKUS</button>
                 <button class="btn-auginti augintiP" type="button" name="augintiP">AUGINTI POMIDORUS</button>
                 <button class="btn-auginti augintiM" type="button" name="augintiM">AUGINTI MOLIŪGUS</button>
-                <button class="btn-auginti augintiV" type="button" name="augintiV">AUGINTI VISUS</button>
+                <!---- <button class="btn-auginti augintiV" type="button" name="augintiV">AUGINTI VISUS</button>--->
             </div>
             </form>
         </div>

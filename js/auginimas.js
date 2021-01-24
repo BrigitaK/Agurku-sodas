@@ -5,7 +5,22 @@ const buttonAugintiV = document.querySelector('.augintiV');
 const listAuginimas = document.querySelector('#listAuginimas');
 const listAuginimasP = document.querySelector('#listAuginimasP');
 const listAuginimasM = document.querySelector('#listAuginimasM');
+const listAuginimasV = document.querySelector('#listAuginimasV');
 const errorMsg = document.querySelector('#error');
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     axios.post(apiUrlA+'/listAuginimasV', {
+//         })
+//         .then(function(response) {
+//             listAuginimasV.innerHTML = response.data.listAuginimasV;
+//             errorMsg.innerHTML = '';
+//         })
+//         .catch(function(error) {
+//             errorMsg.innerHTML = error.response.data.msg;
+//         });
+
+// });
 
 document.addEventListener('DOMContentLoaded', () => {
     axios.post(apiUrlA+'/listAuginimas', {
@@ -46,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
 //agurku auginimas
 buttonAuginti.addEventListener('click', () => {
     axios.post(apiUrlA+'/auginti', {
@@ -79,6 +93,18 @@ buttonAugintiM.addEventListener('click', () => {
     })
         .then(function (response) {
             listAuginimasM.innerHTML = response.data.listAuginimasM;
+            
+        })
+        .catch(function (error) {
+            errorMsg.innerHTML = error.response.data.msg;
+        });
+});
+
+buttonAugintiV.addEventListener('click', () => {
+    axios.post(apiUrlA+'/augintiV', {
+    })
+        .then(function (response) {
+            listAuginimasV.innerHTML = response.data.listAuginimasV;
             
         })
         .catch(function (error) {

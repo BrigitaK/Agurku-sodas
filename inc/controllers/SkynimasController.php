@@ -258,5 +258,16 @@ class SkynimasController {
         $this->store->skynimas();
         $this->store->skynimasM();
         $this->store->skynimasP();
+        ob_start();
+        $store = $this->store;
+        include DIR.'/views/skynimas/listSkynimas.php';
+        $out = ob_get_contents();
+        ob_end_clean();
+        $json = ['listSkynimas' => $out];
+        $response = new JsonResponse($json);
+    
+        $response->prepare(App::$request);
+
+        return $response;
     }
 }

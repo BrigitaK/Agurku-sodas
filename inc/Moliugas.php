@@ -17,7 +17,6 @@ class Moliugas extends Darzove {
     }
 
     public function auga() {
-        $this->kiekAugti = rand(1, 3);
         return $this->kiekAugti;
     }
     public function priceD()

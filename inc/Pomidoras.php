@@ -17,7 +17,6 @@ class Pomidoras extends Darzove {
     }
 
     public function auga() {
-        $this->kiekAugti = rand(1, 6);
         return $this->kiekAugti;
     }
     public function priceD()

@@ -21,6 +21,12 @@ interface Store
     function remove($id);
     function removeM($id);
     function removeP($id);
+    function augintiAgurkus();
+    function augintiPomidorus();
+    function augintiMoliugus();
+    // function skintiAgurkus($id, $kiek);
+    // function skintiMoliugus($id, $kiek);
+    // function skintiPomidorus($id, $kiek);
 
 
 }

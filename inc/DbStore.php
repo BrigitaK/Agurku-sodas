@@ -42,6 +42,7 @@ class DbStore implements Store{
                 $obj->id = $row['id'];
                 $obj->count = $row['count'];
                 $obj->type = $row['type'];
+                $obj->kiekAugti = $row['kiekAugti'];
                 $agurkuMasyvas[] = $obj;
             }
         }
@@ -145,136 +146,174 @@ class DbStore implements Store{
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
     }
-    // public function removeP($id)
-    // {
-    //     foreach($this->data['objP'] as $index => $obj) {
-    //         $obj = unserialize($obj);
-    //         if ($obj->id == $id) {
-    //             unset($this->data['objP'][$index]);
-    //         }
-    //     }
-    // }
 
     public function augintiAgurkus()
     { 
-
-        $sql = "UPDATE darzove
-        SET count=$obj->$kiekAugti
-        WHERE `type`='.agurkas.';";
-        //siunciam i db
-        $this->pdo->query($sql);
+        foreach ($this->getAll() as $k => $obj) {
+            $obj->add($obj->auga());
+            $sql = "UPDATE darzove
+            SET count = $obj->count, 
+            kiekAugti = $obj->kiekAugti
+            WHERE id = $obj->id ; ";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+        }
     }
-    //  public function augintiAgurkus()
-    // {
-    //     foreach($this->data['obj'] as $index => $obj)
-    //     {
-    //         $obj = unserialize($obj); 
-    //         $obj->add($obj->kiekAugti);
-    //         $obj->auga();
-    //         $obj = serialize($obj); 
-    //         $this->data['obj'][$index] = $obj;
-    //     }
-    // }
-    // }
-    // public function augintiMoliugus()
-    // {
-    //     foreach($this->data['objM'] as $index => $obj)
-    //     {
-    //         $obj = unserialize($obj); 
-    //         $obj->add($obj->auga());
-    //         $obj = serialize($obj); 
-    //         $this->data['objM'][$index] = $obj;
-    //     }
-    // }
+    public function augintiPomidorus()
+    { 
+        foreach ($this->getAllP() as $k => $objP) {
+            $objP->add($objP->auga());
+            $sql = "UPDATE darzove
+            SET count = $objP->count, 
+            kiekAugti = $objP->kiekAugti
+            WHERE id = $objP->id ; ";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+        }
+    }
+    public function augintiMoliugus()
+    { 
+        foreach ($this->getAllM() as $k => $objM) {
+            $objM->add($objM->auga());
+            $sql = "UPDATE darzove
+            SET count = $objM->count, 
+            kiekAugti = $objM->kiekAugti
+            WHERE id = $objM->id ; ";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+        }
+    }
 
-    // public function skintiAgurkus()
-    // {
-    //     foreach($this->data['obj'] as $index => $obj){
-    //         $obj = unserialize($obj); 
-    //         $obj->skinti($_POST['kiekis'][$obj->id]);
-    //         $obj = serialize($obj); 
-    //         $this->data['obj'][$index] = $obj;
-    //     }
-    // }
-    // public function skintiPomidorus()
-    // {
-    //     foreach($this->data['objP'] as $index => $obj){
-    //         $obj = unserialize($obj); 
-    //         $obj->skinti($_POST['kiekis'][$obj->id]);
-    //         $obj = serialize($obj); 
-    //         $this->data['objP'][$index] = $obj;
-    //     }
-    // }
-    // public function skintiMoliugus()
-    // {
-    //     foreach($this->data['objM'] as $index => $obj){
-    //         $obj = unserialize($obj); 
-    //         $obj->skinti($_POST['kiekis'][$obj->id]);
-    //         $obj = serialize($obj); 
-    //         $this->data['objM'][$index] = $obj;
-    //     }
-    // }
-
-    // public function skintiVisusAgurkus(){
-    //     foreach($this->data['obj'] as $index => $obj){
-    //         $obj = unserialize($obj); 
-    //         if ($_POST['skinti-visus'] == $obj->id) {
-    //             $obj->skintiVisus($_POST['skinti-visus'][$obj->id]);
-    //             $obj = serialize($obj); 
-    //             $this->data['obj'][$index] = $obj; 
-    //         }
-    //     }
-    // }
-
-    // public function skintiVisusPomidorus(){
-    //     foreach($this->data['objP'] as $index => $obj){
-    //         $obj = unserialize($obj); 
-    //         if ($_POST['skinti-visusP'] == $obj->id) {
-    //             $obj->skintiVisus($_POST['skinti-visus'][$obj->id]);
-    //             $obj = serialize($obj); 
-    //             $this->data['objP'][$index] = $obj; 
-    //         }
-    //     }
-    // }
-
-    // public function skintiVisusMoliugus(){
-    //     foreach($this->data['objM'] as $index => $obj){
-    //         $obj = unserialize($obj); 
-    //         if ($_POST['skinti-visusM'] == $obj->id) {
-    //             $obj->skintiVisus($_POST['skinti-visus'][$obj->id]);
-    //             $obj = serialize($obj); 
-    //             $this->data['objM'][$index] = $obj; 
-    //         }
-    //     }
-    // }
-
-    // public function visuAgurkuNuskynimas(){
-    //     foreach($this->data['obj'] as $index => $obj){
-    //         $obj = unserialize($obj); 
-    //         $obj->skintiVisus($_POST['skynimas'][$obj->id]);// atimam agurka
-    //         $obj = serialize($obj); // vel stringas
-    //         $this->data['obj'][$index] = $obj; // uzsaugom agurkus
-    //     }
-    // }
-
-    // public function visuPomidoruNuskynimas(){
-    //     foreach($this->data['objP'] as $index => $obj){
-    //         $obj = unserialize($obj); 
-    //         $obj->skintiVisus($_POST['skynimasP'][$obj->id]);// atimam agurka
-    //         $obj = serialize($obj); // vel stringas
-    //         $this->data['objP'][$index] = $obj; // uzsaugom agurkus
-    //     }
-    // }
-    // public function visuMoliuguNuskynimas(){
-    //     foreach($this->data['objM'] as $index => $obj){
-    //         $obj = unserialize($obj); 
-    //         $obj->skintiVisus($_POST['skynimasM'][$obj->id]);// atimam agurka
-    //         $obj = serialize($obj); // vel stringas
-    //         $this->data['objM'][$index] = $obj; // uzsaugom agurkus
-    //     }
-    // }
+    public function skintiAgurkus($id, $kiek)
+    {
+        foreach ($this->getAll() as $k => $obj) {
+            if ($obj->id == $id) {
+                $obj->skinti($kiek);
 
 
+                $sql = "UPDATE darzove
+                SET count = ?
+                WHERE id = ? ; ";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([$obj->count, $id]);
+            }
+        }
+    }
 
+    public function skintiMoliugus($id, $kiek)
+    {
+        foreach ($this->getAllM() as $k => $objM) {
+            if ($objM->id == $id) {
+                $objM->skinti($kiek);
+
+
+                $sql = "UPDATE darzove
+                SET count = ?
+                WHERE id = ? ; ";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([$objM->count, $id]);
+            }
+        }
+    }
+
+    public function skintiPomidorus($id, $kiek)
+    {
+        foreach ($this->getAllP() as $k => $objP) {
+            if ($objP->id == $id) {
+                $objP->skinti($kiek);
+
+
+                $sql = "UPDATE darzove
+                SET count = ?
+                WHERE id = ? ; ";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([$objP->count, $id]);
+            }
+        }
+    }
+
+    public function skintiVisusAgurkus($id)
+    {
+        foreach ($this->getAll() as $k => $obj) {
+            if ($obj->id == $id) {
+                $obj->skintiVisus();
+
+                $sql = "UPDATE darzove
+                SET count = ?
+                WHERE id = ? ; ";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([$obj->count, $id]);
+            }
+        }
+    }
+
+    public function skintiVisusMoliugus($id)
+    {
+        foreach ($this->getAllM() as $k => $objM) {
+            if ($objM->id == $id) {
+                $objM->skintiVisus();
+
+                $sql = "UPDATE darzove
+                SET count = ?
+                WHERE id = ? ; ";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([$objM->count, $id]);
+            }
+        }
+    }
+
+    public function skintiVisusPomidorus($id)
+    {
+        foreach ($this->getAllP() as $k => $objP) {
+            if ($objP->id == $id) {
+                $objP->skintiVisus();
+
+                $sql = "UPDATE darzove
+                SET count = ?
+                WHERE id = ? ; ";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([$objP->count, $id]);
+            }
+        }
+    }
+
+    public function visuAgurkuNuskynimas()
+        {
+            foreach ($this->getAll() as $k => $obj) {
+                $obj->skintiVisus();
+    
+                $sql = "UPDATE darzove
+                SET `count` = '$obj->count'
+                WHERE `id`='$obj->id';";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute();
+            }
+        }
+
+        public function visuMoliuguNuskynimas()
+        {
+            foreach ($this->getAllM() as $k => $objM) {
+                $objM->skintiVisus();
+    
+                $sql = "UPDATE darzove
+                SET `count` = '$objM->count'
+                WHERE `id`='$objM->id';";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute();
+            }
+        }
+
+        public function visuPomidoruNuskynimas()
+        {
+            foreach ($this->getAllP() as $k => $objP) {
+                $objP->skintiVisus();
+    
+                $sql = "UPDATE darzove
+                SET `count` = '$objP->count'
+                WHERE `id`='$objP->id';";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute();
+            }
+        }
 
 }

@@ -142,7 +142,15 @@ class DbStore implements Store{
         WHERE id='".$id."';";
         $this->pdo->query($sql); // <--- NESAUGU!!!!!!!!!
     }
-
+    // public function removeP($id)
+    // {
+    //     foreach($this->data['objP'] as $index => $obj) {
+    //         $obj = unserialize($obj);
+    //         if ($obj->id == $id) {
+    //             unset($this->data['objP'][$index]);
+    //         }
+    //     }
+    // }
 
     public function augintiAgurkus()
     { 

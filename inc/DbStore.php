@@ -125,22 +125,25 @@ class DbStore implements Store{
     public function remove($id)
     {
         $sql = "DELETE FROM darzove
-        WHERE id='".$id."';";
-        $this->pdo->query($sql); // <--- NESAUGU!!!!!!!!!
+       WHERE id = ?;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
     }
 
     public function removeM($id)
     {
         $sql = "DELETE FROM darzove
-        WHERE id='".$id."';";
-        $this->pdo->query($sql); // <--- NESAUGU!!!!!!!!!
+        WHERE id = ?;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
     }
 
     public function removeP($id)
     {
         $sql = "DELETE FROM darzove
-        WHERE id='".$id."';";
-        $this->pdo->query($sql); // <--- NESAUGU!!!!!!!!!
+        WHERE id = ?;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
     }
     // public function removeP($id)
     // {

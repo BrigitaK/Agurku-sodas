@@ -42,7 +42,7 @@ class DbStore implements Store{
                 $obj->id = $row['id'];
                 $obj->count = $row['count'];
                 $obj->type = $row['type'];
-                $obj->kiekAugti = $row['kiekAugti'];
+                $objM->price = $row['price'];
                 $agurkuMasyvas[] = $obj;
             }
         }
@@ -150,7 +150,8 @@ class DbStore implements Store{
     public function augintiAgurkus()
     { 
         foreach ($this->getAll() as $k => $obj) {
-            $obj->add($obj->auga());
+            $obj->add($obj->kiekAugti);
+            $obj->auga();
             $sql = "UPDATE darzove
             SET count = $obj->count, 
             kiekAugti = $obj->kiekAugti
@@ -162,7 +163,8 @@ class DbStore implements Store{
     public function augintiPomidorus()
     { 
         foreach ($this->getAllP() as $k => $objP) {
-            $objP->add($objP->auga());
+            $objP->add($objP->kiekAugti);
+            $objP->auga();
             $sql = "UPDATE darzove
             SET count = $objP->count, 
             kiekAugti = $objP->kiekAugti
@@ -174,7 +176,8 @@ class DbStore implements Store{
     public function augintiMoliugus()
     { 
         foreach ($this->getAllM() as $k => $objM) {
-            $objM->add($objM->auga());
+            $objM->add($objM->kiekAugti);
+            $objM->auga();
             $sql = "UPDATE darzove
             SET count = $objM->count, 
             kiekAugti = $objM->kiekAugti
